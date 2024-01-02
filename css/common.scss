@@ -1,0 +1,114 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+$cl-txt: #1C1C1C;
+$cl-dark-grey: #252525;
+$cl-body: #454545;
+$cl-white: #ffffff;
+$cl-blue: #38B6FF;
+$cl-dark-blue: #0099F1;
+$cl-bg: #EAEEF0;
+$cl-bg-grey: #f5f5f5;
+$cl-dark-bg: #212121;
+$cl-disable: #DBDBDB;
+$cl-border: #2D2D2D;
+$dur-default: 400ms;
+
+//$container-width: 172.8rem;
+$container-width: 192rem; //resolve in 192x12.5px(fontsize) = 2400px
+
+//Font
+html {
+    scroll-behavior: unset;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-kerning: none;
+    -webkit-text-rendering: optimizeSpeed;
+    text-rendering: optimizeSpeed;
+    font-family: 'HelveticaNowDisplay';
+    font-size: 0.5787037037vw;
+    color: rgba($cl-txt, 1);
+    // @media only screen and (min-width: 2160px) {
+    //     font-size: 12.5px;
+    // }
+    // @media only screen and (min-width: 1728px) {
+    //     //font-size: 10px;
+    // }
+    @media only screen and (max-width: 991px) {
+        font-size: 1vw;
+    }
+    @media only screen and (max-width: 767px) {
+        font-size: 1.3vw;
+    }
+    @media only screen and (max-width: 476px) {
+        font-size: 2.667vw;
+    }
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+}
+button, input, textarea {
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
+    border: none;
+    font-family: inherit;
+}
+button {
+    cursor: pointer;
+}
+
+//Layout
+.grid {
+    display: grid;
+    column-gap: 2rem;
+}
+.container {
+    --grid-column: 16;
+    --container-padding: 4rem;
+
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    // max-width: $container-width;
+    max-width: none;
+    &.fluid {
+        max-width: none;
+    }
+    &.grid {
+        grid-template-columns: repeat(var(--grid-column), 1fr);
+    }
+    @include md {
+        --grid-column: 12;
+        --container-padding: 4rem;
+    }
+    @include sm {
+        --grid-column: 2;
+    }
+    @include xs {
+        --container-padding: 2rem;
+    }
+}
+.swiper,
+.swiper-wrapper,
+.swiper-slide {
+    width: 100%;
+}
+.swiper-slide {
+    height: auto;
+}
+
+.decor-slash {
+    width: 100%;
+    height: 2rem;
+    display: inline-block;
+    background-image: url('../imgs/decor-slash.svg');
+    background-repeat: repeat-x;
+    background-position: 0% 0%;
+}
