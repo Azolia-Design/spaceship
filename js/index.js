@@ -65,7 +65,20 @@ const scripts = () => {
         }
     }
     //refreshOnBreakpoint();
-
+    const header = $('.header')
+    lenis.on('scroll', function(inst) {
+        if (inst.scroll < header.outerHeight()) {
+            header.removeClass('on-hide')
+            header.removeClass('on-scroll')
+        } else {
+            header.addClass('on-scroll')
+            if (inst.direction >= 1) {
+                header.addClass('on-hide')
+            } else {
+                header.removeClass('on-hide')
+            }
+        }
+    })
     const VIEWS = [
         homeScript,
     ]

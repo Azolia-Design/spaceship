@@ -6,7 +6,9 @@
 
 $cl-txt: #1C1C1C;
 $cl-dark-grey: #252525;
+$cl-txt-sub: #292929;
 $cl-body: #454545;
+$cl-txt-desc: #858585;
 $cl-white: #ffffff;
 $cl-blue: #38B6FF;
 $cl-dark-blue: #0099F1;
@@ -15,6 +17,8 @@ $cl-bg-grey: #f5f5f5;
 $cl-dark-bg: #212121;
 $cl-disable: #DBDBDB;
 $cl-border: #2D2D2D;
+
+$cl-bg-beige: #F6F1EE;
 $dur-default: 400ms;
 
 //$container-width: 172.8rem;
@@ -38,7 +42,7 @@ html {
     //     //font-size: 10px;
     // }
     @media only screen and (max-width: 991px) {
-        font-size: 1vw;
+        font-size: 1.1990407674vw;
     }
     @media only screen and (max-width: 767px) {
         font-size: 1.3vw;
@@ -66,13 +70,16 @@ button {
 
 //Layout
 .grid {
+    --grid-gap: 2rem;
     display: grid;
-    column-gap: 2rem;
+    column-gap: var(--grid-gap);
 }
 .container {
     --grid-column: 16;
     --container-padding: 4rem;
 
+    position: relative;
+    z-index: 2;
     width: 100%;
     margin: 0 auto;
     padding: 0 var(--container-padding);
@@ -86,13 +93,14 @@ button {
     }
     @include md {
         --grid-column: 12;
-        --container-padding: 4rem;
+        --grid-gap: 1.6rem;
     }
     @include sm {
-        --grid-column: 2;
+        --grid-column: 4;
+        --container-padding: 1.6rem;
     }
     @include xs {
-        --container-padding: 2rem;
+        
     }
 }
 .swiper,

@@ -1,8 +1,23 @@
 .home-hero {
-    padding-top: 16.9rem;
+    padding-top: 15.9rem;
     background: linear-gradient(180deg, rgba(213,218,222,1) 0%, rgba(213,218,222,0) 100%,);
+    .decor-slash.hidden-dk {
+        display: none;
+    }
     &-img {
         grid-column: 1/9;
+        grid-row: 1/3;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        &-line {
+            width: 100%;
+        }
+        &-sat {
+            position: absolute;
+            width: 50.98%;
+        }
     }
     &-title-wrap {
         grid-column: 9/17;
@@ -34,9 +49,98 @@
         color: $cl-body;
     }
 }
+@include md {
+    .home-hero {
+        padding-top: 9.2rem;
+        .decor-slash.hidden-dk {
+            display: block;
+            grid-column: 1/-1;
+            grid-row: 1/2;
+        }
+        &-img {
+            grid-column: 1/8;
+            grid-row: 2/5;
+            margin-top: 3.5rem;
+            margin-left: -2.724rem;
+            margin-right: 1.356rem;
+            &-sat {
+                width: 50.98%;
+            }
+        }
+        &-title-wrap {
+            grid-column: 8/13;
+            grid-row: 2/3;
+            margin-left: -1.6rem;
+            .decor-slash {
+                display: none;
+            }
+        }
+        &-title {
+            margin-top: 4rem;
+            margin-bottom: 1.2rem;
+        }
+        &-sub-wrap {
+            column-gap: 0;
+            margin-bottom: 1.2rem;
+            .decor-slash {
+                display: none;
+            }
+        }
+        &-btn-wrap {
+            margin-left: -1.6rem;
+            grid-column: 8/13;
+            grid-row: 4/5;
+        }
+        &-body-wrap {
+            margin-left: -1.6rem;
+            grid-column: 8/13;
+            grid-row: 3/4;
+            margin-bottom: 3.2rem;
+        }
+    }   
+}
+.home-hero-mid {
+    &-img {
+        pointer-events: none;
+        grid-column: 4/14;
+        margin-top: -11.9rem;
+    }
+}
+@include md {
+    .home-hero-mid {
+        display: none;
+    }
+}
+.home-hero-tail {
+    &-title {
+        grid-column: 2/8;
+        max-width: 53.5rem;
+        margin-top: 14rem;
+        grid-row: 1/2;
+    }
+    &-img {
+        grid-column: 7/17;
+        grid-row: 1/2;
+        margin-right: -1.3rem;
+    }
+}
+@include md {
+    .home-hero-tail {
+        &-title {
+            grid-column: 1/6;
+            max-width: 24.1rem;
+            margin-top: 12rem;
+        }
+        &-img {
+            grid-column: 5/13;
+            margin-right: -1.36rem;
+            margin-left: -1.2rem;
+        }
+    } 
+}
 .home-abt {
-    padding-top: 29rem;
-    padding-bottom: 24rem;
+    padding-top: 2.9rem;
+    padding-bottom: 12rem;
     .decor-slash {
         grid-column: 2/ 16;
     }
@@ -55,5 +159,471 @@
         text-align: center;
         align-items: center;
         justify-content: center;
+    }
+}
+@include md {
+    .home-abt {
+        padding-top: 2rem;
+        .decor-slash {
+            grid-column: 1/ -1;
+        }
+        &-title {
+            grid-column: 1/-1;
+            max-width: 57rem;
+            margin-top: 6rem;
+            margin-bottom: 4rem;
+        }
+        &-btn-wrap {
+            grid-column: 1/-1;
+        }
+    }  
+}
+.home-part {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    &-label-wrap {
+        grid-column: 1/-1;
+        margin: 0 -4rem;
+        display: flex;
+        align-items: center;
+        column-gap: 2rem;
+        margin-bottom: 4rem;
+    }
+    &-label {
+        color: $cl-txt-desc;
+        white-space: nowrap;
+    }
+    &-marquee {
+        grid-column: 1/-1;
+        margin: 0 -4rem;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        flex-wrap: nowrap;
+        column-gap: 6rem;
+        &-inner {
+            display: flex;
+            align-items: center;
+            justify-content: start;
+            column-gap: 6rem;
+            animation: animMarquee 20s infinite linear;
+        }
+        &-item {
+            height: 5.6rem;
+            img {
+                height: 100%;
+                width: auto;
+                object-fit: contain;
+            }
+        }
+        @keyframes animMarquee {
+            0% {
+                transform: translateX(0%);
+            }
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+    }
+}
+@include md {
+    .home-part {
+        padding-top: 0rem;
+        padding-bottom: 8rem;
+        &-label-wrap {
+            column-gap: 2rem;
+        }
+        &-marquee {
+            column-gap: 4rem;
+            &-inner {
+                column-gap: 4rem;
+            }
+            &-item {
+                height: 3.6rem;
+            }
+        }
+    } 
+}
+.home-prob {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+    background-color: $cl-bg-beige;
+    overflow: hidden;
+    .decor-slash { 
+        grid-column: 2/16;
+        margin-bottom: 8rem;
+    }
+    &-label {
+        grid-column: 2/8;
+        align-self: start;
+        justify-self: start;
+        margin-bottom: 10rem;
+    }
+    &-title {
+        grid-column: 9/16;
+        margin-bottom: 10rem;
+    }
+    &-main {
+        grid-column: 2/17;
+        &.swiper {
+            overflow: visible;
+        }
+    }
+    &-item {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 4.4rem;
+        border-radius: 2rem;
+        background-color: rgba($cl-white, 1);
+        min-height: 40rem;
+        &-title-wrap {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+        &-title {
+            max-width: 28rem;
+        }
+        &-ic {
+            margin-top: -.3rem;
+            flex: none;
+        }
+    }
+    &-pagi {
+        display: none;
+    }
+}
+@include md {
+    .home-prob {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+        .decor-slash { 
+            grid-column: 1/-1;
+            grid-row: 1/2;
+            margin-bottom: 6rem;
+        }
+        &-label {
+            grid-column: 1/6;
+            grid-row: 2/3;
+            margin-bottom: 0;
+        }
+        &-title {
+            grid-column: 6/13;
+            grid-row: 2/4;
+            margin-bottom: 6rem;
+            font-size: 3.5rem;
+            line-height: 1.2em;
+            font-family: 'Aeonik';
+            margin-right: -.5rem;
+        }
+        &-main {
+            grid-column: 1/11;
+        }
+        &-item {
+            padding: 3.2rem 2.4rem;
+            border-radius: 1.2rem;
+            min-height: 30rem;
+            &-title-wrap {
+                column-gap: 1.2rem;
+            }
+            &-title {
+                max-width: 20.5rem;
+            }
+            &-ic {
+                margin-top: 0rem;
+                @include size(4rem);
+            }
+        }
+        &-pagi {
+            grid-column: 1/6;
+            grid-row: 3/4;
+            display: flex;
+            column-gap: .8rem;
+            margin-bottom: 6rem;
+            align-self: end;
+            .swiper-pagi-prev, .swiper-pagi-next {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                @include size(3.6rem);
+                border-radius: 50%;
+                border: solid 1px rgba($cl-border, .2);
+                @include transition(all 400ms ease);
+                .icon {
+                    color: rgba($cl-border, 1);
+                    @include transition(opacity 400ms ease);
+                }
+                &.swiper-button-disabled {
+                    .icon {
+                        opacity: .2;
+                    }
+                }
+            }
+        }
+    }   
+}
+.home-sol {
+    position: relative;
+
+    &-title-wrap {
+        grid-column: 3/15;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 12rem;
+        margin-bottom: 12rem;
+        text-align: center;
+        width: 100%;
+    }
+    &-label {
+        margin-bottom: 4rem;
+        color: rgba($cl-white, 1);
+        border-color: rgba($cl-white, .1);
+    }
+    &-title {
+        margin-bottom: 4rem;
+        color: rgba($cl-white, 1);
+    }
+    &-main {
+        grid-column: 2/16;
+        padding: 4rem;
+        border-radius: 2rem;
+        background-color: rgba($cl-bg-beige, 1);
+    }
+    &-inner {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+    }
+    &-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 6rem 6rem 8rem;
+        &-ic {
+            margin-bottom: 10rem;
+        }
+        &-title-wrap {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        &-title {
+            margin-bottom: 1.2rem;
+        }
+        &-body {
+            color: rgba($cl-body, 1);
+        }
+    }
+    &-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 46.2rem;
+        z-index: 1;
+        width: 100%;
+    }
+}
+@include md {
+    .home-sol {
+        &-title-wrap {
+            grid-column: 2/12;
+            margin-top: 6rem;
+            margin-bottom: 6rem;
+        }
+        &-label {
+            margin-bottom: 3.2rem;
+        }
+        &-title {
+            margin-bottom: 3.2rem;
+            font-size: 4.4rem;
+            line-height: 1.2em;
+            .heading.h2 {
+                font-size: 4.4rem;
+                line-height: 1.2em;
+            }
+        }
+        &-main {
+            grid-column: 2/12;
+            padding: 3.2rem;
+            margin-left: -1rem;
+            margin-right: -1rem;
+        }
+        &-inner {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        &-item {
+            padding: 6rem 6rem 8rem;
+            &-ic {
+                margin-bottom: 10rem;
+            }
+            &-title-wrap {
+                text-align: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            &-title {
+                margin-bottom: 1.2rem;
+            }
+            &-body {
+                color: rgba($cl-body, 1);
+            }
+        }
+        &-bg {
+            bottom: 53.6rem;
+        }
+    }
+}
+@media only screen and (min-width: 991px) {
+    .home-sol {
+        &-item {
+            &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+                border-bottom: 1px solid #D4CDC9;
+                border-right: 1px solid #D4CDC9;
+            }
+            &:nth-child(3) {
+                border-right: none;
+            }
+            &:nth-child(4), &:nth-child(5) {
+                border-right: 1px solid #D4CDC9;
+            }
+            &:nth-child(4), &:nth-child(5), &:nth-child(6) {
+                padding: 8rem 6rem 6rem;
+            }
+        }
+    }           
+}
+.home-tech {
+    padding-top: 12rem;
+    padding-bottom: 12rem;
+    .decor-slash {
+        grid-column: 2/16;
+        margin-bottom: 12rem
+    }
+    &-title-wrap {
+        grid-column: 2/8;
+        grid-row: 2/3;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: start;
+    }
+    &-title {
+        max-width: 50.2rem;
+        margin-bottom: 8rem;
+    }
+    &-btn-wrap {
+        display: flex;
+        justify-content: start;
+        &.hidden-dk {
+            display: none;
+        }
+    }
+    &-main {
+        grid-column: 8/16;
+        grid-row: 2/3;
+    }
+    &-inner {
+        display: flex;
+        flex-direction: column;
+        row-gap: 6rem;
+    }
+    &-item {
+        display: grid;
+        grid-template-columns: repeat(2,1fr);
+        column-gap: 2rem;
+        padding-bottom: 6rem;
+        border-bottom: 1px solid rgba($cl-border, .1);
+    }
+}
+.home-faq {
+    background-color: rgba($cl-bg-beige, 1);
+    padding-top: 8rem;
+    padding-bottom: 8rem;
+    &-img {
+        grid-column: 1/9;
+        margin-left: 4rem;
+        margin-right: 8rem;
+        border-radius: 2rem;
+        overflow: hidden;
+        align-self: stretch;
+        min-height: 95rem;
+        img {
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+    &-content {
+        grid-column: 10/16;
+        padding-top: 4rem;
+        padding-bottom: 5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        .decor-slash {
+            margin-bottom: 6rem;
+        }
+    }
+    &-title {
+        margin-bottom: 6rem;
+    }
+    &-main {
+        //margin-top: auto;
+    }
+    &-inner {
+        display: flex;
+        flex-direction: column;
+    }
+    &-item {
+        display: flex;
+        flex-direction: column;
+        border-bottom: 1px solid rgba($cl-border, .1);
+        &-head {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 3rem;
+            padding-bottom: 3rem;
+        }
+        &-ic {
+            @include size(3.6rem);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: solid 1px rgba($cl-border, .1);
+            border-radius: 50%;
+            background-color: rgba($cl-txt, 1);
+            @include transition(all 400ms ease);
+            color: rgba($cl-white, 1);
+            .icon {
+                path {
+                    @include transition(transform 400ms ease);
+                    transform-origin: 50% 50%;
+                }
+            }
+        }
+        &-body {
+            display: none;
+            color: rgba($cl-body, 1);
+            &-inner {
+                margin-top: -1rem;
+                margin-bottom: 3rem;
+            }
+        }
+
+        &.active {
+            .home-faq-item-ic {
+                background-color: rgba($cl-txt, 0);
+                color: rgba($cl-txt, 1);
+                .icon {
+                    path:nth-child(1) {
+                        @include transform(rotateZ(90deg))
+                    }
+                }
+            }
+        }
     }
 }

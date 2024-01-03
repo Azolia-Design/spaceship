@@ -1,37 +1,37 @@
 import $ from "jquery";
 import gsap from "gsap";
 
-gsap.registerPlugin(SplitText)
+// gsap.registerPlugin(SplitText)
 
-function nestedLinesSplit(target, vars) {
-    target = gsap.utils.toArray(target);
-    if (target.length > 1) {
-    let splits = target.map(t => nestedLinesSplit(t, vars)),
-        result = splits[0],
-        resultRevert = result.revert;
-    result.lines = splits.reduce((acc, cur) => acc.concat(cur.lines), []);
-    result.revert = () => splits.forEach(s => s === result ? resultRevert() : s.revert());
-    return result;
-    }
-    target = target[0];
-    let contents = target.innerHTML;
-    gsap.utils.toArray(target.children).forEach(child => {
-    let split = new SplitText(child, {type: "lines"});
-    split.lines.forEach(line => {
-        let clone = child.cloneNode(false);
-        clone.innerHTML = line.innerHTML;
-        target.insertBefore(clone, child);
-    });
-    target.removeChild(child);
-    });
-    let split = new SplitText(target, vars),
-        originalRevert = split.revert;
-    split.revert = () => { 
-    originalRevert.call(split); 
-    target.innerHTML = contents; 
-    };
-    return split;
-}
+// function nestedLinesSplit(target, vars) {
+//     target = gsap.utils.toArray(target);
+//     if (target.length > 1) {
+//     let splits = target.map(t => nestedLinesSplit(t, vars)),
+//         result = splits[0],
+//         resultRevert = result.revert;
+//     result.lines = splits.reduce((acc, cur) => acc.concat(cur.lines), []);
+//     result.revert = () => splits.forEach(s => s === result ? resultRevert() : s.revert());
+//     return result;
+//     }
+//     target = target[0];
+//     let contents = target.innerHTML;
+//     gsap.utils.toArray(target.children).forEach(child => {
+//     let split = new SplitText(child, {type: "lines"});
+//     split.lines.forEach(line => {
+//         let clone = child.cloneNode(false);
+//         clone.innerHTML = line.innerHTML;
+//         target.insertBefore(clone, child);
+//     });
+//     target.removeChild(child);
+//     });
+//     let split = new SplitText(target, vars),
+//         originalRevert = split.revert;
+//     split.revert = () => { 
+//     originalRevert.call(split); 
+//     target.innerHTML = contents; 
+//     };
+//     return split;
+// }
 
 function createToc(lenis, richtextEl, tocEl, htmlTemplate) {
     let headings = $(richtextEl).find('h2');
@@ -190,5 +190,7 @@ function sortAsc(arr) {
         return a.data.order < b.data.order ? -1 : 1;
     })
 }
-
-export { nestedLinesSplit, createToc, lerp, isTouchDevice, pointerCurr, xSetter, ySetter, xGetter, yGetter, toHTML, sortAsc }
+const parseRem = (input) => {
+    return input / 10 * parseFloat($('html').css('font-size'))
+}
+export { createToc, lerp, isTouchDevice, pointerCurr, xSetter, ySetter, xGetter, yGetter, toHTML, sortAsc, parseRem }
