@@ -366,7 +366,6 @@
 }
 .home-sol {
     position: relative;
-
     &-title-wrap {
         grid-column: 3/15;
         display: flex;
@@ -426,6 +425,25 @@
         width: 100%;
     }
 }
+@media only screen and (min-width: 991px) {
+    .home-sol {
+        &-item {
+            &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+                border-bottom: 1px solid #D4CDC9;
+                border-right: 1px solid #D4CDC9;
+            }
+            &:nth-child(3) {
+                border-right: none;
+            }
+            &:nth-child(4), &:nth-child(5) {
+                border-right: 1px solid #D4CDC9;
+            }
+            &:nth-child(4), &:nth-child(5), &:nth-child(6) {
+                padding: 8rem 6rem 6rem;
+            }
+        }
+    }           
+}
 @include md {
     .home-sol {
         &-title-wrap {
@@ -455,21 +473,34 @@
             grid-template-columns: repeat(2, 1fr);
         }
         &-item {
-            padding: 6rem 6rem 8rem;
-            &-ic {
-                margin-bottom: 10rem;
+            padding-top: 4rem;
+            padding-bottom: 4rem;    
+            padding-left: 0;
+            padding-right: 0;
+            @media only screen and (min-width: 767px) {
+                &:nth-child(1), &:nth-child(3) {
+                    border-bottom: 1px solid #D4CDC9;
+                    border-right: 1px solid #D4CDC9;
+                }
+                &:nth-child(5) {
+                    border-right: 1px solid #D4CDC9;
+                }
+                &:nth-child(2), &:nth-child(4) {
+                    border-bottom: 1px solid #D4CDC9;
+                }
+                &:nth-child(1), &:nth-child(3), &:nth-child(5) {
+                    padding-right: 3.2rem;
+                }
+                &:nth-child(2), &:nth-child(4), &:nth-child(6) {
+                    padding-left: 3.2rem;
+                }
             }
-            &-title-wrap {
-                text-align: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
+            &-ic {
+                margin-bottom: 4rem;
+                @include size(4rem);
             }
             &-title {
-                margin-bottom: 1.2rem;
-            }
-            &-body {
-                color: rgba($cl-body, 1);
+                margin-bottom: .8rem;
             }
         }
         &-bg {
@@ -477,25 +508,7 @@
         }
     }
 }
-@media only screen and (min-width: 991px) {
-    .home-sol {
-        &-item {
-            &:nth-child(1), &:nth-child(2), &:nth-child(3) {
-                border-bottom: 1px solid #D4CDC9;
-                border-right: 1px solid #D4CDC9;
-            }
-            &:nth-child(3) {
-                border-right: none;
-            }
-            &:nth-child(4), &:nth-child(5) {
-                border-right: 1px solid #D4CDC9;
-            }
-            &:nth-child(4), &:nth-child(5), &:nth-child(6) {
-                padding: 8rem 6rem 6rem;
-            }
-        }
-    }           
-}
+
 .home-tech {
     padding-top: 12rem;
     padding-bottom: 12rem;
@@ -537,6 +550,39 @@
         column-gap: 2rem;
         padding-bottom: 6rem;
         border-bottom: 1px solid rgba($cl-border, .1);
+    }
+}
+@include md {
+    .home-tech {
+        .decor-slash {
+            grid-column: 1/-1;
+            margin-bottom: 6rem;
+        }
+        &-title-wrap {
+            grid-column: 1/-1;
+            grid-row: 2/3;
+            flex-direction: row;
+            align-items: end;
+            justify-content: space-between;
+            margin-bottom: 6rem;
+        }
+        &-title {
+            margin-bottom: 0rem;
+            max-width: 44.3rem;
+        }
+        &-btn-wrap {
+        }
+        &-main {
+            grid-column: 1/-1;
+            grid-row: 3/4;
+        }
+        &-inner {
+            row-gap: 2.4rem;
+        }
+        &-item {
+            column-gap: 1.6rem;
+            padding-top: 2.4rem;
+        }
     }
 }
 .home-faq {
@@ -608,6 +654,8 @@
         &-body {
             display: none;
             color: rgba($cl-body, 1);
+            margin-top: -1rem;
+            padding-top: 1rem;
             &-inner {
                 margin-top: -1rem;
                 margin-bottom: 3rem;
@@ -624,6 +672,37 @@
                     }
                 }
             }
+        }
+    }
+}
+@include md {
+    .home-faq {
+        &-img {
+            grid-column: 1/6;
+            margin-left: 0;
+            margin-right: 0;
+            align-self: start;
+            height: 41.2rem;
+            min-height: auto;
+        }
+        &-content {
+            grid-column: 7/13;
+            padding-top: 0;
+            padding-bottom: 0;
+            .decor-slash {
+                margin-bottom: 2.4rem;
+            }
+        }
+        &-title {
+            margin-bottom: 2.4rem;
+            font-size: 3.2rem;
+            line-height: 1.3em;
+        }
+        &-main {
+            
+        }
+        &-inner {
+           
         }
     }
 }
