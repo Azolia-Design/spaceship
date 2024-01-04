@@ -72,12 +72,25 @@ const scripts = () => {
             header.removeClass('on-scroll')
         } else {
             header.addClass('on-scroll')
-            if (inst.direction >= 1) {
-                header.addClass('on-hide')
+            if (!$('.header-nav').hasClass('active')) {
+                if (inst.direction >= 1) {
+                    header.addClass('on-hide')
+                } else {
+                    header.removeClass('on-hide')
+                }
             } else {
                 header.removeClass('on-hide')
             }
+            
         }
+    })
+    $('.header-toggle-link').on('click', function(e) {
+        e.preventDefault();
+        $('.header-nav').addClass('active')
+    })
+    $('.header-nav-close-ic').on('click', function(e) {
+        e.preventDefault();
+        $('.header-nav').removeClass('active')
     })
     const VIEWS = [
         homeScript,

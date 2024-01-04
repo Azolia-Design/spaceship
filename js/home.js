@@ -4,7 +4,7 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 import MotionPathPlugin from "gsap/MotionPathPlugin";
 import lenis from './vendors/lenis';
 import Swiper from "swiper";
-import { Navigation } from "swiper";
+import { Navigation, Pagination } from "swiper";
 import { parseRem, xSetter, ySetter, xGetter, yGetter, pointerCurr, lerp } from "./untils";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
@@ -58,19 +58,33 @@ const homeScript = {
             arrowAnim('#outPathL', '.outArrL', true, true, false)
             arrowAnim('#inPathR', '.inArrR', true, false, false)
             arrowAnim('#inPathL', '.inArrL', true, false, false)
-            arrowAnim('#upPath', '.upArr', 90, false, true)
-            arrowAnim('#downPathL', '.downArrL', -90, true, false)
-            arrowAnim('#downPathR', '.downArrR', -90, false, false)
+            if ($(window).width() > 991) {
+                arrowAnim('.show-dk #upPath', '.show-dk .upArr', 90, false, true)
+                arrowAnim('.show-dk #downPathL', '.show-dk .downArrL', -90, true, false)
+                arrowAnim('.show-dk #downPathR', '.show-dk .downArrR', -90, false, false)
+            } else if ($(window).width() > 767) {
+                arrowAnim('.show-tb #upPath', '.show-tb .upArr', 90, false, true)
+                arrowAnim('.show-tb #downPathL', '.show-tb .downArrL', -90, true, false)
+                arrowAnim('.show-tb #downPathR', '.show-tb .downArrR', -90, false, false)
+            } else {
+                arrowAnim('.show-mb #upPath', '.show-mb .upArr', 90, false, true)
+                arrowAnim('.show-mb #downPathL', '.show-mb .downArrL', -90, true, false)
+                arrowAnim('.show-mb #downPathR', '.show-mb .downArrR', -90, false, false)
+            }
         }
         homeHeroPath()
         function homeProb() {
             const homeProbSwiper = new Swiper('.home-prob-main', {
-                modules: [Navigation],
+                modules: [Navigation, Pagination],
                 slidesPerView: 1,
                 spaceBetween: parseRem(20),
                 navigation: {
                     nextEl: '.home-prob-pagi .swiper-pagi-next',
                     prevEl: '.home-prob-pagi .swiper-pagi-prev'
+                },
+                pagination: {
+                    el: '.home-prob-counter',
+                    type: 'fraction'
                 },
                 breakpoints: {
                     767: {

@@ -59,30 +59,19 @@
         --h4-fs: 2.6rem;
         --h4-lh: 1.5em;
 
-        --h5-fs: 2em;
+        --h5-fs: 2rem;
         --h5-lh: 1.5em;
 
         --h6-fs: 2rem;
         --h6-lh: 1.4em;
     }
     @media only screen and (max-width: 767px) {
-        --h1-fs: 6rem;
+        --h0-fs: 3.6rem;
+        --h0-lh: 1.2em;
 
-        --h2-fs: 3.6rem;
-
-        --h3-fs: 3.2rem;
-
-        --h4-fs: 2.4rem;
-
-        --fs-24: 1.8rem;
-        --fs-20: 1.6rem;
+        --h5-fs: 2.2rem;
+        --h5-lh: 1.5em;
     }
-    @media only screen and (max-width: 476px) {
-        --h1-fs: 3.6rem;
-
-        --h3-fs: 3.2rem;
-    }
-
 }
 
 $txtSizes: 12, 14, 16, 18, 20, 24, 28, 36;
