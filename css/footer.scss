@@ -286,6 +286,9 @@
                                 border: none;
                                 padding: 2rem 3rem;
                                 color: rgba($cl-txt,1);
+                                &:hover {
+                                    color: rgba($cl-white,1);   
+                                }
                             }
                         }
                         &.hidden-tb {

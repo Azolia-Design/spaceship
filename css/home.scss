@@ -167,10 +167,10 @@
     .home-hero-mid {
         &-img {
             grid-column: 1/-1;
-            margin-top: -5rem;
-            margin-left: 0rem;
+            margin-top: -10.5rem;
+            margin-left: -1rem;
             margin-right: 0rem;
-            margin-bottom: -2.6rem;
+            margin-bottom: -4.6rem;
         }
         &-line {
             &.show-tb {
@@ -179,6 +179,15 @@
             &.show-mb {
                 display: block;
             }
+        }
+    }
+}
+@include xs {
+    .home-hero-mid {
+        &-img {
+            margin-top: -5rem;
+            margin-left: 0;
+            margin-bottom: -2.6rem;
         }
     }
 }

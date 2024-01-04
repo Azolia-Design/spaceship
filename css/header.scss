@@ -89,7 +89,7 @@
             border-radius: 1.2rem;
             transform-origin: 100% 0%;
             will-change: transform;
-            @include transition(all 400ms ease-out);
+            @include transition(all 400ms ease-in-out);
             @include transform(translate(-2rem, 1rem) scale(0, 0));
             pointer-events: none;
             &.active {

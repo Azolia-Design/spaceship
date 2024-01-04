@@ -62,7 +62,7 @@ const homeScript = {
                 arrowAnim('.show-dk #upPath', '.show-dk .upArr', 90, false, true)
                 arrowAnim('.show-dk #downPathL', '.show-dk .downArrL', -90, true, false)
                 arrowAnim('.show-dk #downPathR', '.show-dk .downArrR', -90, false, false)
-            } else if ($(window).width() > 767) {
+            } else if ($(window).width() >= 767) {
                 arrowAnim('.show-tb #upPath', '.show-tb .upArr', 90, false, true)
                 arrowAnim('.show-tb #downPathL', '.show-tb .downArrL', -90, true, false)
                 arrowAnim('.show-tb #downPathR', '.show-tb .downArrR', -90, false, false)
