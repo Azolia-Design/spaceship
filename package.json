@@ -37,5 +37,6 @@
     "jquery": "^3.7.1",
     "serve-static": "^1.15.0",
     "swiper": "^8.4.7"
-  }
+  },
+  "browserslist": "> 0.5%, last 2 versions, not dead, Safari 14"
 }

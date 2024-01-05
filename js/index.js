@@ -64,7 +64,7 @@ const scripts = () => {
             }))
         }
     }
-    //refreshOnBreakpoint();
+    refreshOnBreakpoint();
     const header = $('.header')
     lenis.on('scroll', function(inst) {
         if (inst.scroll < header.outerHeight()) {
@@ -81,7 +81,6 @@ const scripts = () => {
             } else {
                 header.removeClass('on-hide')
             }
-            
         }
     })
     $('.header-toggle-link').on('click', function(e) {

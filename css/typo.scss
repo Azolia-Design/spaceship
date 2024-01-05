@@ -167,6 +167,10 @@
     &-white {
         background-color: rgba($cl-white, 1);
         color: rgba($cl-txt, 1);
+        @include transition(color 0.3s cubic-bezier(0.75, 0, 0.125, 1));
+        &:hover {
+            color: rgba($cl-white, 1);
+        }
     }
     &-sm {
         padding: .9rem 1.9rem;
