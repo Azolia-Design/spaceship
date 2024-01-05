@@ -480,12 +480,15 @@
             margin-right: -.5rem;
         }
         &-main {
-            grid-column: 1/11;
+            grid-column: 1/-1;
         }
         &-item {
             padding: 3.2rem 2.4rem;
             border-radius: 1.2rem;
             min-height: 30rem;
+            &.swiper-slide {
+                width: calc(50% - 7.2rem);
+            }
             &-title-wrap {
                 column-gap: 1.2rem;
             }
@@ -543,11 +546,11 @@
         &-main {
             grid-column: 1/-1;
             margin-bottom: 6rem;
-            &.swiper {
-                padding-right: 3.2rem;
-            }
         }
         &-item {
+            &.swiper-slide {
+                width: calc(100% - 3.2rem);
+            }
         }
         &-pagi {
             grid-column: 1/-1;
@@ -939,6 +942,13 @@
             align-items: center;
             padding-top: 3rem;
             padding-bottom: 3rem;
+            &:hover {
+                .home-faq-item-ic {
+                    border-color: transparent;
+                    background-color: rgba($cl-blue,1);
+                    color: rgba($cl-white, 1);
+                }
+            }
         }
         &-ic {
             @include size(3.6rem);
@@ -976,6 +986,13 @@
                     path:nth-child(1) {
                         @include transform(rotateZ(90deg))
                     }
+                }
+            }
+            &:hover {
+                .home-faq-item-ic {
+                    border-color: transparent;
+                    background-color: rgba($cl-blue,1);
+                    color: rgba($cl-white, 1);
                 }
             }
         }

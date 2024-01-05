@@ -5,8 +5,10 @@ import barba from '@barba/core';
 import barbaPrefetch from '@barba/prefetch';
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-
+import { parseRem, xSetter, ySetter, xGetter, yGetter, pointerCurr, lerp } from "./untils";
 import homeScript from './home';
+import termScript from './term';
+import blogdtlScript from './blogdtl';
 
 const scripts = () => {
     if (history.scrollRestoration) {
@@ -23,7 +25,6 @@ const scripts = () => {
             timer = setTimeout(func, delay, event);
         };
     }
-
     function refreshOnBreakpoint() {
         let initialViewportWidth = window.innerWidth || document.documentElement.clientWidth;
         let newViewportWidth;
@@ -65,6 +66,66 @@ const scripts = () => {
         }
     }
     refreshOnBreakpoint();
+    function addNavActiveLink(data) {
+        $('[data-link]').removeClass('active')
+        $(`[data-link="${$(data.next.container).attr('data-namespace')}"]`).addClass('active')
+    }
+    function handleHeaderMode(data) {
+        $('.header').removeClass('on-hide dark-mode')
+        if ($(data.next.container).attr('data-header') == 'dark') {
+            $('.header').addClass('dark-mode')
+        }
+    }
+    function resetScroll() {
+        let locationHash = window.location.hash;
+        lenis.stop()
+        if ($(locationHash).length) {
+            setTimeout(() => {
+                lenis.scrollTo(locationHash, {
+                    force: true,
+                    immediate: true,
+                });
+                if ($(window).width() < 767) {
+                    setTimeout(() => {
+                        document.querySelector('.wrapper').scrollTo(0,document.getElementById(locationHash.replace('#','')).offsetTop)
+                    }, 300);
+                }
+            }, 300);
+            
+        } else {
+            lenis.scrollTo(0, {
+                force: true,
+                immediate: true,
+            });
+        }
+        lenis.start()
+    }
+    function resetBeforeLeave(data) {
+        console.log('reset')
+        handleHeaderMode(data)
+        addNavActiveLink(data);
+    }
+    const handleCursor = {
+        init: () => {
+            function mouseMove() {
+                let iconX = xGetter('.cursor-wrap')
+                let iconY = yGetter('.cursor-wrap')
+                xSetter('.cursor-wrap')(lerp(iconX, pointerCurr().x, .15))
+                ySetter('.cursor-wrap')(lerp(iconY, pointerCurr().y, .15))
+                requestAnimationFrame(mouseMove)
+                if ($('.swiper-wrapper.home-prob-inner:hover').length) {
+                    $('.cursor-inner').addClass('on-hover-drag')
+                } else {
+                    $('.cursor-inner').removeClass('on-hover-drag')
+                }
+            }
+            requestAnimationFrame(mouseMove)
+        },
+        reset: () => {
+            $('.cursor-inner').removeClass('on-hover-drag')
+        }
+    }
+    handleCursor.init()
     const header = $('.header')
     lenis.on('scroll', function(inst) {
         if (inst.scroll < header.outerHeight()) {
@@ -93,6 +154,8 @@ const scripts = () => {
     })
     const VIEWS = [
         homeScript,
+        termScript,
+        blogdtlScript
     ]
 
     barba.init({
@@ -101,6 +164,8 @@ const scripts = () => {
             name: 'opacity-transition',
             sync: true,
             once(data) {
+                resetScroll()
+                resetBeforeLeave(data)
             },
             async enter(data) {
                 
@@ -109,8 +174,10 @@ const scripts = () => {
 
             },
             async afterEnter(data) {
+                resetScroll()
             },
             async beforeLeave(data) {
+                resetBeforeLeave(data)
             },
             async leave(data) {
             },

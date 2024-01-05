@@ -1,0 +1,265 @@
+.blogdtl-hero {
+    padding-top: 16rem;
+    
+    &-title-wrap {
+        grid-column: 2/16;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 8rem;
+    }
+    &-btn-wrap {
+        margin-bottom: 4rem;
+    }
+    &-thumb {
+        grid-column: 2/16;
+        border-radius: 2rem;
+        max-height: 56rem;
+        overflow: hidden;
+        img {
+            object-fit: cover;
+            height: 100%;
+        }
+    }
+}
+.blogdtl-main {
+    padding-top: 8rem;
+    padding-bottom: 10rem;
+    &-rictxt {
+        grid-column: 5/13;
+        h2 {
+            margin-top: 4rem;
+            margin-bottom: 1.6rem;
+        }
+        h3 {
+            margin-top: 4rem;
+            margin-bottom: 1.6rem;
+        }
+        h4 {
+            margin-top: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        p {
+            color: rgba($cl-body, 1);
+            margin-bottom: 1.6rem;
+            strong {
+                font-weight: 500;
+            }
+        }
+        ul {
+            margin-bottom: 1.6rem;
+            padding-left: 2.8rem;
+            list-style: disc;
+            li {
+                margin-bottom: .4rem;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+        figure {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            row-gap: 1.2rem;
+            margin-top: 4rem;
+            margin-bottom: 3.2rem;
+            .rictxt-img {
+                width: 100%;
+                overflow: hidden;
+                border-radius: 2rem;
+            }
+            figcaption {
+                font-size: var(--fs-14);
+                line-height: var(--lh-14);
+                color: rgba($cl-txt-desc, 1);
+            }
+        }
+    }
+}
+.blogdtl-rel {
+    padding-bottom: 10rem;
+    &-title-wrap {
+        grid-column: 5/13;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 6rem;
+    }
+    &-title {
+        margin-bottom: 2rem;
+    }
+    &-main.swiper {
+        grid-column: 5/13;
+    }
+    &-list.swiper-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+    }
+    &-item {
+        padding: 3rem;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: space-between;
+        min-height: 31rem;
+        background-color: rgba($cl-bg-beige, 1);
+        border-radius: 2rem;
+        &.swiper-slide {
+            @include transition(all 400ms ease);
+        }
+        &-title {
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3; 
+            -webkit-box-orient: vertical;
+        }
+        .label-wrap {
+            @include transition(all 400ms ease);
+        }
+        &:hover {
+            background-color: rgba($cl-txt, 1);
+            color: rgba($cl-white, 1);
+            .label-wrap {
+                color: rgba($cl-white, 1);
+                border-color: rgba($cl-white, .2);
+            }
+        }
+    }
+    &-pagi {
+        display: none;
+    }
+}
+@include md {
+    .blogdtl-hero {
+        padding-top: 12rem;
+        &-title-wrap {
+            grid-column: 1/-1;
+        }
+        &-btn-wrap {
+        }
+        &-thumb {
+            grid-column: 1/-1;
+            max-height: 40rem;
+        }
+    }
+    .blogdtl-main {
+        padding-bottom: 12rem;
+        &-rictxt {
+            grid-column: 1/-1;
+            p {
+                font-size: 1.6rem;
+                line-height: 1.6em;
+            }
+        }
+    }
+    .blogdtl-rel {
+        padding-bottom: 10rem;
+        &-title-wrap {
+            grid-column: 1/-1;
+        }
+        &-main.swiper {
+            grid-column: 1/-1;
+        } 
+    }
+}
+@include sm {
+    .blogdtl-hero {
+        padding-top: 9.6rem;
+        &-title-wrap {
+            grid-column: 1/-1;
+            align-items: start;
+            text-align: left;
+            margin-bottom: 6rem;
+        }
+        &-title {
+            font-size: 3.2rem;
+            line-height: 1.3em;
+        }
+        &-btn-wrap {
+            margin-bottom: 3.2rem;
+        }
+        &-thumb {
+            max-height: 26rem;
+            border-radius: 1.2rem;
+        }
+    }
+    .blogdtl-main {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+        &-rictxt {
+            grid-column: 1/-1;
+            h3 {
+                font-size: 2rem;
+                line-height: 1.4em;
+            }
+            h4 {
+                font-size: 1.8rem;
+                line-height: 1.6em;
+            }
+            figure {
+                align-items: start;
+                text-align: left;
+                .rictxt-img {
+                    border-radius: 1.2rem;
+                }
+            }
+        }
+    }
+    .blogdtl-rel {
+        overflow: hidden;
+        padding-bottom: 10rem;
+        &-title-wrap {
+            grid-column: 1/-1;
+            margin-bottom: 4rem;
+        }
+        &-title {
+            margin-bottom: 3.2rem;
+        }
+        &-main.swiper {
+            overflow: visible;
+            //padding-right: 3.2rem;
+        } 
+        &-list.swiper-wrapper {
+            display: flex;
+            gap: 0;
+        }
+        &-item {
+            &.swiper-slide {
+                width: calc(100vw - 6.4rem);
+            }
+            min-height: 24rem;
+            padding: 2.4rem;
+            border-radius: 1.2rem;
+        }
+        &-pagi {
+            grid-column: 1/-1;
+            display: flex;
+            justify-content: center;
+            column-gap: .8rem;
+            margin-top: 4rem;
+            align-self: center;
+            .swiper-pagi-prev, .swiper-pagi-next {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                @include size(3.6rem);
+                border-radius: 50%;
+                border: solid 1px rgba($cl-border, .2);
+                @include transition(all 400ms ease);
+                .icon {
+                    color: rgba($cl-border, 1);
+                    @include transition(opacity 400ms ease);
+                }
+                &.swiper-button-disabled {
+                    .icon {
+                        opacity: .2;
+                    }
+                }
+            }
+        }
+    }
+}

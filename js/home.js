@@ -76,7 +76,7 @@ const homeScript = {
         function homeProb() {
             const homeProbSwiper = new Swiper('.home-prob-main', {
                 modules: [Navigation, Pagination],
-                slidesPerView: 1,
+                slidesPerView: 'auto',
                 spaceBetween: parseRem(20),
                 navigation: {
                     nextEl: '.home-prob-pagi .swiper-pagi-next',
@@ -88,7 +88,7 @@ const homeScript = {
                 },
                 breakpoints: {
                     767: {
-                        slidesPerView: 2,
+                        slidesPerView: 'auto',
                     },
                     991: {
                         slidesPerView: 3

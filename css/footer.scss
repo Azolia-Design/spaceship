@@ -206,7 +206,8 @@
                 &-link {
                     color: rgba($cl-white, .3);
                     @include transition(color 400ms ease);
-                    &:hover {
+                    text-wrap: nowrap;
+                    &.active, &:hover {
                         color: rgba($cl-white, 8);
                     }
                 }
@@ -228,7 +229,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            opacity: .6;
+            opacity: .1;
         }
     }
 }

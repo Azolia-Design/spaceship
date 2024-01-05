@@ -121,12 +121,15 @@
     text-align: center;
     background-color: rgba($cl-dark-grey, 1);
     color: rgba($cl-white, 1);
-    transition: background-color $dur-default ease;
     -webkit-backface-visibility: hidden;
     position: relative;
     overflow: hidden;
     z-index: 1;
     border-radius: .2rem;
+    @include transition(all $dur-default ease);
+    .icon-btn {
+        margin-right: 1rem;
+    }
     &::before,
     &::after {
         content: '';
@@ -159,9 +162,10 @@
         border: 1px solid rgba($cl-border, .2);
         background-color: transparent;
         color: rgba($cl-txt, 1);
-        @include transition(color 0.3s cubic-bezier(0.75, 0, 0.125, 1));
+        @include transition(all 0.3s cubic-bezier(0.75, 0, 0.125, 1));
         &:hover {
             color: rgba($cl-white, 1);
+            border-color: transparent;
         }
     }
     &-white {
@@ -185,7 +189,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: .9rem 1.9rem;
+    padding: .8rem 1.9rem .9rem;
     border-radius: 1.6rem;
     border: 1px solid rgba($cl-border, .2);
     color: $cl-txt-sub;
@@ -232,6 +236,7 @@
 }
 
 img {
+    display: block;
     width: 100%;
     height: auto;
     max-width: none;

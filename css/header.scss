@@ -8,6 +8,7 @@
     padding-bottom: 2rem;
     background-color: rgba($cl-white, 0);
     @include transition(all 400ms ease);
+    color: rgba($cl-txt-sub, 1);
     &.on-hide {
         @include transform(translateY(-100%))
     }
@@ -15,6 +16,32 @@
         background-color: rgba($cl-white, 1);
         padding-top: 1rem;
         padding-bottom: 1rem;
+    }
+    &.dark-mode {
+        &:not(.on-scroll) {
+            color: rgba($cl-white, .8);
+            .btn {
+                background-color: rgba($cl-white, 1);
+                color: rgba($cl-txt, 1);
+                &:hover {
+                    color: rgba($cl-white, 1);
+                }
+            }
+            .header-link-div {
+                color: rgba($cl-white, .2);
+            }
+            .header-logo-link {
+                img {
+                    &[data-mode="light"] {
+                        opacity: 0;
+                    }
+                    &[data-mode="dark"] {
+                        opacity: 1;
+                    }
+                }
+            }
+        }
+        
     }
     &-logo {
         grid-column: 1/5;
@@ -24,9 +51,20 @@
         &-link {
             width: auto;
             height: 4rem;
+            display: grid;
+            justify-content: start;
             img {
-                height: 100%;
+                grid-column: 1/2;
+                grid-row: 1/2;
+                height: 4rem;
                 width: auto;
+                @include transition(opacity 400ms ease);
+                &[data-mode="light"] {
+                    opacity: 1;
+                }
+                &[data-mode="dark"] {
+                    opacity: 0;
+                }
             }
         }
     }
@@ -61,7 +99,17 @@
             display: none;
         }
     }
+    &-link-txt {
+        @include transition(color 400ms ease);
+        &.active {
+            color: rgba($cl-dark-blue, 1);
+        }
+        &:hover {
+            color: rgba($cl-blue, 1);
+        }
+    }
     &-link-div {
+        @include transition(color 400ms ease);
         color: rgba($cl-txt, .2);
     }
     &-toggle {
@@ -76,6 +124,9 @@
             grid-column: 1/7;
             &-link {
                 height: 2.8rem;
+                img {
+                    height: 2.8rem;
+                }
             }
         }
         &-nav {
@@ -157,6 +208,9 @@
                     @include transition(transform 400ms ease);
                     @include transform(scaleX(0))
                 }
+            }
+            &.active {
+                color: rgba($cl-white, 1);
             }
             &.active, &:hover {
                 .line-inner {

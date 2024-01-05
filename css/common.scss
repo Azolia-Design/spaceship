@@ -21,8 +21,8 @@ $cl-border: #2D2D2D;
 $cl-bg-beige: #F6F1EE;
 $dur-default: 400ms;
 
-//$container-width: 172.8rem;
-$container-width: 192rem; //resolve in 192x12.5px(fontsize) = 2400px
+$container-width: 1728px;
+//$container-width: 192rem; //resolve in 192x12.5px(fontsize) = 2400px
 
 //Font
 html {
@@ -38,9 +38,9 @@ html {
     // @media only screen and (min-width: 2160px) {
     //     font-size: 12.5px;
     // }
-    // @media only screen and (min-width: 1728px) {
-    //     //font-size: 10px;
-    // }
+    @media only screen and (min-width: 1728px) {
+        font-size: 10px;
+    }
     @media only screen and (max-width: 991px) {
         font-size: 1.1990407674vw;
     }
@@ -83,8 +83,8 @@ button {
     width: 100%;
     margin: 0 auto;
     padding: 0 var(--container-padding);
-    // max-width: $container-width;
-    max-width: none;
+    max-width: $container-width;
+    //max-width: none;
     &.fluid {
         max-width: none;
     }
@@ -129,16 +129,31 @@ button {
     height: 100%;
     position: fixed;
     pointer-events: none;
+    color: rgba($cl-white, 1);
     &-wrap {
         position: absolute;
         top: 0;
         left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     &-inner {
         position: absolute;
-        @include transform(translate(-50%, -50%));
-        top: 0;
-        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba($cl-dark-bg, 1);
+        border-radius: 50%;
 
+        @include size(10rem);
+        @include transform(scale(.2));
+        opacity: 0;
+        @include transition(all 400ms ease);
+        transform-origin: center;
+        &.on-hover-drag {
+            @include transform(scale(1));
+            opacity: 1;
+        }
     }
 }

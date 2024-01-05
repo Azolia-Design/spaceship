@@ -1,0 +1,112 @@
+.term-hero {
+    padding-top: 20rem;
+    padding-bottom: 11.5rem;
+    background-color: rgba($cl-txt, 1);
+    color: rgba($cl-white, 1);
+    &-title-wrap {
+        grid-column: 1/-1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    &-title {
+        margin-bottom: 3.2rem;
+    }
+    &-date {
+        color: rgba($cl-white, .6);
+    }
+}
+.term-main {
+    padding-top: 4rem;
+    padding-bottom: 7rem;
+    &-rictxt {
+        grid-column: 5/13;
+        h2 {
+            margin-top: 4rem;
+            margin-bottom: 1.6rem;
+        }
+        h3 {
+            margin-top: 4rem;
+            margin-bottom: 1.6rem;
+        }
+        h4 {
+            margin-top: 1.6rem;
+            margin-bottom: 1.2rem;
+        }
+        p {
+            color: rgba($cl-body, 1);
+            margin-bottom: 1.6rem;
+        }
+        ul {
+            margin-bottom: 1.6rem;
+            padding-left: 2.8rem;
+            list-style: disc;
+            li {
+                margin-bottom: .4rem;
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+@include md {
+    .term-hero {
+        padding-top: 11.2rem;
+        padding-bottom: 11.2rem;
+        &-title {
+            margin-bottom: 2.4rem;
+        }
+    }
+    .term-main {
+        padding-bottom: 8.4rem;
+        &-rictxt {
+            grid-column: 1/-1;
+            h2 {
+                font-size: 3.2rem;
+                line-height: 1.3em;
+            }
+            h3 {
+                font-size: 2.4rem;
+                line-height: 1.5em;
+            }
+            .txt.txt-18 {
+                font-size: 1.8rem;
+                line-height: 1.6em;
+            }
+        }
+    }
+}
+@include sm {
+    .term-hero {
+        padding-top: 9.6rem;
+        padding-bottom: 9.6rem;
+        &-title {
+            font-size: 4.8rem;
+            line-height: 1.2em;
+        }
+        &-date {
+            font-size: 1.8rem;
+            line-height: 1.6em;
+        }
+    }
+    .term-main {
+        padding-top: 3.5rem;
+        padding-bottom: 14rem;
+        &-rictxt {
+            h2 {
+                font-size: 2.4rem;
+                line-height: 1.5em;
+            }
+            h3 {
+                font-size: 2rem;
+                line-height: 1.4em;
+            }
+            h4 {
+                font-size: 1.8rem;
+                line-height: 1.6em;
+            }
+        }
+    }
+}

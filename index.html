@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spaceship</title>
+    <title>SpaceShip</title>
     <meta property="og:image" content="#"/>
     <meta property="og:site_name" content="Spaceship"/>
     <link rel="icon" type="image/png" sizes="32x32" href="./imgs/favicon.png">
@@ -16,7 +16,8 @@
             <div class="container grid">
                 <div class="header-logo">
                     <a href="./" class="header-logo-link">
-                        <img src="./imgs/header-logo.svg" alt="Spaceship logo">
+                        <img src="./imgs/header-logo.svg" alt="Spaceship logo" data-mode="light">
+                        <img src="./imgs/header-logo-dark.svg" alt="Spaceship logo" data-mode="dark">
                     </a>
                 </div>
                 <div class="header-nav">
@@ -81,8 +82,8 @@
                 <div class="header-toggle">
                     <a href="#" class="icon icon-24 header-toggle-link">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19.5 16.5H4.5" stroke="#1C1C1C" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M4.5 7.5H19.5" stroke="#1C1C1C" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19.5 16.5H4.5" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M4.5 7.5H19.5" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </a>
                 </div>
@@ -90,7 +91,11 @@
         </header>
         <div class="cursor">
             <div class="cursor-wrap">
-                <div class="cursor-inner"></div>
+                <div class="cursor-inner">
+                    <div class="txt txt-16 cursor-txt">
+                        Drag
+                    </div>
+                </div>
             </div>
         </div>
         <div class="main" data-barba="container" data-barba-namespace="home" data-namespace="home">
@@ -790,7 +795,7 @@
                             Head Office
                         </div>
                         <div class="ft-ctc-grp-li">
-                            <a href="tel:004915166113142" class="ft-ctc-link">
+                            <div class="ft-ctc-link">
                                 <div class="icon icon-20 ft-ctc-link-ic">
                                     <svg width="100%" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                                         <path d="M4 4L16 9.57433L4 15L6.4 9.57432L4 4Z" fill="currentColor"/>
@@ -799,7 +804,7 @@
                                 <div class="heading h6 ft-ctc-link-txt">
                                     Munich, Germany
                                 </div>
-                            </a>
+                            </div>
                         </div>
                     </div>
                     <div class="ft-ctc-btn-wrap">
@@ -812,7 +817,7 @@
                     <div class="ft-menu-list">
                         <ul class="ft-menu-ul">
                             <li class="ft-menu-link">
-                                <a href="#" class="heading h5 ft-menu-link-txt" data-link="home">
+                                <a href="./" class="heading h5 ft-menu-link-txt" data-link="home">
                                     Home
                                     <div class="line">
                                         <div class="line-inner"></div>
@@ -844,7 +849,7 @@
                                 </a>
                             </li>
                             <li class="ft-menu-link">
-                                <a href="#" class="heading h5 ft-menu-link-txt" data-link="career">
+                                <a href="./blog-dtl.html" class="heading h5 ft-menu-link-txt" data-link="career">
                                     Career
                                     <div class="line">
                                         <div class="line-inner"></div>
@@ -858,11 +863,11 @@
                     <div class="txt txt-16 ft-copy-txt">© <span data-year="">2024</span>, SPACE-SHIP. All Rights Reserved.</div>
                     <div class="ft-term">
                         <div class="ft-term-item">
-                            <a href="#" class="txt txt-16 ft-term-item-link">Imprints</a>
+                            <a href="/imprint.html" class="txt txt-16 ft-term-item-link" data-link="imprint">Imprints</a>
                             <div class="txt txt-16 ft-term-item-div">/</div>
                         </div>
                         <div class="ft-term-item">
-                            <a href="#" class="txt txt-16 ft-term-item-link">Privacy policy</a>
+                            <a href="/term.html" class="txt txt-16 ft-term-item-link" data-link="term">Privacy policy</a>
                             <div class="txt txt-16 ft-term-item-div">/</div>
                         </div>
                     </div>
