@@ -302,8 +302,7 @@
     padding-top: 4rem;
     padding-bottom: 4rem;
     &-label-wrap {
-        grid-column: 1/-1;
-        margin: 0 -4rem;
+        width: 100%;
         display: flex;
         align-items: center;
         column-gap: 2rem;
@@ -314,8 +313,7 @@
         white-space: nowrap;
     }
     &-marquee {
-        grid-column: 1/-1;
-        margin: 0 -4rem;
+        width: 100%;
         overflow: hidden;
         display: flex;
         align-items: center;
@@ -380,13 +378,9 @@
     .home-part {
         padding-bottom: 4rem;
         &-label-wrap {
-            margin-left: -1.6rem;
-            margin-right: -1.6rem;
         }
         &-marquee {
             column-gap: 2rem;
-            margin-left: -1.6rem;
-            margin-right: -1.6rem;
             &.hidden-dk {
                 display: flex;
                 margin-top: 2rem;

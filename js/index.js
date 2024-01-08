@@ -9,6 +9,7 @@ import { parseRem, xSetter, ySetter, xGetter, yGetter, pointerCurr, lerp } from 
 import homeScript from './home';
 import termScript from './term';
 import blogdtlScript from './blogdtl';
+import aboutScript from './about';
 
 const scripts = () => {
     if (history.scrollRestoration) {
@@ -102,6 +103,7 @@ const scripts = () => {
     }
     function resetBeforeLeave(data) {
         console.log('reset')
+        $('.header-nav').removeClass('active')
         handleHeaderMode(data)
         addNavActiveLink(data);
     }
@@ -154,6 +156,7 @@ const scripts = () => {
     })
     const VIEWS = [
         homeScript,
+        aboutScript,
         termScript,
         blogdtlScript
     ]
