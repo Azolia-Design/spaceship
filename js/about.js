@@ -56,7 +56,7 @@ const aboutScript = {
         abtMile()
     },
     beforeLeave() {
-        console.log('leave blogdtls')
+        console.log('leave about')
     }
 }
 export default aboutScript

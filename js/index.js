@@ -10,6 +10,8 @@ import homeScript from './home';
 import termScript from './term';
 import blogdtlScript from './blogdtl';
 import aboutScript from './about';
+import solutionScript from './solution';
+import insightScript from './insight';
 
 const scripts = () => {
     if (history.scrollRestoration) {
@@ -158,7 +160,9 @@ const scripts = () => {
         homeScript,
         aboutScript,
         termScript,
-        blogdtlScript
+        blogdtlScript,
+        solutionScript,
+        insightScript
     ]
 
     barba.init({
