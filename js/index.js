@@ -136,8 +136,11 @@ const scripts = () => {
                 e.preventDefault();
                 if ($(this).attr('data-popup') == 'open') {
                     $('.popup').addClass('active')
+                    lenis.stop()
+                    $('.header-nav').removeClass('active')
                 } else {
                     $('.popup').removeClass('active')
+                    lenis.start()
                 }
             })
         },
