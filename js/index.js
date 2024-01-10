@@ -130,6 +130,22 @@ const scripts = () => {
         }
     }
     handleCursor.init()
+    const handlePopup = {
+        init: () => {
+            $('[data-popup]').on('click', function(e) {
+                e.preventDefault();
+                if ($(this).attr('data-popup') == 'open') {
+                    $('.popup').addClass('active')
+                } else {
+                    $('.popup').removeClass('active')
+                }
+            })
+        },
+        open: () => {
+            
+        }
+    }
+    handlePopup.init()
     const header = $('.header')
     lenis.on('scroll', function(inst) {
         if (inst.scroll < header.outerHeight()) {

@@ -1,0 +1,277 @@
+.popup {
+    position: fixed;
+    @include size(100%);
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    display: flex;
+    justify-content: end;
+    padding: 4rem;
+    opacity: 0;
+    @include transition(opacity 400ms ease);
+    pointer-events: none;
+    &.active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+    &-overlay {
+       @include size(100%);
+       position: absolute;
+       top: 0;
+       left: 0;
+       z-index: 1;
+       background-color: rgba(black, .9);
+    }
+    &-main {
+        position: relative;
+        z-index: 2;
+        width: 100%;
+        max-width: 87.4rem;
+        background-color: rgba($cl-white, 1);
+        border-radius: 2rem;
+    }
+    &-inner {
+        @include size(100%);
+        display: grid;
+        grid-template-columns: 4.1fr 5.9fr;
+    }
+    &-info {
+        padding-top: 8rem;
+        padding-bottom: 8rem;
+        padding-left: 6rem;
+        padding-right: 4rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: start;
+        position: relative;
+        &-inner {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            row-gap: 2rem;
+            &.hidden-dk {
+                display: none;
+            }
+        }
+        &-item {
+            flex-direction: column;
+            align-items: start;
+            row-gap: .4rem;
+            &-label {
+                color: rgba($cl-txt-desc, 1);
+            }
+            &-link {
+                @include transition(color 400ms ease);
+                &:hover {
+                    color: rgba($cl-dark-blue, 1);
+                }
+            }
+        }
+        .line {
+            width: 1px;
+            height: 100%;
+            background-color: rgba($cl-border, .2);
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
+    }
+    &-form {
+        padding: 8rem 6rem;
+        height: 100%;
+        overflow: hidden;
+        &-inner {
+            @include size(100%);
+            display: flex;
+            flex-direction: column;
+        }
+        &-fields {
+            display: flex;
+            flex-direction: column;
+            row-gap: 2rem;
+            height: 100%;
+            overflow: hidden;
+        }
+        &-btn-wrap {
+            flex-shrink: 0;
+            width: 100%;
+            padding-top: 4rem;
+            margin-top: auto;
+            .btn {
+                width: 100%;
+            }
+        }
+    }
+    &-input {
+        &-grp {
+            padding-top: 1rem;
+            flex-shrink: 0;
+            position: relative;
+            &.textarea-grp {
+                flex-grow: 1;
+                display: flex;
+                flex-direction: column;
+                textarea {
+                    flex-grow: 1;
+                }
+            }
+            .line {
+                bottom: 0;
+                left: 0;
+                position: absolute;
+            }
+        }
+        &-label {
+            color: rgba($cl-body, 1);
+        }
+        &-field {
+            display: block;
+            width: 100%;
+            padding-top: .8rem;
+            padding-bottom: 1rem;
+            color: rgba($cl-txt, 1);
+            outline: none;
+            border: none;
+            background-color: transparent;
+            @include transition(color 400ms ease);
+            &::placeholder {
+                color: rgba($cl-txt-desc, 1);
+            }
+        }
+    }
+    &-close {
+        position: absolute;
+        top: 4rem;
+        right: 4rem;
+    }
+}
+@include md {
+    .popup {
+        padding: 2.4rem;
+        &-main {
+            max-width: none;
+        }
+        &-inner {
+        }
+        &-info {
+            padding-left: 4rem;
+        }
+        &-form {
+            padding: 8rem 4rem;
+        }
+    }
+}
+@include sm {
+    .popup {
+        padding: 0rem;
+        &-main {
+            border-radius: 0rem;
+        }
+        &-inner {
+            display: flex;
+            flex-direction: column;
+        }
+        &-info {
+            padding: 4rem 1.6rem 1.6rem;
+            &-title {
+                font-size: 3.6rem;
+                line-height: 1.2em;
+            }
+            &-inner {
+                flex-direction: row;
+                column-gap: 3.2rem;
+                padding: 1.6rem 1.6rem 4rem;
+                &.hidden-dk {
+                    display: flex;
+                }
+                &.hidden-mb {
+                    display: none;
+                }
+            }
+            &-item {
+                row-gap: .2rem;
+                &-label {
+                    font-size: 1.6rem;
+                    line-height: 1.6em;
+                }
+                &-link {
+                    font-size: 1.6rem;
+                    line-height: 1.6em;
+                }
+            }
+        }
+        &-form {
+            padding: 1.6rem;
+            &-inner {
+            }
+            &-fields {
+                display: block;
+                row-gap: 0rem;
+                height: auto;
+                overflow: scroll;
+            }
+            &-btn-wrap {
+                flex-shrink: 0;
+                width: 100%;
+                padding-top: 4rem;
+                margin-top: auto;
+                .btn {
+                    width: 100%;
+                }
+            }
+        }
+        &-input {
+            &-grp {
+                margin-bottom: 2rem;
+                padding-top: 1rem;
+                flex-shrink: 0;
+                position: relative;
+                &.textarea-grp {
+                    flex-grow: 1;
+                    display: flex;
+                    flex-direction: column;
+                    textarea {
+                        flex-grow: 1;
+                    }
+                }
+                .line {
+                    bottom: 0;
+                    left: 0;
+                    position: absolute;
+                }
+            }
+            &-label {
+                color: rgba($cl-body, 1);
+            }
+            &-field {
+                display: block;
+                width: 100%;
+                padding-top: .8rem;
+                padding-bottom: 1rem;
+                color: rgba($cl-txt, 1);
+                outline: none;
+                border: none;
+                background-color: transparent;
+                @include transition(color 400ms ease);
+                &::placeholder {
+                    color: rgba($cl-txt-desc, 1);
+                }
+            }
+        }
+        &-close {
+            position: absolute;
+            top: 1.6rem;
+            right: .8rem;
+            border: none;
+            &:hover {
+                color: rgba($cl-txt, 1);
+                background-color: transparent;
+            }
+            .icon-16 {
+                @include size(2.4rem);
+            }
+
+        }
+    }
+}
