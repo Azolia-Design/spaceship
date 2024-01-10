@@ -27,8 +27,8 @@ const aboutScript = {
                     let tlScrub = gsap.timeline({
                         scrollTrigger: {
                             trigger: '.abt-mile',
-                            start: $(window).width() > 991 ? `top top+=${offsetTop + $('.abt-mile-item').outerWidth() * 2}` : `top top+=${offsetTop}`,
-                            end: $(window).width() > 991 ? `bottom bottom-=${offsetTop + $('.abt-mile-item').outerWidth() * 2}` : `bottom bottom-=${offsetTop}`,
+                            start: $(window).width() > 991 ? `top top+=${offsetTop}` : `top top+=${offsetTop}`,
+                            end: $(window).width() > 991 ? `bottom bottom-=${offsetTop}` : `bottom bottom-=${offsetTop}`,
                             scrub: true,
                         },
                         defaults: {
@@ -36,7 +36,7 @@ const aboutScript = {
                         }
                     })
                     tlScrub
-                    .fromTo('.abt-mile-main-inner', {x: $(window).width() > 991 ? $('.abt-mile-item').outerWidth() * 2 : 0}, {x: $(window).width() > 991 ? -distance - $('.abt-mile-item').outerWidth() * 2 : -distance})
+                    .fromTo('.abt-mile-main-inner', {x: $(window).width() > 991 ? 0 : 0}, {x: $(window).width() > 991 ? -distance : -distance})
                     .fromTo('.abt-mile-prog-inner', {width: '0%'}, {width: '100%'}, 0)
                 })
             } else {

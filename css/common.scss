@@ -158,3 +158,8 @@ button {
         }
     }
 }
+@include md {
+    .cursor {
+        display: none;
+    }
+}
