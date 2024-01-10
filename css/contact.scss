@@ -7,12 +7,16 @@
     display: flex;
     justify-content: end;
     padding: 4rem;
-    opacity: 0;
-    @include transition(opacity 400ms ease);
     pointer-events: none;
     &.active {
-        opacity: 1;
         pointer-events: auto;
+        .popup-overlay {
+            opacity: 1;
+        }
+        .popup-main {
+            opacity: 1;
+            @include transform(translateX(0%));
+        }
     }
     &-overlay {
        @include size(100%);
@@ -21,14 +25,19 @@
        left: 0;
        z-index: 1;
        background-color: rgba(black, .9);
+       opacity: 0;
+        @include transition(opacity 400ms ease);
     }
     &-main {
         position: relative;
         z-index: 2;
         width: 100%;
-        max-width: 87.4rem;
+        max-width: 97.4rem;
         background-color: rgba($cl-white, 1);
         border-radius: 2rem;
+        opacity: 0;
+        @include transform(translateX(50%));
+        @include transition(all 400ms ease);
     }
     &-inner {
         @include size(100%);
@@ -173,7 +182,7 @@
             flex-direction: column;
         }
         &-info {
-            padding: 2.4rem 1.6rem 1.6rem;
+            padding: 1.6rem;
             &-title {
                 font-size: 3.6rem;
                 line-height: 1.2em;
