@@ -35,3 +35,43 @@
         margin-bottom: 8rem;
     }
 }
+@include md {
+    .notfound-main {
+        padding-top: 23rem;
+        padding-bottom: 24rem;
+        background: linear-gradient(180deg, rgba(213,218,222,1) 0%, rgba(213,218,222,0) calc(100% - 9rem));
+        &-title {
+            font-size: 20rem;
+            margin-bottom: 2rem;
+        }
+        &-label {
+            margin-bottom: .8rem;
+            font-size: 3.2rem;
+            line-height: 1.3em;
+        }
+        &-sub {
+            margin-bottom: 6rem;
+            font-size: 1.8rem;
+            line-height: 1.6em;
+        }
+    }
+}
+@include sm {
+    .notfound-main {
+        padding-top: 14rem;
+        padding-bottom: 14rem;
+        background: linear-gradient(180deg, rgba(213,218,222,1) 0%, rgba(213,218,222,0) calc(100% - 5rem));
+        &-title {
+            font-size: 16rem;
+            margin-bottom: 2.4rem;
+        }
+        &-label {
+            font-size: 2.2rem;
+            line-height: 1.5em;
+        }
+        &-sub {
+            margin-bottom: 4rem;
+            font-size: 1.6rem;
+        }
+    }
+}
