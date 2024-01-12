@@ -3,7 +3,8 @@ import gsap from "gsap";
 import Swiper from "swiper";
 import { Navigation } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { parseRem } from "./untils";
+import { parseRem, sortAsc } from "./untils";
+import { getAllDataByType } from "./common/prismic_fn"
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -12,7 +13,25 @@ gsap.registerPlugin(ScrollTrigger);
 const aboutScript = {
     namespace: 'about',
     afterEnter(data) {
-        console.log('enter about')  
+        console.log('enter about')
+        function getApiAbtMile() {
+            getAllDataByType('milstone').then((res) => {
+                let allMils = sortAsc(res);
+                let templateMilItem = $('.abt-mile-item').eq(0).clone();
+                let parent = '.abt-mile-main-inner'
+                $(parent).html('')
+                allMils.forEach((i) => {
+                    let htmlSlide = templateMilItem.clone();
+                    htmlSlide.find('.abt-mile-item-thumb img').attr('src', i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.type)
+                    htmlSlide.find('.abt-mile-item-title').text(i.data.title)
+                    htmlSlide.find('.abt-mile-item-sub').text(i.data.body_text)
+                    htmlSlide.find('.abt-mile-item-date-month').text(new Date(i.data.date).toLocaleString('default', { month: 'short' }))
+                    htmlSlide.find('.abt-mile-item-date-year').text(new Date(i.data.date).getFullYear())
+                    htmlSlide.appendTo(parent);
+                })
+            }).then(abtMile)
+        }
+        getApiAbtMile()
         function abtMile() {
             if ($(window).width() > 767) {
                 let offsetTop = ($(window).height() - $('.abt-mile-sticky').outerHeight()) / 2;
@@ -52,8 +71,52 @@ const aboutScript = {
                 abtMileSwiper.slideTo(0)
             }
             
-        }  
-        abtMile()
+        }
+        function getApiAbtTeam() {
+            getAllDataByType('team').then((res) => {
+                let allTeam = sortAsc(res);
+                let templateTeamItem = $('.abt-team-item').eq(0).clone();
+                let parent = '.abt-team-main'
+                $(parent).find('.abt-team-item').remove()
+                allTeam.forEach((i) => {
+                    let html = templateTeamItem.clone();
+                    html.find('.abt-team-item-thumb img').attr('src', i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
+                    html.find('.abt-team-item-name').text(i.data.name)
+                    html.find('.abt-team-item-job').text(i.data.job_title)
+                    if (i.data.linkedin.url) {
+                        html.find('.abt-team-item-name-wrap').attr('href', i.data.linkedin.url).attr('target', '_blank')
+                    } else {
+                        html.find('.abt-team-item-name-wrap').css('pointer-events','none')
+                        html.find('.abt-team-item-name-wrap').find('.abt-team-item-ic').remove()
+                    }
+                    html.appendTo(parent);
+                })
+            })
+        }
+        getApiAbtTeam()
+        function getApiAbtJob() {
+            getAllDataByType('job').then((res) => {
+                let allJob = sortAsc(res).reverse();
+                console.log(allJob)
+                let templateJobItem = $('.abt-job-item').eq(0).clone();
+                let parent = '.abt-job-main-inner'
+                $(parent).html('')
+                allJob.forEach((i) => {
+                    let html = templateJobItem.clone();
+                    if (i.data.link.url) {
+                        html.attr('href', i.data.link.url).attr('target', '_blank')
+                    } else {
+                        html.css('pointer-events','none')
+                    }
+                    html.find('.abt-job-item-title').text(i.data.job_title)
+                    html.find('.abt-job-item-type').text(i.data.job_type)
+                    html.find('.abt-job-item-loc').text(i.data.location)
+                    html.appendTo(parent);
+                })
+            })
+        }
+        getApiAbtJob()
+        
     },
     beforeLeave() {
         console.log('leave about')

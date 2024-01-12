@@ -1,6 +1,6 @@
-const baseURL = 'https://cargokite.cdn.prismic.io/api/v2'
+const baseURL = 'https://space-ship.cdn.prismic.io/api/v2'
 let ref = ''
-const access_token = 'MC5aU1Ytb0JBQUFDSUFlY1Vz.FGrvv70uNe-_ve-_ve-_ve-_vRfvv73vv73vv73vv73vv73vv73vv73vv73vv71877-977-9R--_ve-_ve-_vXrvv73vv73vv73vv73vv70';
+const access_token = 'MC5aWi1sT0JFQUFDQUFXbV9p.77-977-9cO-_vVgsNe-_ve-_vQTvv71377-977-9dHR477-9bA1UfO-_ve-_ve-_ve-_ve-_vXBo77-977-977-9';
 
  /**
   * parse graphQuery
@@ -86,4 +86,4 @@ async function getMasterRef(){
     return data.results[0]
 }
 
-export {getAllDataByType}
+export {getAllDataByType, getDetail}

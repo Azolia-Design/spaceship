@@ -319,19 +319,20 @@
         align-items: center;
         justify-content: start;
         flex-wrap: nowrap;
-        column-gap: 6rem;
+        column-gap: 3.2rem;
         &.hidden-dk {
             display: none;
         }
         &-inner {
+            width: 100%;
             display: flex;
             align-items: center;
-            justify-content: start;
+            justify-content: space-between;
             column-gap: 6rem;
-            animation: animMarquee 20s infinite linear;
+            //animation: animMarquee 20s infinite linear;
         }
         &-item {
-            height: 5.6rem;
+            height: 6rem;
             img {
                 height: 100%;
                 width: auto;
@@ -359,7 +360,7 @@
 @include md {
     .home-part {
         padding-top: 0rem;
-        padding-bottom: 8rem;
+        padding-bottom: 6rem;
         &-label-wrap {
             column-gap: 2rem;
         }
@@ -513,8 +514,16 @@
                     color: rgba($cl-border, 1);
                     @include transition(opacity 400ms ease);
                 }
-                &.swiper-button-disabled {
+                &:hover {
+                    background-color: rgba($cl-white, 1);
                     .icon {
+                        color: rgba($cl-border, 1);
+                    }
+                }
+                &.swiper-button-disabled {
+                    pointer-events: none;
+                    .icon {
+                        color: rgba($cl-border, 1);
                         opacity: .2;
                     }
                 }

@@ -5,7 +5,8 @@ import MotionPathPlugin from "gsap/MotionPathPlugin";
 import lenis from './vendors/lenis';
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper";
-import { parseRem, xSetter, ySetter, xGetter, yGetter, pointerCurr, lerp } from "./untils";
+import { getAllDataByType } from "./common/prismic_fn"
+import { parseRem, xSetter, ySetter, xGetter, yGetter, pointerCurr, lerp, sortAsc } from "./untils";
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
@@ -73,6 +74,22 @@ const homeScript = {
             }
         }
         homeHeroPath()
+        function getApiHomeProb() {
+            getAllDataByType('problem').then((res) => {
+                let allProb = sortAsc(res);
+                let templateProbItem = $('.home-prob-item').eq(0).clone();
+                let parent = '.home-prob-inner'
+                $(parent).html('')
+                allProb.forEach((i) => {
+                    let html = templateProbItem.clone();
+                    html.find('.home-prob-item-ic img').attr('src', i.data.icon.url).attr('alt', i.data.icon.alt ? i.data.icon.alt : i.data.title)
+                    html.find('.home-prob-item-title').text(i.data.title)
+                    html.find('.home-prob-item-body').text(i.data.body_text)
+                    html.appendTo(parent);
+                })
+            }).then(homeProb)
+        }
+        getApiHomeProb()
         function homeProb() {
             const homeProbSwiper = new Swiper('.home-prob-main', {
                 modules: [Navigation, Pagination],
@@ -96,7 +113,6 @@ const homeScript = {
                 }
             })
         }
-        homeProb()
         function homeFaq() {
             $('.home-faq-item').eq(0).addClass('active');
             $('.home-faq-item').eq(0).find('.home-faq-item-body').slideDown();

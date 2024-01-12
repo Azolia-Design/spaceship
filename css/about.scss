@@ -4,22 +4,22 @@
     position: relative;
     overflow: hidden;
     &-title {
-        grid-column: 2/16;
+        grid-column: 1/16;
         max-width: 71.1rem;
         margin-bottom: 7rem;
         z-index: 2;
     }
     .decor-slash {
-        grid-column: 2/16;
+        grid-column: 1/-1;
         margin-bottom: 8rem;
     }
     &-label {
-        grid-column: 2/9;
+        grid-column: 1/9;
         align-self: start;
         justify-self: start;
     }
     &-sub {
-        grid-column: 9/16;
+        grid-column: 9/-1;
         color: rgba($cl-txt-sub, 1);
     }
     &-decor {

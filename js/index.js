@@ -12,6 +12,7 @@ import blogdtlScript from './blogdtl';
 import aboutScript from './about';
 import solutionScript from './solution';
 import insightScript from './insight';
+import notfoundScript from './notfound';
 
 const scripts = () => {
     if (history.scrollRestoration) {
@@ -175,13 +176,40 @@ const scripts = () => {
         e.preventDefault();
         $('.header-nav').removeClass('active')
     })
+    function transitionOnce(data) {
+        let tl = gsap.timeline({
+
+        })
+    }
+    function transitionLeave(data) {
+        console.log('leaveTrans')
+        gsap.set(data.next.container, {opacity: 0})
+        let tl = gsap.timeline({})
+        tl
+        .to(data.current.container, {opacity: 0, duration: .4, onComplete: () => {
+            $(data.current.container).remove()
+            resetScroll()
+        }})
+        .to('.footer', {opacity: 0, duration: .4}, '<=0')
+        .to(data.next.container, {opacity: 1, duration: .4})
+        .to('.footer', {opacity: 1, duration: .4}, '<=0')
+        return tl;
+    }
+    function transitionEnter(data) {
+        console.log('enterTrans')
+        let tl = gsap.timeline({})
+        tl
+        return tl;
+    }
+    
     const VIEWS = [
         homeScript,
         aboutScript,
         termScript,
         blogdtlScript,
         solutionScript,
-        insightScript
+        insightScript,
+        notfoundScript
     ]
 
     barba.init({
@@ -192,6 +220,7 @@ const scripts = () => {
             once(data) {
                 resetScroll()
                 resetBeforeLeave(data)
+                transitionOnce(data)
             },
             async enter(data) {
                 
@@ -200,12 +229,13 @@ const scripts = () => {
 
             },
             async afterEnter(data) {
-                resetScroll()
+                await transitionEnter(data)
             },
             async beforeLeave(data) {
                 resetBeforeLeave(data)
             },
             async leave(data) {
+                await transitionLeave(data)
             },
             async afterLeave(data) {
             }

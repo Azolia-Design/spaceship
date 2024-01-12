@@ -39,7 +39,9 @@
     src: url('../fonts/Georgia Italic.ttf');
     font-display: swap;
 }
-
+.link-hidden {
+    display: none;
+}
 .txt {
     font-family: 'Aeonik';
     @each $size in $txtSizes {
