@@ -32,6 +32,20 @@ const aboutScript = {
             }).then(abtMile)
         }
         getApiAbtMile()
+        function getAPiHomePart() {
+            getAllDataByType('part_logo').then((res) => {
+                let allPart = sortAsc(res);
+                let templatePartItem = $('.home-part-marquee-item').eq(0).clone();
+                let parent = '.home-part-marquee-inner'
+                $(parent).find('.home-part-marquee-item').remove()
+                allPart.forEach((i) => {
+                    let html = templatePartItem.clone();
+                    html.find('img').attr('src',i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
+                    html.appendTo(parent);
+                })
+            }).then(homeFaq)
+        }
+        getAPiHomePart()
         function abtMile() {
             if ($(window).width() > 767) {
                 let offsetTop = ($(window).height() - $('.abt-mile-sticky').outerHeight()) / 2;

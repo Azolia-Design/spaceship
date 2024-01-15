@@ -81,6 +81,12 @@
                         height: 100%;
                         appearance: none;
                         background-color: transparent;
+                        color: rgba($cl-white, .2);
+                        @include transition(color 400ms ease);
+                        font-weight: 500;
+                        &:focus, &:not(:placeholder-shown) {
+                            color: rgba($cl-white, .8);
+                        }
                     }
                     .input-label {
                         color: rgba($cl-white, .2);
@@ -88,6 +94,7 @@
                         left: 0;
                         pointer-events: none;
                         @include transition(color 400ms ease);
+                        display: none;
                     }
                     &:hover .input-label {
                         color: rgba($cl-white, .4);
