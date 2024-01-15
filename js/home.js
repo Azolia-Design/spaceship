@@ -85,7 +85,7 @@ const homeScript = {
                     html.find('img').attr('src',i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
                     html.appendTo(parent);
                 })
-            }).then(homeFaq)
+            })
         }
         getAPiHomePart()
         function getApiHomeProb() {
@@ -186,7 +186,23 @@ const homeScript = {
                 }
             })
         }
+        function getApiHomeFaq() {
+            getAllDataByType('home_benefit').then((res) => {
+                let allFaq = sortAsc(res);
+                let templateFaqItem = $('.home-faq-item').eq(0).clone();
+                let parent = '.home-faq-inner'
+                $(parent).find('.home-faq-item').remove()
+                allFaq.forEach((i) => {
+                    let html = templateFaqItem.clone();
+                    html.find('.home-faq-item-head-txt').text(i.data.title)
+                    html.find('.home-faq-item-body-inner .txt').html(toHTML(i.data.content))
+                    html.appendTo(parent);
+                })
+            }).then(homeFaq)
+        }
+        getApiHomeFaq()
         function homeFaq() {
+            console.log($('.home-faq-item').length)
             $('.home-faq-item').eq(0).addClass('active');
             $('.home-faq-item').eq(0).find('.home-faq-item-body').slideDown();
             $('.home-faq-item-head').on('click', function(e) {
@@ -202,21 +218,6 @@ const homeScript = {
                 }
             })
         }
-        function getAPiHomeFaq() {
-            getAllDataByType('home_benefit').then((res) => {
-                let allFaq = sortAsc(res);
-                let templateFaqItem = $('.home-faq-item').eq(0).clone();
-                let parent = '.home-faq-inner'
-                $(parent).find('.home-faq-item').remove()
-                allFaq.forEach((i) => {
-                    let html = templateFaqItem.clone();
-                    html.find('.home-faq-item-head-txt').text(i.data.title)
-                    html.find('.home-faq-item-body-inner .txt').html(toHTML(i.data.content))
-                    html.appendTo(parent);
-                })
-            }).then(homeFaq)
-        }
-        getAPiHomeFaq()
     },
     beforeLeave() {
         console.log('leave home')
