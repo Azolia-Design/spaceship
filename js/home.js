@@ -90,6 +90,65 @@ const homeScript = {
             }).then(homeProb)
         }
         getApiHomeProb()
+        function toHTML(richTextArray) {
+            let html = '';
+            let isLabeled;
+            for (const block of richTextArray) {
+                switch (block.type) {
+                case 'paragraph':
+                        let string = block.text;
+                        for (const span of block.spans) {
+                            switch (span.type) {
+                                case 'strong':
+                                string = string.replace(block.text.substring(span.start, span.end),`<strong>${block.text.substring(span.start, span.end)}</strong>`);
+                                break;
+                                case 'em':
+                                string = string.replace(block.text.substring(span.start, span.end),`<em>${block.text.substring(span.start, span.end)}</em>`);
+                                break;
+                                default:
+                                break;
+                            }
+                        }
+                        html += `<p>${string}</p>`;
+                    break;
+                case 'list-item':
+                    let listString = block.text;
+                    for (const span of block.spans) {
+                        switch (span.type) {
+                            case 'strong':
+                            listString = listString.replace(block.text.substring(span.start, span.end),`<strong>${block.text.substring(span.start, span.end)}</strong>`);
+                            break;
+                            case 'em':
+                            listString = listString.replace(block.text.substring(span.start, span.end),`<em>${block.text.substring(span.start, span.end)}</em>`);
+                            break;
+                            default:
+                            break;
+                        }
+                    }
+                    html += `<li>${listString}</li>`;
+                    break;
+                default:
+                    console.error(`Unsupported block type: ${block.type}`);
+                }
+            }
+            return html;
+        }
+        function getAPiHomeSol() {
+            getAllDataByType('home_sol').then((res) => {
+                let allSol = sortAsc(res);
+                let templateSolItem = $('.home-sol-item').eq(0).clone();
+                let parent = '.home-sol-inner'
+                $(parent).find('.home-sol-item').remove()
+                allSol.forEach((i) => {
+                    let html = templateSolItem.clone();
+                    html.find('.home-sol-item-ic img').attr('src', i.data.icon.url).attr('alt', i.data.icon.alt ? i.data.icon.alt : i.data.name)
+                    html.find('.home-sol-item-title').text(i.data.title)
+                    html.find('.home-sol-item-body').html(toHTML(i.data.content))
+                    html.appendTo(parent);
+                })
+            })
+        }
+        getAPiHomeSol()
         function homeProb() {
             const homeProbSwiper = new Swiper('.home-prob-main', {
                 modules: [Navigation, Pagination],
@@ -129,7 +188,21 @@ const homeScript = {
                 }
             })
         }
-        homeFaq()
+        function getAPiHomeFaq() {
+            getAllDataByType('home_benefit').then((res) => {
+                let allFaq = sortAsc(res);
+                let templateFaqItem = $('.home-faq-item').eq(0).clone();
+                let parent = '.home-faq-inner'
+                $(parent).find('.home-faq-item').remove()
+                allFaq.forEach((i) => {
+                    let html = templateFaqItem.clone();
+                    html.find('.home-faq-item-head-txt').text(i.data.title)
+                    html.find('.home-faq-item-body-inner .txt').html(toHTML(i.data.content))
+                    html.appendTo(parent);
+                })
+            }).then(homeFaq)
+        }
+        getAPiHomeFaq()
     },
     beforeLeave() {
         console.log('leave home')
