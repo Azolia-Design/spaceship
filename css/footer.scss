@@ -101,6 +101,9 @@
                     }
                 }
                 &-btn-wrap {
+                    .txt-btn {
+                        white-space: nowrap;
+                    }
                     .btn-submit-ic {
                         display: none;
                     }

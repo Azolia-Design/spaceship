@@ -130,47 +130,60 @@
                         <form action="#" class="popup-form-inner">
                             <div class="popup-form-fields" data-lenis-prevent>
                                 <div class="popup-input-grp">
-                                    <label for="fname" class="txt txt-14 txt-med popup-input-label">
+                                    <label for="firstname" class="txt txt-14 txt-med popup-input-label">
                                         First name
                                     </label>
-                                    <input type="text" name="fname" class="txt txt-16 popup-input-field" placeholder="Ex: John" required="required">
+                                    <input type="text" name="firstname" class="txt txt-16 popup-input-field" placeholder="Ex: John" required="required">
                                     <div class="line"><div class="line-inner"></div></div>
                                 </div>
                                 <div class="popup-input-grp">
-                                    <label for="lname" class="txt txt-14 txt-med popup-input-label">
+                                    <label for="lastname" class="txt txt-14 txt-med popup-input-label">
                                         Last name
                                     </label>
-                                    <input type="text" name="lname" class="txt txt-16 popup-input-field" placeholder="Ex: Doe" required="required">
+                                    <input type="text" name="lastname" class="txt txt-16 popup-input-field" placeholder="Ex: Doe" required="required">
                                     <div class="line"><div class="line-inner"></div></div>
                                 </div>
                                 <div class="popup-input-grp">
-                                    <label for="mail" class="txt txt-14 txt-med popup-input-label">
+                                    <label for="email" class="txt txt-14 txt-med popup-input-label">
                                         Email
                                     </label>
-                                    <input type="email" name="mail" class="txt txt-16 popup-input-field" placeholder="Ex: johndoe@example.com" required="required">
+                                    <input type="email" name="email" class="txt txt-16 popup-input-field" placeholder="Ex: johndoe@example.com" required="required">
                                     <div class="line"><div class="line-inner"></div></div>
                                 </div>
                                 <div class="popup-input-grp">
                                     <label for="fname" class="txt txt-14 txt-med popup-input-label">
                                         Company <span class="txt-opt">(Optional)</span>
                                     </label>
-                                    <input type="text" name="fname" class="txt txt-16 popup-input-field" placeholder="Ex: Google">
+                                    <input type="text" name="company" class="txt txt-16 popup-input-field" placeholder="Ex: Google">
                                     <div class="line"><div class="line-inner"></div></div>
                                 </div>
                                 <div class="popup-input-grp textarea-grp">
                                     <label for="fname" class="txt txt-14 txt-med popup-input-label">
                                         Message <span class="txt-opt">(Optional)</span>
                                     </label>
-                                    <textarea type="text" name="fname" class="txt txt-16 popup-input-field" placeholder=""></textarea>
+                                    <textarea type="text" name="message" class="txt txt-16 popup-input-field" placeholder=""></textarea>
                                     <div class="line"><div class="line-inner"></div></div>
                                 </div>
                             </div>
                             <div class="popup-form-btn-wrap">
                                 <button type="submit" class="btn popup-form-submit">
-                                    <div class="txt txt-16 txt-btn txt-med">Send</div>
+                                    <div class="txt txt-16 txt-btn txt-med popup-form-submit-txt">Send</div>
                                 </button>
                             </div>
                         </form>
+                        <div class="popup-form-succ hidden">
+                            <div class="txt txt-24 popup-form-succ-title">
+                                Thank you, <span data-form-name>David</span>!
+                            </div>
+                            <div class="txt txt-16 popup-form-succ-sub">
+                                We appreciate your interest and will get back to you shortly. 
+                            </div>
+                            <div class="popup-form-succ-btn-wrap">
+                                <a href="#" class="btn popup-form-succ-btn" data-popup="close">
+                                    <div class="txt txt-16 txt-btn txt-med">Close panel</div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                     <div class="popup-info-inner hidden-dk">
                             <div class="popup-info-item">
@@ -684,8 +697,8 @@
                                     <input type="email" class="txt txt-20 input-field" name="email" placeholder="Enter your email">
                                 </div>
                                 <div class="ft-abt-form-btn-wrap">
-                                    <button type="submit" class="btn btn-outline">
-                                        <div class="txt txt-16 txt-med txt-btn">Subscribe</div>
+                                    <button type="submit" class="btn btn-outline ft-abt-form-submit">
+                                        <div class="txt txt-16 txt-med txt-btn ft-abt-form-submit-txt">Subscribe</div>
                                         <div class="icon icon-24 btn-submit-ic">
                                             <svg width="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                                 <path d="M4.5 12H19.5M19.5 12L12.75 5.25M19.5 12L12.75 18.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>

@@ -150,6 +150,221 @@ const scripts = () => {
         }
     }
     handlePopup.init()
+    function handleForm() {
+        //Form utils
+        function mapFormToObject(ele) {
+            return (parsedFormData = [...new FormData(ele).entries()].reduce(
+                (prev, cur) => {
+                    const name = cur[0];
+                    const val = cur[1];
+                    return { ...prev, [name]: val };
+                },
+                {}
+            ));
+        }
+        function initForm(form, options) {
+            const { submitEle = {}, onSuccess, onError, handleSubmit, prepareMap, fields, pageName = "Form", hubspot } = options;
+            const { ele, textEle } = submitEle;
+
+            let submitBtn = $(form).find('button[type=submit]');
+            if (ele) {
+                submitBtn = $(form).find(ele);
+            }
+            let defaultText = submitBtn.clone().val();
+            if (textEle) {
+                defaultText = submitBtn.find(textEle).clone().text();
+            }
+
+            let url = $(form).attr('action');
+
+            if (hubspot) {
+                const { portalId, formId } = hubspot;
+                url = `https://api.hsforms.com/submissions/v3/integration/submit/${portalId}/${formId}`;
+            }
+
+            const setLoading = (isLoading) => {
+                console.log(isLoading)
+                if (isLoading) {
+                    console.log(textEle)
+                    if (textEle) {
+                        submitBtn.find(textEle).text('Please wait ...');
+                    } else {
+                        submitBtn.val('Please wait ...');
+                    }
+
+                    submitBtn.css({ 'pointer-events': 'none' })
+                }
+                else {
+                    if (textEle) {
+                        submitBtn.find(textEle).text(defaultText);
+                    } else {
+                        submitBtn.val(defaultText)
+                    }
+                    submitBtn.css({ 'pointer-events': '' })
+                }
+            }
+
+            const showError = (message = "Something error") => {
+                alert(message)
+            }
+            const mapField = (data) => {
+                if (!fields.length) return [];
+                const result = fields.map((field) => {
+                    const { name, value, regexp } = field;
+                    if (!value) {
+                        return {
+                            name,
+                            value: data[name] || ""
+                        }
+                    }
+                    else {
+                        const getValue = value(data);
+                        return {
+                            name,
+                            value: getValue || ''
+                        }
+                    }
+                })
+                return result;
+            }
+            const sendSubmission = (data) => {
+                const mappedFields = mapField(data);
+                const dataSend = {
+                    fields: mappedFields,
+                    context: {
+                        pageUri: window.location.href,
+                        pageName: pageName,
+                    },
+                };
+                $.ajax({
+                    url: url,
+                    method: 'POST',
+                    data: JSON.stringify(dataSend),
+                    dataType: 'json',
+                    headers: {
+                        accept: 'application/json',
+                        'Access-Control-Allow-Origin': '*',
+                    },
+                    contentType: 'application/json',
+                    success: function (response) {
+                        $(form).get(0).reset()
+                        if (onSuccess) onSuccess(data);
+                        setLoading(false);
+                    },
+                    error: function (error) {
+                        if (error.readyState === 4) {
+                            const errors = error.responseJSON.errors
+                            const errorArr = errors[0].message.split('.')
+                            const errorMess = errorArr[errorArr.length - 1]
+
+                            showError(errorMess);
+                        }
+                        else {
+                            showError('Something error');
+                        }
+                        setLoading(false)
+                    },
+                });
+            }
+
+            $(form).on("submit", function (e) {
+                e.preventDefault();
+                setLoading(true);
+                if (prepareMap) {
+                    prepareMap($(this));
+                }
+                const data = mapFormToObject(e.target);
+                if (handleSubmit) handleSubmit(data);
+                sendSubmission(data);
+                return false;
+            });
+        }
+
+        //form contact popup
+        //$('.input-field').on('change keyup blur input', hanldeInput);
+        // $('.popup-form-inner .popup-form-submit').on('click', function (e) {
+        //     e.preventDefault();
+        //     console.log('submiitttttttt')
+
+        //     $('.popup-form-inner').trigger('submit');
+        // })
+        const formContact = initForm('.popup-form-inner', {
+            onSuccess: (data) => {
+                // success form callback
+                console.log('submited')
+                $('.popup-form').find('.popup-form-succ [data-form-name]').text(data.firstname)
+                $('.popup-form').find('.popup-form-inner').addClass('hidden')
+                $('.popup-form').find('.popup-form-succ').removeClass('hidden')
+            },
+            hubspot: {
+                portalId: '44935450',
+                formId: '9f5fd12f-40a0-41c9-9525-294e8867ed09'
+            },
+            submitEle: {
+                ele: '.popup-form-submit',
+                textEle: '.popup-form-submit-txt',
+            },
+            pageName: document.title,
+            prepareMap: (ele) => {
+            },
+            fields: [
+                {
+                    name: 'firstname',
+                    value: (data) => data.firstname,
+                },
+                {
+                    name: 'lastname',
+                    value: (data) => data.lastname,
+                },
+                {
+                    name: 'email',
+                    value: (data) => data.email,
+                },
+                {
+                    name: 'message',
+                    value: (data) => data.message
+                },
+            ]
+        })
+        $('.popup-form .popup-form-succ-btn').on('click', function (e) {
+            e.preventDefault();
+            $('.footer__form-main').trigger('reset');
+            $('.popup-form').find('.popup-form-inner').removeClass('hidden')
+            $('.popup-form').find('.popup-form-succ').addClass('hidden')
+        })
+        
+
+        //form subscribe footer
+        const formSubscribe = initForm('.ft-abt-form', {
+            onSuccess: (data) => {
+                // success form callback
+                $('.footer').find('.ft-input-wrap .input-field').val('Thanks for subscribing!')
+
+                setTimeout(() => {
+                    $('.footer').find('.ft-input-wrap .input-field').val('')
+                }, 2000);
+            },
+            hubspot: {
+                portalId: '44935450',
+                formId: '0e97c5ff-253e-4dfd-ac2e-ecf1f62b1da3'
+            },
+            submitEle: {
+                ele: '.ft-abt-form-submit',
+                textEle: '.ft-abt-form-submit-txt',
+            },
+            pageName: document.title,
+            prepareMap: (ele) => {
+            },
+            fields: [
+                {
+                    name: 'email',
+                    value: (data) => data.email,
+                },
+            ]
+        })
+    }
+    handleForm()
+    
     const header = $('.header')
     lenis.on('scroll', function(inst) {
         if (inst.scroll < header.outerHeight()) {

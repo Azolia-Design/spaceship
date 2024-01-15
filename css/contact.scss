@@ -90,10 +90,37 @@
         padding: 8rem 6rem;
         height: 100%;
         overflow: hidden;
+        display: grid;
         &-inner {
+            grid-column: 1/2;
+            grid-row: 1/2;
             @include size(100%);
             display: flex;
             flex-direction: column;
+            @include transition(opacity 400ms ease);
+            &.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+        }
+        &-succ {
+            grid-column: 1/2;
+            grid-row: 1/2;
+            @include transition(opacity 400ms ease);
+            &.hidden {
+                opacity: 0;
+                pointer-events: none;
+            }
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            &-title {
+                margin-bottom: .8rem;
+            }
+            &-sub {
+                margin-bottom: 4rem;
+                color: rgba($cl-body, 1);
+            }
         }
         &-fields {
             display: flex;
