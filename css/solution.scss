@@ -157,11 +157,15 @@
     padding-bottom: 12rem;
     background-color: rgba($cl-bg-beige, 1);
     &-title-wrap {
-        grid-column: 7/17;
+        grid-column: span 2;
         display: flex;
-        align-items: center;
-        column-gap: 4rem;
-        margin-bottom: 8rem;
+        flex-direction: column;
+        row-gap: 2rem;
+        justify-content: center;
+        max-width: 80rem;
+    }
+    &-sub {
+        color: rgba($cl-txt-sub, 1);
     }
     &-title {
         flex-shrink: 0;
@@ -172,14 +176,6 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: var(--grid-gap);
-            &::before {
-                content: '';
-                display: block;
-                pointer-events: none;
-                grid-column: 1/2;
-                grid-row: 1/2;
-
-            }
         }
         &-item {
             height: 46rem;
@@ -214,20 +210,21 @@
         padding-bottom: 8rem;
         &-title-wrap {
             grid-column: 1/-1;
-            column-gap: 2rem;
-            margin-bottom: 6rem;
+            row-gap: 1.2rem;
+            margin-bottom: 4.4rem;
+        }
+        &-sub {
+            font-size: 1.8rem;
+            line-height: 1.6em;
         }
         &-title {
-            font-size: 3.2rem;
-            line-height: 1.3em;
+            font-size: 4.4rem;
+            line-height: 1.2em;
         }
         &-main {
             grid-column: 1/-1;
             &-inner {
                 grid-template-columns: repeat(2, 1fr);
-                &::before {
-                    display: none;
-                }
             }
             &-item {
                 height: 34rem; 
@@ -255,11 +252,10 @@
         padding-top: 6rem;
         padding-bottom: 6rem;
         &-title-wrap {
-            flex-direction: column-reverse;
-            align-items: start;
-            text-align: left;
-            column-gap: 0;
-            row-gap: 4rem;
+        }
+        &-title {
+            font-size: 4.8rem;
+            line-height: 1.2em;
         }
         &-main {
             &-inner {

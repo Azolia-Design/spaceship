@@ -43,7 +43,7 @@ const aboutScript = {
                     html.find('img').attr('src',i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
                     html.appendTo(parent);
                 })
-            }).then(homeFaq)
+            })
         }
         getAPiHomePart()
         function abtMile() {
@@ -117,6 +117,7 @@ const aboutScript = {
                 $(parent).html('')
                 allJob.forEach((i) => {
                     let html = templateJobItem.clone();
+                    console.log(i.data.link.url)
                     if (i.data.link.url) {
                         html.attr('href', i.data.link.url).attr('target', '_blank')
                     } else {
