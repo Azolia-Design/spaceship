@@ -671,7 +671,7 @@
         }
         &-title {
             max-width: 54.8rem;
-            color: rgba($cl-body, 1);
+            color: rgba($cl-txt, 1);
             @include transition(color 400ms ease);
         }
         .arr-wrap {
@@ -706,7 +706,7 @@
         }
         &:hover {
             .abt-job-item-title {
-                color: rgba($cl-txt, 1);
+                color: rgba($cl-blue, 1);
             }
             .line {
                 .line-inner {

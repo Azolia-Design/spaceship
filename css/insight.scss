@@ -115,13 +115,16 @@
                     @include transition(opacity 400ms ease);
                 }
                 &:hover {
+                    background-color: rgba($cl-txt, 1);
                     .icon {
                         color: rgba($cl-white, 1);
                     }
                 }
                 &.swiper-button-disabled {
+                    background-color: rgba($cl-txt, 0);
                     pointer-events: none;
                     .icon {
+                        color: rgba($cl-txt, 1);
                         opacity: .2;
                     }
                 }
@@ -213,16 +216,7 @@
                     height: 39.6rem;
                 }
             }
-            &-pagi {
-                .swiper-pagi-prev, .swiper-pagi-next {
-                    &:hover {
-                        background-color: rgba($cl-white, 1);
-                        .icon {
-                            color: rgba($cl-border, 1);
-                        }
-                    }
-                }
-            }
+            
             &-item {
                 height: calc(100% / 2) !important;
                 padding-right: 1.6rem;
@@ -386,7 +380,7 @@
                     top: 0;
                     left: 0;
                     transform-origin: left;
-                    background-color: rgba($cl-txt-sub, 1);
+                    background-color: rgba($cl-txt, 1);
                     @include transform(scaleX(0));
                     @include transition(transform 400ms ease);
                 }
@@ -397,8 +391,8 @@
                         @include transform(scaleX(1));
                     }
                 }
-                .ins-art-main-item-link {
-                    color: rgba($cl-dark-blue, 1);
+                .ins-art-main-item-title {
+                    color: rgba($cl-blue, 1);
                 }
             }
         }

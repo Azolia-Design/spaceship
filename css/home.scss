@@ -526,9 +526,10 @@
                     }
                 }
                 &.swiper-button-disabled {
+                    background-color: rgba($cl-txt, 0);
                     pointer-events: none;
                     .icon {
-                        color: rgba($cl-border, 1);
+                        color: rgba($cl-txt, 1);
                         opacity: .2;
                     }
                 }
