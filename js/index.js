@@ -297,8 +297,8 @@ const scripts = () => {
                 $('.popup-form').find('.popup-form-succ').removeClass('hidden')
             },
             hubspot: {
-                portalId: '44935450',
-                formId: '9f5fd12f-40a0-41c9-9525-294e8867ed09'
+                portalId: '143957301',
+                formId: '34eda6ac-e4e0-4d69-af5f-ea2e02d6850a'
             },
             submitEle: {
                 ele: '.popup-form-submit',
@@ -332,8 +332,6 @@ const scripts = () => {
             $('.popup-form').find('.popup-form-inner').removeClass('hidden')
             $('.popup-form').find('.popup-form-succ').addClass('hidden')
         })
-        
-
         //form subscribe footer
         const formSubscribe = initForm('.ft-abt-form', {
             onSuccess: (data) => {
@@ -345,8 +343,8 @@ const scripts = () => {
                 }, 2000);
             },
             hubspot: {
-                portalId: '44935450',
-                formId: '0e97c5ff-253e-4dfd-ac2e-ecf1f62b1da3'
+                portalId: '143957301',
+                formId: '82e04d4a-4077-496d-a5f1-19f7bba52cea'
             },
             submitEle: {
                 ele: '.ft-abt-form-submit',

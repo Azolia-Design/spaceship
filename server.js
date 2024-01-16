@@ -33,7 +33,7 @@ app.use((req, res) => {
   res.status(404).sendFile(path.join(__dirname, 'dist', '404.html'));
 });
 
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
