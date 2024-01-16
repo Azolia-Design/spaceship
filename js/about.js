@@ -1,6 +1,7 @@
 import $ from "jquery";
 import gsap from "gsap";
 import Swiper from "swiper";
+import lenis from './vendors/lenis';
 import { Navigation } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { parseRem, sortAsc } from "./untils";
@@ -14,6 +15,23 @@ const aboutScript = {
     namespace: 'about',
     afterEnter(data) {
         console.log('enter about')
+        function scrollTo(data) {
+            if (window.location.hash) {
+                let locationHash = window.location.hash;
+                setTimeout(() => {
+                    lenis.scrollTo(locationHash, {
+                        force: true,
+                        immediate: true,
+                    });
+                    if ($(window).width() < 767) {
+                        setTimeout(() => {
+                            document.querySelector('.wrapper').scrollTo(0,document.getElementById(locationHash.replace('#','')).offsetTop)
+                        }, 300);
+                    }
+                }, 300);
+            }
+        }
+        scrollTo(data)
         function getApiAbtMile() {
             getAllDataByType('milstone').then((res) => {
                 let allMils = sortAsc(res);
@@ -29,7 +47,7 @@ const aboutScript = {
                     htmlSlide.find('.abt-mile-item-date-year').text(new Date(i.data.date).getFullYear())
                     htmlSlide.appendTo(parent);
                 })
-            }).then(abtMile)
+            }).then(abtMile).then(scrollTo)
         }
         getApiAbtMile()
         function getAPiHomePart() {
@@ -43,7 +61,7 @@ const aboutScript = {
                     html.find('img').attr('src',i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
                     html.appendTo(parent);
                 })
-            })
+            }).then(scrollTo)
         }
         getAPiHomePart()
         function abtMile() {
