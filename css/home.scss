@@ -333,7 +333,7 @@
             //animation: animMarquee 20s infinite linear;
         }
         &-item {
-            height: 6rem;
+            height: 7rem;
             width: calc(100% / 6);
             display: flex;
             align-items: center;
@@ -442,7 +442,7 @@
             align-items: start;
         }
         &-title {
-            max-width: 28rem;
+            max-width: 26.2rem;
         }
         &-ic {
             margin-top: -.3rem;
@@ -923,13 +923,17 @@
     &-content {
         grid-column: 10/16;
         padding-top: 4rem;
-        padding-bottom: 5rem;
+        //padding-bottom: 5rem;
         display: flex;
         flex-direction: column;
         justify-content: start;
         .decor-slash {
             margin-bottom: 6rem;
         }
+    }
+    &-label {
+        margin-bottom: 4rem;
+        align-self: start;
     }
     &-title {
         margin-bottom: 6rem;
@@ -1025,6 +1029,9 @@
                 margin-bottom: 2.4rem;
             }
         }
+        &-label {
+            margin-bottom: 2.4rem;
+        }
         &-title {
             margin-bottom: 2.4rem;
             font-size: 3.2rem;
@@ -1056,6 +1063,10 @@
                 margin-top: 6rem;
                 margin-bottom: 6rem;
             }
+        }
+        &-label {
+            justify-self: start;
+            margin-bottom: 3.2rem;
         }
         &-title {
             margin-bottom: 3.2rem;
