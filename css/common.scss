@@ -39,6 +39,11 @@ html {
     // @media only screen and (min-width: 2160px) {
     //     font-size: 12.5px;
     // }
+    @media only screen and (max-width: 1729px) and (min-width: 991px) {
+        @media screen and (min-device-aspect-ratio: 1600 / 800) {
+            font-size: 0.9259259259vh;
+        }
+    }
     @media only screen and (min-width: 1728px) {
         font-size: 10px;
     }
