@@ -334,15 +334,20 @@
             //animation: animMarquee 20s infinite linear;
         }
         &-item {
-            height: 7rem;
+            height: 8rem;
             width: calc(100% / 6);
             display: flex;
             align-items: center;
             justify-content: center;
+            filter: grayscale(1.0);
+            @include transition(filter 400ms ease);
             img {
                 height: 100%;
                 width: auto;
                 object-fit: contain;
+            }
+            &:hover {
+                filter: grayscale(0);
             }
         }
         @keyframes animMarquee {

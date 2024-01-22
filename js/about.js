@@ -59,6 +59,7 @@ const aboutScript = {
                 allPart.forEach((i) => {
                     let html = templatePartItem.clone();
                     html.find('img').attr('src',i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
+                    html.attr('href', i.data.link.url).attr('target', '_blank');
                     html.appendTo(parent);
                 })
             }).then(scrollTo)

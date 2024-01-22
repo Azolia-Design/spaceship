@@ -15,18 +15,18 @@ const solutionScript = {
     afterEnter(data) {
         console.log('enter solution')  
         function solProd() {
-            if ($(window).width() > 991) {
-                let tl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger:'.sol-prod-img-wrap',
-                        start: 'top bottom',
-                        end: 'bottom top+=50%',
-                        scrub: .4,
-                    }
-                })
-                tl
-                .to('.sol-prod-img-wrap img', {scale: 1.2, yPercent: -10, ease: 'none'})
-            } 
+            // if ($(window).width() > 991) {
+            //     let tl = gsap.timeline({
+            //         scrollTrigger: {
+            //             trigger:'.sol-prod-img-wrap',
+            //             start: 'top bottom',
+            //             end: 'bottom top+=50%',
+            //             scrub: .4,
+            //         }
+            //     })
+            //     tl
+            //     .to('.sol-prod-img-wrap img', {scale: 1.2, yPercent: -10, ease: 'none'})
+            // } 
         }
         solProd()
         function toHTML(richTextArray) {

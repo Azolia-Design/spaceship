@@ -78,11 +78,12 @@ const homeScript = {
             getAllDataByType('part_logo').then((res) => {
                 let allPart = sortAsc(res);
                 let templatePartItem = $('.home-part-marquee-item').eq(0).clone();
-                let parent = '.home-part-marquee-inner'
+                let parent = '.home-part-marquee-inner';
                 $(parent).find('.home-part-marquee-item').remove()
                 allPart.forEach((i) => {
                     let html = templatePartItem.clone();
                     html.find('img').attr('src',i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
+                    html.attr('href', i.data.link.url).attr('target', '_blank');
                     html.appendTo(parent);
                 })
             })
