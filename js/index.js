@@ -387,11 +387,13 @@ const scripts = () => {
     })
     function updateContactInfo(data) {
         let parent;
-        if (data) {
-            parent = $(data.next.container)
-        } else {
+        console.log(data)
+        if (!data) {
             parent = $('body')
+        } else {
+            parent = $(data.next.container)
         }
+        console.log(parent)
         getAllDataByType('global_info').then(res => {
             let infos = res;
             let allItem = parent.find('[data-replace]');

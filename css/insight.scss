@@ -356,6 +356,7 @@
                 -webkit-box-orient: vertical;  
                 overflow: hidden;
                 margin-bottom: 2rem;
+                @include transition(color 400ms ease);
             }
             &-info {
                 width: 100%;

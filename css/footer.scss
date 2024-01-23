@@ -370,6 +370,9 @@
                 }
                 &-link {
                     column-gap: .8rem;
+                    &-ic {
+                        margin-top: 0.4rem;
+                    }
                     &-txt {
                         font-weight: 400;
                     }
