@@ -13,7 +13,6 @@ gsap.registerPlugin(ScrollTrigger);
 const solutionScript = {
     namespace: 'solution',
     afterEnter(data) {
-        console.log('enter solution')  
         function solProd() {
             // if ($(window).width() > 991) {
             //     let tl = gsap.timeline({
@@ -65,7 +64,6 @@ const solutionScript = {
         getAPiSolFea()
     },
     beforeLeave() {
-        console.log('leave solution')
     }
 }
 export default solutionScript

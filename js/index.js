@@ -13,6 +13,7 @@ import aboutScript from './about';
 import solutionScript from './solution';
 import insightScript from './insight';
 import notfoundScript from './notfound';
+import { getAllDataByType, getDetail } from './common/prismic_fn';
 
 const scripts = () => {
     if (history.scrollRestoration) {
@@ -105,7 +106,6 @@ const scripts = () => {
         lenis.start()
     }
     function resetBeforeLeave(data) {
-        console.log('reset')
         $('.header-nav').removeClass('active')
         handleHeaderMode(data)
         addNavActiveLink(data);
@@ -183,9 +183,7 @@ const scripts = () => {
             }
 
             const setLoading = (isLoading) => {
-                console.log(isLoading)
                 if (isLoading) {
-                    console.log(textEle)
                     if (textEle) {
                         submitBtn.find(textEle).text('Please wait ...');
                     } else {
@@ -284,14 +282,12 @@ const scripts = () => {
         //$('.input-field').on('change keyup blur input', hanldeInput);
         // $('.popup-form-inner .popup-form-submit').on('click', function (e) {
         //     e.preventDefault();
-        //     console.log('submiitttttttt')
 
         //     $('.popup-form-inner').trigger('submit');
         // })
         const formContact = initForm('.popup-form-inner', {
             onSuccess: (data) => {
                 // success form callback
-                console.log('submited')
                 $('.popup-form').find('.popup-form-succ [data-form-name]').text(data.firstname)
                 $('.popup-form').find('.popup-form-inner').addClass('hidden')
                 $('.popup-form').find('.popup-form-succ').removeClass('hidden')
@@ -389,13 +385,60 @@ const scripts = () => {
         e.preventDefault();
         $('.header-nav').removeClass('active')
     })
+    function updateContactInfo(data) {
+        let parent;
+        if (data) {
+            parent = $(data.next.container)
+        } else {
+            parent = $('body')
+        }
+        getAllDataByType('global_info').then(res => {
+            let infos = res;
+            let allItem = parent.find('[data-replace]');
+            allItem.each((idx, el) => {
+                let type = $(el).attr('data-replace')
+                let src;
+                switch (type) {
+                    case 'tel':
+                        src = infos.filter((i) => i.uid == 'tel')[0]
+                        $(el).attr('href', `tel:${src.data.link.url}`)
+                        if ($(el).find('.ft-ctc-link-txt').length) {
+                            $(el).find('.ft-ctc-link-txt').text(src.data.link.url)
+                        } else {
+                            $(el).text(src.data.link.url)
+                        }
+                        break;  
+                    case 'email':
+                        src = infos.filter((i) => i.uid == 'email')[0]
+                        $(el).attr('href', `email:${src.data.link.url}`)
+                        if ($(el).find('.ft-ctc-link-txt').length) {
+                            $(el).find('.ft-ctc-link-txt').text(src.data.link.url)
+                        } else {
+                            $(el).text(src.data.link.url)
+                        }
+                        break;
+                    case 'linkedin':
+                        src = infos.filter((i) => i.uid == 'linkedin')[0]
+                        $(el).attr('href', src.data.link.url).attr('target', '_blank')
+                        break;
+                    case 'address':
+                        src = infos.filter((i) => i.uid == 'address')[0]
+                        $(el).attr('href', src.data.link.url).attr('target', '_blank')
+                        $(el).find('.ft-ctc-link-txt').text(src.data.name)
+                        break;
+                    default: 
+                        break;
+                }
+
+            })
+        })
+    }
     function transitionOnce(data) {
         let tl = gsap.timeline({
 
         })
     }
     function transitionLeave(data) {
-        console.log('leaveTrans')
         gsap.set(data.next.container, {opacity: 0})
         let tl = gsap.timeline({})
         tl
@@ -409,7 +452,6 @@ const scripts = () => {
         return tl;
     }
     function transitionEnter(data) {
-        console.log('enterTrans')
         let tl = gsap.timeline({})
         tl
         return tl;
@@ -432,6 +474,7 @@ const scripts = () => {
             sync: true,
             once(data) {
                 resetScroll()
+                updateContactInfo()
                 resetBeforeLeave(data)
                 transitionOnce(data)
             },
@@ -446,6 +489,7 @@ const scripts = () => {
             },
             async beforeLeave(data) {
                 resetBeforeLeave(data)
+                updateContactInfo(data)
             },
             async leave(data) {
                 await transitionLeave(data)

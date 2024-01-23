@@ -13,7 +13,6 @@ gsap.registerPlugin(ScrollTrigger);
 const blogdtlScript = {
     namespace: 'blogdtl',
     afterEnter(data) {
-        console.log('enter blogdtl')
         let param;
         function updateBlogContent(data) {
             param = window.location.search.replace('?id=','')
@@ -115,7 +114,6 @@ const blogdtlScript = {
         function getApiBlogdtlRel(data) {
             getAllDataByType('article').then((res) => {
                 let allArt = res.filter((i) => i.uid != param);
-                console.log(allArt)
                 let templateArtItem = $(data.next.container).find('.blogdtl-rel-item').eq(0).clone();
                 let parent = '.blogdtl-rel-list';
                 $(data.next.container).find(parent).html('')
@@ -149,7 +147,6 @@ const blogdtlScript = {
         }   
     },
     beforeLeave() {
-        console.log('leave blogdtl')
     }
 }
 export default blogdtlScript

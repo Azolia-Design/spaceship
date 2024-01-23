@@ -13,7 +13,6 @@ gsap.registerPlugin(ScrollTrigger);
 const insightScript = {
     namespace: 'insight',
     afterEnter(data) {
-        console.log('enter insight')
         function getApiInsNews() {
             getAllDataByType('news').then((res) => {
                 let allNews = res;
@@ -73,7 +72,6 @@ const insightScript = {
             $('.ins-news-logo-item.item-default').addClass('active');
             $('.ins-news-main-item').on('pointermove', function(e) {
                 let idx = $(this).index()
-                console.log(idx)
                 $('.ins-news-logo-item').removeClass('active')
                 $('.ins-news-logo-item').eq(idx + 1).addClass('active')
             })
@@ -86,7 +84,6 @@ const insightScript = {
         function getApiInsArt() {
             getAllDataByType('article').then((res) => {
                 let allArt = res;
-                console.log(allArt)
                 if (allArt.length < pageLimit) {
                     $('.ins-art-main-btn-wrap').addClass('hidden')
                 }
@@ -128,7 +125,6 @@ const insightScript = {
         }
     },
     beforeLeave() {
-        console.log('leave insight')
     }
 }
 export default insightScript

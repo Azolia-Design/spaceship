@@ -10,7 +10,6 @@ gsap.registerPlugin(ScrollTrigger);
 const notfoundScript = {
     namespace: 'notfound',
     afterEnter() {
-        console.log('enter notfound')
         function checkRedirect() {
             let path = window.location.pathname;
             let uid = path.replace('/','')
@@ -36,7 +35,6 @@ const notfoundScript = {
         checkRedirect();  
     },
     beforeLeave() {
-        console.log('leave notfound')
     }
 }
 export default notfoundScript

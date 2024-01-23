@@ -9,10 +9,8 @@ gsap.registerPlugin(ScrollTrigger);
 const termScript = {
     namespace: 'term',
     afterEnter() {
-        console.log('enter terms')        
     },
     beforeLeave() {
-        console.log('leave terms')
     }
 }
 export default termScript

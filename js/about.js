@@ -14,7 +14,6 @@ gsap.registerPlugin(ScrollTrigger);
 const aboutScript = {
     namespace: 'about',
     afterEnter(data) {
-        console.log('enter about')
         function scrollTo(data) {
             if (window.location.hash) {
                 let locationHash = window.location.hash;
@@ -130,15 +129,13 @@ const aboutScript = {
         function getApiAbtJob() {
             getAllDataByType('job').then((res) => {
                 let allJob = sortAsc(res).reverse();
-                console.log(allJob)
                 let templateJobItem = $('.abt-job-item').eq(0).clone();
                 let parent = '.abt-job-main-inner'
                 $(parent).html('')
                 allJob.forEach((i) => {
                     let html = templateJobItem.clone();
-                    console.log(i.data.link.url)
-                    if (i.data.link.url) {
-                        html.attr('href', i.data.link.url).attr('target', '_blank')
+                    if (i.data.link_pdf.url) {
+                        html.attr('href', i.data.link_pdf.url).attr('target', '_blank')
                     } else {
                         html.css('pointer-events','none')
                     }
@@ -153,7 +150,6 @@ const aboutScript = {
         
     },
     beforeLeave() {
-        console.log('leave about')
     }
 }
 export default aboutScript

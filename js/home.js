@@ -15,7 +15,6 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 const homeScript = {
     namespace: 'home',
     afterEnter() {
-        console.log('enter home')
         function homeHeroMouse() {
             function mousMove() {
                 let iconX = xGetter('.home-hero-img-sat')
@@ -203,7 +202,6 @@ const homeScript = {
         }
         getApiHomeFaq()
         function homeFaq() {
-            console.log($('.home-faq-item').length)
             $('.home-faq-item').eq(0).addClass('active');
             $('.home-faq-item').eq(0).find('.home-faq-item-body').slideDown();
             $('.home-faq-item-head').on('click', function(e) {
@@ -221,7 +219,6 @@ const homeScript = {
         }
     },
     beforeLeave() {
-        console.log('leave home')
     }
 }
 export default homeScript
