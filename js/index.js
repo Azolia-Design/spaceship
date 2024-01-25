@@ -19,7 +19,7 @@ const scripts = () => {
     if (history.scrollRestoration) {
         history.scrollRestoration = "manual";
     }
-
+    const GTAG_ID = 'G-4DB80S5P4S';
     barba.use(barbaPrefetch);
     gsap.registerPlugin(ScrollTrigger);
 
@@ -358,6 +358,29 @@ const scripts = () => {
         })
     }
     handleForm()
+    //Gtag
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments);}
+    const updateGtag = {
+        once: () => {
+            gtag('js', new Date());
+            gtag('config', GTAG_ID);
+            console.log('hello')
+        },
+        reinit: () => {
+            gtag('config', GTAG_ID, {
+                send_page_view: false,
+            });
+            window.dataLayer.push({
+                'event': 'page_view',
+                'page_title': (document.title) ? document.title : '',
+                'page_URL': (window.location.href) ?  window.location.href : '',
+                'page_path': (window.location.pathname) ? window.location.pathname : '',
+                'page_hash': (window.location.hash) ? window.location.hash : ''
+            });
+            console.log(window.dataLayer);
+        }
+    }
     
     const header = $('.header')
     lenis.on('scroll', function(inst) {
@@ -475,6 +498,7 @@ const scripts = () => {
             name: 'opacity-transition',
             sync: true,
             once(data) {
+                updateGtag.once();
                 resetScroll()
                 updateContactInfo()
                 resetBeforeLeave(data)
@@ -497,6 +521,9 @@ const scripts = () => {
                 await transitionLeave(data)
             },
             async afterLeave(data) {
+            },
+            async after(data) {
+                updateGtag.reinit();
             }
         }],
         views: VIEWS
