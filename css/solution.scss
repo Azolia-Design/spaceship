@@ -85,6 +85,7 @@
     }
 }
 .sol-prod {
+    overflow: hidden;
     position: relative;
     .decor-slash {
         grid-column: 3/15;
@@ -103,10 +104,11 @@
         color: rgba($cl-txt-sub, 1);
     }
     &-img-wrap {
-        grid-column: 4/14;
-        margin-left: -8rem;
-        margin-right: -8rem;
-        margin-bottom: -41.8rem;
+        grid-column: 5/13;
+        margin-left: -7rem;
+        margin-right: -7rem;
+        margin-top: -2rem;
+        margin-bottom: -31.2rem;
     }
 }
 @include md {
@@ -128,7 +130,7 @@
             grid-column: 3/11;
             margin-left: -5rem;
             margin-right: -5rem;
-            margin-bottom: -30.6rem;
+            margin-bottom: -18.4rem;
         }
     }    
 }
@@ -145,14 +147,14 @@
         }
         &-img-wrap {
             grid-column: 1/-1;
-            margin-left: -1rem;
-            margin-right: -1rem;
-            margin-bottom: -15.9rem;
+            margin-left: -2rem;
+            margin-right: -2rem;
+            margin-bottom: -11.2rem;
         }
     }  
 }
 .sol-fea {
-    padding-top: 53.8rem;
+    padding-top: 12rem;
     padding-bottom: 12rem;
     background-color: rgba($cl-bg-beige, 1);
     &-title-wrap {
@@ -205,7 +207,7 @@
 }
 @include md {
     .sol-fea {
-        padding-top: 36rem;
+        padding-top: 8rem;
         padding-bottom: 8rem;
         &-title-wrap {
             grid-column: 1/-1;
@@ -248,7 +250,7 @@
 }
 @include sm {
     .sol-fea {
-        padding-top: 22rem;
+        padding-top: 6rem;
         padding-bottom: 6rem;
         &-title-wrap {
         }
