@@ -180,6 +180,17 @@ button {
             opacity: 1;
         }
     }
+    &-ic {
+        display: block;
+        position: absolute;
+        &.left {
+            left: 1.1rem;
+        }
+        &.right {
+            right: 1.1rem;
+            @include transform(rotate(180deg));
+        }
+    }
 }
 @include md {
     .cursor {
