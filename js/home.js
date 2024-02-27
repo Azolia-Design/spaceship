@@ -23,16 +23,20 @@ const homeScript = {
             getDetail('home', 'home', getLang()).then((res) => {
                 return res.data
             }).then((data) => {
+                console.log(data);
                 getApiHomeHero(data)
                 getApiHomeAbt(data)
                 getApiHomeProblem(data)
                 getApiHomeSol(data)
                 getApiHomeTech(data)
                 getApiHomeBenefits(data)
+                getApiPartnerlabel(data)
             })
         }
         function getApiHomeHero(data) {
-            $('.home-hero-title').text(data.hero_title[0].text)
+
+            let heroTitle = data.hero_title[0].text.replace(`${data.hero_title_highlight}`, `<span class="txt-hl">${data.hero_title_highlight}</span>`)
+            $('.home-hero-title').html(heroTitle)
             $('.home-hero-sub').text(data.hero_subtitle)
             $('.home-hero-btn-wrap a .txt').text(data.hero_button)
             $('.home-hero-body').text(data.hero_body[0].text)
@@ -40,6 +44,10 @@ const homeScript = {
         }
         function getApiHomeAbt(data) {
             $('.home-abt-title').text(data.about_title[0].text)
+            $('.home-abt-btn-wrap .txt').text(data.about_button)
+        }
+        function getApiPartnerlabel(data) {
+            $('.home-part-label').text(data.partner_label)
         }
         function getApiHomeProblem(data) {
             $('.home-prob-title').text(data.problem_title[0].text)
@@ -58,6 +66,14 @@ const homeScript = {
             $('.home-faq-title').text(data.benefit_title[0].text)
             $('.home-faq-label .txt').text(data.benefit_label)
         }
+
+
+
+
+
+
+
+
 
         function homeHeroMouse() {
             function mousMove() {
@@ -118,7 +134,7 @@ const homeScript = {
         }
         homeHeroPath()
         function getAPiHomePart() {
-            getAllDataByType('part_logo').then((res) => {
+            getAllDataByType('part_logo', getLang()).then((res) => {
                 let allPart = sortAsc(res);
                 let templatePartItem = $('.home-part-marquee-item').eq(0).clone();
                 let parent = '.home-part-marquee-inner';
@@ -133,7 +149,7 @@ const homeScript = {
         }
         getAPiHomePart()
         function getApiHomeProb() {
-            getAllDataByType('problem').then((res) => {
+            getAllDataByType('problem', getLang()).then((res) => {
                 let allProb = sortAsc(res);
                 let templateProbItem = $('.home-prob-item').eq(0).clone();
                 let parent = '.home-prob-inner'
@@ -192,7 +208,8 @@ const homeScript = {
             return html;
         }
         function getAPiHomeSol() {
-            getAllDataByType('home_sol').then((res) => {
+            getAllDataByType('home_sol', getLang()).then((res) => {
+                // console.log(res);
                 let allSol = sortAsc(res);
                 let templateSolItem = $('.home-sol-item').eq(0).clone();
                 let parent = '.home-sol-inner'
@@ -231,7 +248,7 @@ const homeScript = {
             })
         }
         function getApiHomeFaq() {
-            getAllDataByType('home_benefit').then((res) => {
+            getAllDataByType('home_benefit', getLang()).then((res) => {
                 let allFaq = sortAsc(res);
                 let templateFaqItem = $('.home-faq-item').eq(0).clone();
                 let parent = '.home-faq-inner'
