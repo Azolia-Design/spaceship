@@ -86,7 +86,7 @@ const insightScript = {
         }
         let pageLimit = 2;
         function getApiInsArt() {
-            getAllDataByType('article').then((res) => {
+            getAllDataByType('article', getLang()).then((res) => {
                 let allArt = res;
                 if (allArt.length < pageLimit) {
                     $('.ins-art-main-btn-wrap').addClass('hidden')
@@ -96,8 +96,12 @@ const insightScript = {
                 $(parent).html('')
                 allArt.forEach((i, idx) => {
                     let html = templateArtItem.clone();
-                    let originalUrl = html.attr('href');
-                    html.attr('href', `${originalUrl}?id=${i.uid}`)
+                    let originalUrl = html.attr('href')
+                    if (originalUrl.includes('?lang')) {
+                        html.attr('href', `${originalUrl.replace('?lang=es', '')}?id=${i.uid}&lang=es`)
+                    } else {
+                        html.attr('href', `${originalUrl}?id=${i.uid}`)
+                    }
                     html.find('.ins-art-main-item-thumb img').attr('src', i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.title)
                     html.find('.ins-art-main-item-title').text(i.data.title)
                     html.find('.ins-art-main-item-label .txt-med').text(`${new Date(i.data.date).toLocaleString('default', { month: 'long' })}, ${new Date(i.data.date).getFullYear()}`)

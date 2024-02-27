@@ -23,13 +23,21 @@ function setActiveLangBtn(data) {
 function setAnchor(data) {
     if (data == 'es') {
         document.querySelectorAll('a:not([data-lang])').forEach((el) => {
-            let newHref = el.getAttribute('href') + '?lang=es'
-            el.setAttribute('href', newHref)
+            if (!el.getAttribute('href').includes('mailto') &&
+                !el.getAttribute('href').includes('tel:') &&
+                !el.getAttribute('href').includes('https:')) {
+                let newHref = el.getAttribute('href') + '?lang=es'
+                el.setAttribute('href', newHref)
+            }
         })
     } else if (data == 'en') {
         document.querySelectorAll('a:not([data-lang])').forEach((el) => {
-            let newHref = el.getAttribute('href').replace('?lang=es', '')
-            el.setAttribute('href', newHref)
+            if (!el.getAttribute('href').includes('mailto') &&
+                !el.getAttribute('href').includes('tel:') &&
+                !el.getAttribute('href').includes('https:')) {
+                let newHref = el.getAttribute('href').replace('?lang=es', '')
+                el.setAttribute('href', newHref)
+            }
         })
     }
 }
@@ -52,6 +60,7 @@ function setActiveLangURL(data) {
             break;
     }
     history.replaceState({}, '', newUrl)
+    window.location = newUrl
 }
 function setDefaultlang() {
     if (!window.location.search.includes('lang')) {

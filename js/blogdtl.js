@@ -16,8 +16,8 @@ const blogdtlScript = {
 
         let param;
         function updateBlogContent(data) {
-            param = window.location.search.replace('?id=', '')
-            getDetail('article', param).then((res) => {
+            param = window.location.search.replace('?id=', '').replace('&lang=es', '').replace('&id=', '').replace('?id=', '')
+            getDetail('article', param, getLang()).then((res) => {
                 let item = res;
                 $(document).find('title').text(`${item.data.title} | SpaceShip`)
                 $(data.next.container).find('.blogdtl-hero-title').text(item.data.title)

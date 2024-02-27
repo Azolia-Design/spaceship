@@ -5,7 +5,7 @@ import MotionPathPlugin from "gsap/MotionPathPlugin";
 import lenis from './vendors/lenis';
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper";
-import { getAllDataByType } from "./common/prismic_fn"
+import { getAllDataByType, getDetail } from "./common/prismic_fn"
 import { parseRem, xSetter, ySetter, xGetter, yGetter, pointerCurr, lerp, sortAsc } from "./untils";
 import { getLang } from "./common/lang";
 
@@ -17,23 +17,20 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 const homeScript = {
     namespace: 'home',
     afterEnter() {
+        getApiHome()
 
         function getApiHome() {
-            getDetail('home', 'home').then((res) => {
-                console.log(res);
+            getDetail('home', 'home', getLang()).then((res) => {
                 return res.data
+            }).then((data) => {
+                getApiHomeHero(data)
+                getApiHomeAbt(data)
+                getApiHomeProblem(data)
+                getApiHomeSol(data)
+                getApiHomeTech(data)
+                getApiHomeBenefits(data)
             })
-            // .then((data) => {
-            //     console.log(data);
-            //     getApiHomeHero(data)
-            //     getApiHomeAbt(data)
-            //     getApiHomeProblem(data)
-            //     getApiHomeSol(data)
-            //     getApiHomeTech(data)
-            //     getApiHomeBenefits(data)
-            // })
         }
-        // getApiHome()
         function getApiHomeHero(data) {
             $('.home-hero-title').text(data.hero_title[0].text)
             $('.home-hero-sub').text(data.hero_subtitle)
