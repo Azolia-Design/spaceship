@@ -60,7 +60,7 @@ const homeScript = {
         }
         function getApiHomeTech(data) {
             $('.home-tech-title').text(data.technology_title[0].text)
-            $('.home-tech-btn-wrap a .txt').text(data.technology_title[0].text)
+            $('.home-tech-btn-wrap a .txt').text(data.technology_button)
         }
         function getApiHomeBenefits(data) {
             $('.home-faq-title').text(data.benefit_title[0].text)
@@ -247,6 +247,13 @@ const homeScript = {
                 }
             })
         }
+        function getApiHomeTechnology() {
+            getAllDataByType('home_tech', getLang()).then((res) => {
+                let allProb = sortAsc(res);
+
+            })
+        }
+        getApiHomeTechnology()
         function getApiHomeFaq() {
             getAllDataByType('home_benefit', getLang()).then((res) => {
                 let allFaq = sortAsc(res);

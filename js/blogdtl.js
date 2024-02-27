@@ -25,13 +25,13 @@ const blogdtlScript = {
                 $(data.next.container).find('.blogdtl-main-rictxt').html('')
                 $(data.next.container).find('.blogdtl-main-rictxt').html(toHTML(item.data.content))
                 updateUlLi($(data.next.container).find('.blogdtl-main-rictxt').get(0))
-                // updateUrl(item)
+                updateUrl(item, getLang())
                 $(data.next.container).find('.blogdtl-hero-thumb').addClass('active')
             })
         }
         updateBlogContent(data)
-        function updateUrl(item) {
-            history.replaceState({}, '', `/${item.uid}`)
+        function updateUrl(item, lang) {
+            history.replaceState({}, '', `/${item.uid}${lang !== 'en-us' ? `?lang=es` : ''}`)
         }
         function toHTML(richTextArray) {
             let html = '';

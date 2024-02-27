@@ -1,10 +1,10 @@
-import $ from "jquery";
+import $, { get } from "jquery";
 import gsap from "gsap";
 import Swiper from "swiper";
 import { Navigation, Grid } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { parseRem } from "./untils";
-import { getAllDataByType } from "./common/prismic_fn";
+import { getAllDataByType, getDetail } from "./common/prismic_fn";
 import { getLang } from "./common/lang";
 
 
@@ -15,6 +15,27 @@ gsap.registerPlugin(ScrollTrigger);
 const insightScript = {
     namespace: 'insight',
     afterEnter(data) {
+        function getApiInsight() {
+            getDetail('insight', 'insight', getLang()).then((res) => {
+                return res.data
+            }).then((data) => {
+                console.log(data);
+                getApiInsightHero(data)
+                getApiInsightNews(data)
+                getApiInsightArt(data)
+            })
+        }
+        getApiInsight()
+
+        function getApiInsightHero(data) {
+            $('.ins-hero-title').html(data.hero_title[0].text)
+        }
+        function getApiInsightNews(data) {
+            $('.ins-news-main-title').text(data.news_title)
+        }
+        function getApiInsightArt(data) {
+            $('.ins-art-title').text(data.articles_title)
+        }
 
 
         function getApiInsNews() {

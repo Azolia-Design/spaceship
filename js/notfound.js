@@ -7,32 +7,28 @@ import { getLang } from "./common/lang";
 
 gsap.registerPlugin(ScrollTrigger);
 
-//Home
-
 const notfoundScript = {
     namespace: 'notfound',
     afterEnter() {
-
-
         function checkRedirect() {
             let path = window.location.pathname;
-            let uid = path.replace('/', '')
+            let uid = path.replace('/', '').replace('?lang', '')
 
             if (path) {
             } else {
                 $('.notfound-main-inner').addClass('active')
-                notFound()
+                notFound(getLang())
             }
-            getDetail('article', uid).then((res) => {
+            getDetail('article', uid, getLang()).then((res) => {
                 if (!res) {
                     $('.notfound-main-inner').addClass('active')
-                    notFound()
+                    notFound(getLang())
                 } else {
-                    window.location.href = `${window.location.origin}/blog-dtl?id=` + uid
+                    window.location.href = `${window.location.origin}/blog-dtl?id=` + uid + `${getLang() !== 'en-us' ? `&lang=es` : ''}`
                 }
             })
-            function notFound() {
-                history.replaceState({}, '', `/404`)
+            function notFound(lang) {
+                history.replaceState({}, '', `/404${lang !== 'en-us' ? `?lang=es` : ''}`)
                 return;
             }
         }
