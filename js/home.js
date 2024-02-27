@@ -7,7 +7,7 @@ import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper";
 import { getAllDataByType } from "./common/prismic_fn"
 import { parseRem, xSetter, ySetter, xGetter, yGetter, pointerCurr, lerp, sortAsc } from "./untils";
-import { getlang } from "./common/lang";
+import { getLang } from "./common/lang";
 
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);

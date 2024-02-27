@@ -6,7 +6,7 @@ import { Navigation } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { parseRem, sortAsc } from "./untils";
 import { getAllDataByType } from "./common/prismic_fn";
-import { getlang } from "./common/lang";
+import { getLang } from "./common/lang";
 
 
 gsap.registerPlugin(ScrollTrigger);

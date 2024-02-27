@@ -1,7 +1,7 @@
 import $ from "jquery";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { getlang } from "./common/lang";
+import { getLang } from "./common/lang";
 
 
 gsap.registerPlugin(ScrollTrigger);

@@ -1,8 +1,8 @@
-// const baseURL = 'https://space-ship.cdn.prismic.io/api/v2'
-const baseURL = 'https://koma-space-ship.cdn.prismic.io/api/v2'; //demo
+const baseURL = 'https://space-ship.cdn.prismic.io/api/v2'
+// const baseURL = 'https://koma-space-ship.cdn.prismic.io/api/v2'; //demo
 let ref = ''
-// const access_token = 'MC5aWi1sT0JFQUFDQUFXbV9p.77-977-9cO-_vVgsNe-_ve-_vQTvv71377-977-9dHR477-9bA1UfO-_ve-_ve-_ve-_ve-_vXBo77-977-977-9';
-const access_token = 'MC5aZGdiRWhFQUFDSUFGUDAt.77-977-977-977-977-9U--_vXYZZe-_ve-_vTJ6RBrvv71vYWXvv71U77-9eB4TcO-_vS7vv73vv71S'; //demo
+const access_token = 'MC5aWi1sT0JFQUFDQUFXbV9p.77-977-9cO-_vVgsNe-_ve-_vQTvv71377-977-9dHR477-9bA1UfO-_ve-_ve-_ve-_ve-_vXBo77-977-977-9';
+// const access_token = 'MC5aZGdiRWhFQUFDSUFGUDAt.77-977-977-977-977-9U--_vXYZZe-_ve-_vTJ6RBrvv71vYWXvv71U77-9eB4TcO-_vS7vv73vv71S'; //demo
 
 /**
  * parse graphQuery

@@ -14,7 +14,7 @@ import solutionScript from './solution';
 import insightScript from './insight';
 import notfoundScript from './notfound';
 import { getAllDataByType, getDetail } from './common/prismic_fn';
-import { setLang, getlang, setDefaultlang, updateSearch } from "./common/lang";
+import { setLang, getLang, setDefaultlang, updateSearch } from "./common/lang";
 
 
 const scripts = () => {
@@ -509,7 +509,6 @@ const scripts = () => {
             name: 'opacity-transition',
             sync: true,
             once(data) {
-                console.log(getLang());
                 updateGtag.once();
                 resetScroll()
                 updateContactInfo()

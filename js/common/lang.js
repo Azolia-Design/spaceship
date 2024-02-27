@@ -1,4 +1,4 @@
-function getlang() {
+function getLang() {
     switch (document.querySelector('html').getAttribute('lang')) {
         case 'es':
             return 'es-es';
@@ -72,4 +72,4 @@ function setDefaultlang() {
     }
 }
 
-export { setLang, getlang, setDefaultlang, setActiveLangURL }
+export { setLang, getLang, setDefaultlang, setActiveLangURL }
