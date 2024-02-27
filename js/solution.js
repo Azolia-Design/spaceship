@@ -5,7 +5,7 @@ import { Navigation } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { parseRem, sortAsc } from "./untils";
 import { getAllDataByType } from "./common/prismic_fn";
-import { getlang, updateSearch } from "./common/lang";
+import { getlang } from "./common/lang";
 
 
 
@@ -16,8 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
 const solutionScript = {
     namespace: 'solution',
     afterEnter(data) {
-        console.log(getlang());
-        updateSearch()
+
 
         function solProd() {
             if ($(window).width() > 991) {

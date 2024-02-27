@@ -2,7 +2,7 @@ import $ from "jquery";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { getDetail } from "./common/prismic_fn";
-import { getlang, updateSearch } from "./common/lang";
+import { getlang } from "./common/lang";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -12,8 +12,8 @@ gsap.registerPlugin(ScrollTrigger);
 const notfoundScript = {
     namespace: 'notfound',
     afterEnter() {
-        console.log(getlang());
-        updateSearch()
+
+
         function checkRedirect() {
             let path = window.location.pathname;
             let uid = path.replace('/', '')

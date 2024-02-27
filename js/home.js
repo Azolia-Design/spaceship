@@ -7,7 +7,7 @@ import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper";
 import { getAllDataByType } from "./common/prismic_fn"
 import { parseRem, xSetter, ySetter, xGetter, yGetter, pointerCurr, lerp, sortAsc } from "./untils";
-import { getlang, updateSearch } from "./common/lang";
+import { getlang } from "./common/lang";
 
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
@@ -17,8 +17,6 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 const homeScript = {
     namespace: 'home',
     afterEnter() {
-        console.log(getlang());
-        updateSearch()
 
         function homeHeroMouse() {
             function mousMove() {

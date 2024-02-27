@@ -5,7 +5,7 @@ import { Navigation } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { getAllDataByType, getDetail } from "./common/prismic_fn";
 import { parseRem, sortAsc } from "./untils";
-import { getlang, updateSearch } from "./common/lang";
+import { getlang } from "./common/lang";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -13,6 +13,7 @@ gsap.registerPlugin(ScrollTrigger);
 const blogdtlScript = {
     namespace: 'blogdtl',
     afterEnter(data) {
+
         let param;
         function updateBlogContent(data) {
             param = window.location.search.replace('?id=', '')
@@ -24,7 +25,7 @@ const blogdtlScript = {
                 $(data.next.container).find('.blogdtl-main-rictxt').html('')
                 $(data.next.container).find('.blogdtl-main-rictxt').html(toHTML(item.data.content))
                 updateUlLi($(data.next.container).find('.blogdtl-main-rictxt').get(0))
-                updateUrl(item)
+                // updateUrl(item)
                 $(data.next.container).find('.blogdtl-hero-thumb').addClass('active')
             })
         }

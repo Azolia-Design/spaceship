@@ -1,57 +1,75 @@
-import $ from "jquery";
-
 function getlang() {
-    if (localStorage.getItem('lang')) {
-        if (localStorage.getItem('lang') == 'es') {
-            return 'es-es'
-        } else {
-            return 'en-us'
-        }
-    } else {
-        return 'en-us'
+    switch (document.querySelector('html').getAttribute('lang')) {
+        case 'es':
+            return 'es-es';
+        default:
+            return 'en-us';
     }
 }
-
-function setLang(data) {
-    localStorage.setItem('lang', data)
-}
-
-function updateSearch() {
-    let urlSearch = window.location.search.substring(1)
-    if (urlSearch !== '') {
-        let search = JSON.parse('{"' + decodeURI(urlSearch).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
-        if (search.lang == 'es' || search.lang == 'es-es') {
-            history.replaceState({}, '', `${window.location.origin + window.location.pathname}?${search.id ? `id=${search.id}&` : ''}lang=es`);
-            setLang('es')
-            $('html').attr('lang', 'es')
-
-        } else {
-            history.replaceState({}, '', `${window.location.origin + window.location.pathname}${search.id ? `?id=${search.id}` : ''}`);
-            setLang('en')
-            $('html').attr('lang', 'en')
-        }
+function setLang(data, setURL = true) {
+    document.querySelector('html').setAttribute('lang', data)
+    setActiveLangBtn(data)
+    setAnchor(data)
+    if (setURL) {
+        setActiveLangURL(data)
     }
-    $(`[data-lang="${getlang()}"]`).addClass('active')
-    $('[data-lang]').on('click', function (e) {
-        e.preventDefault()
-        if ($(this).attr('data-lang') == 'es-es') {
-            setLang('es')
-            window.location = `${window.location.origin + window.location.pathname}?lang=es`
-        } else {
-            setLang('en')
-            window.location = `${window.location.origin + window.location.pathname}`
-        }
+}
+function setActiveLangBtn(data) {
+    document.querySelectorAll("[data-lang]").forEach((el) => {
+        el.classList.remove("active")
     })
+    document.querySelector(`[data-lang=${data}]`).classList.add("active")
+}
+function setAnchor(data) {
+    if (data == 'es') {
+        document.querySelectorAll('a:not([data-lang])').forEach((el) => {
+            let newHref = el.getAttribute('href') + '?lang=es'
+            el.setAttribute('href', newHref)
+        })
+    } else if (data == 'en') {
+        document.querySelectorAll('a:not([data-lang])').forEach((el) => {
+            let newHref = el.getAttribute('href').replace('?lang=es', '')
+            el.setAttribute('href', newHref)
+        })
+    }
+}
+function setActiveLangURL(data) {
+    let newUrl
+    switch (data) {
+        case 'es':
+            if (!window.location.href.includes('?')) {
+                newUrl = `${window.location.origin + window.location.pathname}?lang=` + data
+            } else {
+                newUrl = `${window.location.origin + window.location.pathname + window.location.search}&lang=` + data
+            }
+            break;
+        default:
+            if (!window.location.href.includes('id')) {
+                newUrl = window.location.href.replace('?lang=es', '')
+            } else {
+                newUrl = window.location.href.replace('lang=es', '').replace('&', '')
+            }
+            break;
+    }
+    history.replaceState({}, '', newUrl)
 }
 function setDefaultlang() {
-    let langTarget = localStorage.getItem('lang')
-    if (langTarget) {
-        if (localStorage.getItem('lang') !== 'es' && localStorage.getItem('lang') !== 'en') {
-            setLang('en')
-        }
+    if (!window.location.search.includes('lang')) {
+        setLang('en', false)
     } else {
-        setLang('en')
+        let search = JSON.parse('{"' + decodeURI(window.location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
+        switch (search.lang) {
+            case 'es':
+                setLang('es', false)
+                break;
+            case 'en':
+                setLang('en', false)
+                break;
+            default:
+                setLang('en', false)
+                break;
+        }
     }
 }
 
-export { setLang, getlang, setDefaultlang, updateSearch }
+export { setLang, getlang, setDefaultlang, setActiveLangURL }

@@ -20,6 +20,10 @@ import { setLang, getlang, setDefaultlang, updateSearch } from "./common/lang";
 const scripts = () => {
 
     setDefaultlang()
+    $('[data-lang]').on('click', function (e) {
+        e.preventDefault()
+        setLang($(this).attr('data-lang'))
+    })
 
     if (history.scrollRestoration) {
         history.scrollRestoration = "manual";

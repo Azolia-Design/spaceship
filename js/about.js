@@ -6,7 +6,7 @@ import { Navigation } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { parseRem, sortAsc } from "./untils";
 import { getAllDataByType } from "./common/prismic_fn";
-import { getlang, updateSearch } from "./common/lang";
+import { getlang } from "./common/lang";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -16,8 +16,7 @@ gsap.registerPlugin(ScrollTrigger);
 const aboutScript = {
     namespace: 'about',
     afterEnter(data) {
-        console.log(getlang());
-        updateSearch()
+
 
         function scrollTo(data) {
             if (window.location.hash) {

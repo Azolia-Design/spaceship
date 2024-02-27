@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Insight | SpaceShip</title>
-        <meta property="og:image" content="https://s3.ap-southeast-1.amazonaws.com/assets.bearplus.io/videos/spaceship-og.jpg"/>
+    <meta property="og:image"
+        content="https://s3.ap-southeast-1.amazonaws.com/assets.bearplus.io/videos/spaceship-og.jpg" />
 
-    <meta property="og:site_name" content="Spaceship"/>
+    <meta property="og:site_name" content="Spaceship" />
     <link rel="icon" type="image/png" sizes="32x32" href="./imgs/favicon.png">
     <meta name="description" content="Transforming Maritime Operations">
-    <link rel="preload" href="./css/main.scss" as="style"/>
+    <link rel="preload" href="./css/main.scss" as="style" />
     <link rel="stylesheet" href="./css/main.scss">
     <link rel="preload" href="./fonts/Poppins-Regular.woff" as="font" type="font/woff" crossorigin>
     <link rel="preload" href="./fonts/Poppins-Medium.woff" as="font" type="font/woff" crossorigin>
@@ -19,8 +21,16 @@
     <link rel="preload" href="./fonts/Aeonik-Bold.woff" as="font" type="font/woff" crossorigin>
     <link rel="preload" href="./fonts/Georgia Italic.woff" as="font" type="font/woff" crossorigin>
 </head>
+
 <body>
     <div class="wrapper" data-barba="wrapper">
+        <div class="lang-wrap">
+            <p class="lang-curr">Language</p>
+            <div class="lang-drop">
+                <a href="#" class="lang-drop-item" data-lang="en">English</a>
+                <a href="#" class="lang-drop-item" data-lang="es">Spanish</a>
+            </div>
+        </div>
         <header class="header">
             <div class="container grid">
                 <div class="header-logo">
@@ -41,7 +51,8 @@
                                 <span class="txt txt-16 header-link-div">/</span>
                             </li>
                             <li class="header-link-item">
-                                <a href="./about.html" class="txt txt-16 txt-med header-link-txt" data-link="about">About
+                                <a href="./about.html" class="txt txt-16 txt-med header-link-txt"
+                                    data-link="about">About
                                     <div class="line">
                                         <div class="line-inner"></div>
                                     </div>
@@ -57,7 +68,8 @@
                                 <span class="txt txt-16 header-link-div">/</span>
                             </li>
                             <li class="header-link-item">
-                                <a href="./insight.html" class="txt txt-16 txt-med header-link-txt" data-link="insight">Insights
+                                <a href="./insight.html" class="txt txt-16 txt-med header-link-txt"
+                                    data-link="insight">Insights
                                     <div class="line">
                                         <div class="line-inner"></div>
                                     </div>
@@ -65,7 +77,8 @@
                                 <span class="txt txt-16 header-link-div">/</span>
                             </li>
                             <li class="header-link-item">
-                                <a href="./about.html#Careers" class="txt txt-16 txt-med header-link-txt" data-link="careers">Careers
+                                <a href="./about.html#Careers" class="txt txt-16 txt-med header-link-txt"
+                                    data-link="careers">Careers
                                     <div class="line">
                                         <div class="line-inner"></div>
                                     </div>
@@ -83,16 +96,19 @@
                     </div>
                     <a href="#" class="icon icon-24 header-nav-close-ic">
                         <svg width="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19.5 4.5L4.5 19.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M4.5 4.5L19.5 19.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg
-                    </a>
+                            <path d="M19.5 4.5L4.5 19.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M4.5 4.5L19.5 19.5" stroke="white" stroke-width="1.5" stroke-miterlimit="10"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                        </svg </a>
                 </div>
                 <div class="header-toggle">
                     <a href="#" class="icon icon-24 header-toggle-link">
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M19.5 16.5H4.5" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M4.5 7.5H19.5" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M19.5 16.5H4.5" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M4.5 7.5H19.5" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </a>
                 </div>
@@ -133,36 +149,51 @@
                                     <label for="firstname" class="txt txt-14 txt-med popup-input-label">
                                         First name
                                     </label>
-                                    <input type="text" name="firstname" class="txt txt-16 popup-input-field" placeholder="Ex: John" required="required">
-                                    <div class="line"><div class="line-inner"></div></div>
+                                    <input type="text" name="firstname" class="txt txt-16 popup-input-field"
+                                        placeholder="Ex: John" required="required">
+                                    <div class="line">
+                                        <div class="line-inner"></div>
+                                    </div>
                                 </div>
                                 <div class="popup-input-grp">
                                     <label for="lastname" class="txt txt-14 txt-med popup-input-label">
                                         Last name
                                     </label>
-                                    <input type="text" name="lastname" class="txt txt-16 popup-input-field" placeholder="Ex: Doe" required="required">
-                                    <div class="line"><div class="line-inner"></div></div>
+                                    <input type="text" name="lastname" class="txt txt-16 popup-input-field"
+                                        placeholder="Ex: Doe" required="required">
+                                    <div class="line">
+                                        <div class="line-inner"></div>
+                                    </div>
                                 </div>
                                 <div class="popup-input-grp">
                                     <label for="email" class="txt txt-14 txt-med popup-input-label">
                                         Email
                                     </label>
-                                    <input type="email" name="email" class="txt txt-16 popup-input-field" placeholder="Ex: johndoe@example.com" required="required">
-                                    <div class="line"><div class="line-inner"></div></div>
+                                    <input type="email" name="email" class="txt txt-16 popup-input-field"
+                                        placeholder="Ex: johndoe@example.com" required="required">
+                                    <div class="line">
+                                        <div class="line-inner"></div>
+                                    </div>
                                 </div>
                                 <div class="popup-input-grp">
                                     <label for="fname" class="txt txt-14 txt-med popup-input-label">
                                         Company <span class="txt-opt">(Optional)</span>
                                     </label>
-                                    <input type="text" name="company" class="txt txt-16 popup-input-field" placeholder="Ex: Google">
-                                    <div class="line"><div class="line-inner"></div></div>
+                                    <input type="text" name="company" class="txt txt-16 popup-input-field"
+                                        placeholder="Ex: Google">
+                                    <div class="line">
+                                        <div class="line-inner"></div>
+                                    </div>
                                 </div>
                                 <div class="popup-input-grp textarea-grp">
                                     <label for="fname" class="txt txt-14 txt-med popup-input-label">
                                         Message <span class="txt-opt">(Optional)</span>
                                     </label>
-                                    <textarea type="text" name="message" class="txt txt-16 popup-input-field" placeholder=""></textarea>
-                                    <div class="line"><div class="line-inner"></div></div>
+                                    <textarea type="text" name="message" class="txt txt-16 popup-input-field"
+                                        placeholder=""></textarea>
+                                    <div class="line">
+                                        <div class="line-inner"></div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="popup-form-btn-wrap">
@@ -176,7 +207,7 @@
                                 Thank you, <span data-form-name>David</span>!
                             </div>
                             <div class="txt txt-16 popup-form-succ-sub">
-                                We appreciate your interest and will get back to you shortly. 
+                                We appreciate your interest and will get back to you shortly.
                             </div>
                             <div class="popup-form-succ-btn-wrap">
                                 <a href="#" class="btn popup-form-succ-btn" data-popup="close">
@@ -186,29 +217,31 @@
                         </div>
                     </div>
                     <div class="popup-info-inner hidden-dk">
-                            <div class="popup-info-item">
-                                <div class="txt txt-18 txt-med popup-info-item-label">
-                                    Support
-                                </div>
-                                <a href="mailto:info@space-ship.world" class="txt txt-18 popup-info-item-link">
-                                    info@space-ship.world
-                                </a>
+                        <div class="popup-info-item">
+                            <div class="txt txt-18 txt-med popup-info-item-label">
+                                Support
                             </div>
-                            <div class="popup-info-item">
-                                <div class="txt txt-18 txt-med popup-info-item-label">
-                                    Call us
-                                </div>
-                                <a href="tel:+49 151 66113142" class="txt txt-18 popup-info-item-link">
-                                    +49 151 66113142
-                                </a>
+                            <a href="mailto:info@space-ship.world" class="txt txt-18 popup-info-item-link">
+                                info@space-ship.world
+                            </a>
+                        </div>
+                        <div class="popup-info-item">
+                            <div class="txt txt-18 txt-med popup-info-item-label">
+                                Call us
                             </div>
+                            <a href="tel:+49 151 66113142" class="txt txt-18 popup-info-item-link">
+                                +49 151 66113142
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <a href="#" class="btn-ic popup-close" data-popup="close">
                     <div class="icon icon-16">
                         <svg width="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M3 3L13 13" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M13 3L3 13" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                stroke-linecap="round" stroke-linejoin="round" />
+                            <path d="M3 3L13 13" stroke="currentColor" stroke-width="1.5" stroke-miterlimit="10"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </div>
                 </a>
@@ -229,7 +262,8 @@
                 </div>
             </div>
         </div>
-        <div class="main" data-barba="container" data-barba-namespace="insight" data-namespace="insight" data-header="dark">
+        <div class="main" data-barba="container" data-barba-namespace="insight" data-namespace="insight"
+            data-header="dark">
             <section class="ins-hero">
                 <div class="container grid">
                     <h1 class="heading h1 ins-hero-title">
@@ -268,15 +302,19 @@
                             <div class="swiper-pagi ins-news-main-pagi">
                                 <a href="#" class="btn-ic swiper-pagi-prev">
                                     <div class="icon icon-16">
-                                        <svg width="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M13 8H3M3 8L7.5 12.5M3 8L7.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <svg width="100%" viewBox="0 0 16 16" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M13 8H3M3 8L7.5 12.5M3 8L7.5 3.5" stroke="currentColor"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </div>
                                 </a>
                                 <a href="#" class="btn-ic swiper-pagi-next">
                                     <div class="icon icon-16">
-                                        <svg width="100%" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <svg width="100%" viewBox="0 0 16 16" fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5" stroke="currentColor"
+                                                stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                                         </svg>
                                     </div>
                                 </a>
@@ -391,14 +429,18 @@
                                     <label for="email" class="txt txt-20 txt-med input-label">
                                         Enter your email
                                     </label>
-                                    <input type="email" class="txt txt-20 input-field" name="email" placeholder="Enter your email">
+                                    <input type="email" class="txt txt-20 input-field" name="email"
+                                        placeholder="Enter your email">
                                 </div>
                                 <div class="ft-abt-form-btn-wrap">
                                     <button type="submit" class="btn btn-outline ft-abt-form-submit">
                                         <div class="txt txt-16 txt-med txt-btn ft-abt-form-submit-txt">Subscribe</div>
                                         <div class="icon icon-24 btn-submit-ic">
-                                            <svg width="100%" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M4.5 12H19.5M19.5 12L12.75 5.25M19.5 12L12.75 18.75" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                            <svg width="100%" viewBox="0 0 24 24" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4.5 12H19.5M19.5 12L12.75 5.25M19.5 12L12.75 18.75"
+                                                    stroke="white" stroke-width="1.5" stroke-linecap="round"
+                                                    stroke-linejoin="round" />
                                             </svg>
                                         </div>
                                     </button>
@@ -415,8 +457,9 @@
                         <div class="ft-ctc-grp-li">
                             <a href="tel:+49 151 66113142" class="ft-ctc-link" data-replace="tel">
                                 <div class="icon icon-20 ft-ctc-link-ic">
-                                    <svg width="100%" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4 4L16 9.57433L4 15L6.4 9.57432L4 4Z" fill="currentColor"/>
+                                    <svg width="100%" viewBox="0 0 20 19" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 4L16 9.57433L4 15L6.4 9.57432L4 4Z" fill="currentColor" />
                                     </svg>
                                 </div>
                                 <div class="heading h6 ft-ctc-link-txt">
@@ -425,8 +468,9 @@
                             </a>
                             <a href="mailto:info@space-ship.world" class="ft-ctc-link" data-replace="email">
                                 <div class="icon icon-20 ft-ctc-link-ic">
-                                    <svg width="100%" viewBox="0 0 20 19" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M4 4L16 9.57433L4 15L6.4 9.57432L4 4Z" fill="currentColor"/>
+                                    <svg width="100%" viewBox="0 0 20 19" fill="none"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M4 4L16 9.57433L4 15L6.4 9.57432L4 4Z" fill="currentColor" />
                                     </svg>
                                 </div>
                                 <div class="heading h6 ft-ctc-link-txt">
@@ -440,7 +484,8 @@
                             Head Office
                         </div>
                         <div class="ft-ctc-grp-li">
-                            <a href="https://maps.app.goo.gl/SVLbv8GHEAmfHGJA6" class="ft-ctc-link" data-replace="address">
+                            <a href="https://maps.app.goo.gl/SVLbv8GHEAmfHGJA6" class="ft-ctc-link"
+                                data-replace="address">
                                 <div class="heading h6 ft-ctc-link-txt ft-ctc-link-txt-add">
                                     A1.22, Agnes-Pockels-Bogen 1, 80992 Munich, Germany
                                 </div>
@@ -448,10 +493,13 @@
                         </div>
                     </div>
                     <div class="ft-ctc-btn-wrap">
-                        <a href="https://www.linkedin.com/company/space-ship/" class="btn btn-outline btn-sm btn-w-ic-sm" target="_blank" data-replace="linkedin">
+                        <a href="https://www.linkedin.com/company/space-ship/"
+                            class="btn btn-outline btn-sm btn-w-ic-sm" target="_blank" data-replace="linkedin">
                             <div class="icon icon-16">
                                 <svg width="100%" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M0.666992 2.39208C0.666992 2.0671 0.79609 1.75544 1.02588 1.52564C1.25568 1.29585 1.56735 1.16675 1.89233 1.16675H14.107C14.268 1.16649 14.4276 1.19799 14.5764 1.25946C14.7253 1.32093 14.8606 1.41116 14.9745 1.52497C15.0884 1.63879 15.1788 1.77397 15.2404 1.92276C15.3021 2.07155 15.3337 2.23103 15.3337 2.39208V14.6067C15.3338 14.7678 15.3022 14.9274 15.2407 15.0762C15.1792 15.2251 15.0889 15.3604 14.975 15.4743C14.8611 15.5882 14.7259 15.6786 14.5771 15.7402C14.4283 15.8018 14.2687 15.8335 14.1077 15.8334H1.89233C1.73136 15.8334 1.57196 15.8017 1.42326 15.7401C1.27455 15.6785 1.13944 15.5881 1.02565 15.4743C0.911857 15.3604 0.821613 15.2253 0.760074 15.0765C0.698534 14.9278 0.666905 14.7684 0.666992 14.6074V2.39208ZM6.47233 6.75875H8.45833V7.75608C8.74499 7.18275 9.47833 6.66675 10.5803 6.66675C12.693 6.66675 13.1937 7.80875 13.1937 9.90408V13.7854H11.0557V10.3814C11.0557 9.18808 10.769 8.51475 10.041 8.51475C9.03099 8.51475 8.61099 9.24075 8.61099 10.3814V13.7854H6.47233V6.75875ZM2.80566 13.6941H4.94433V6.66675H2.80566V13.6941ZM5.25033 4.37475C5.25436 4.55786 5.22177 4.73994 5.15449 4.91029C5.0872 5.08064 4.98656 5.23584 4.85848 5.36677C4.7304 5.4977 4.57746 5.60173 4.40863 5.67275C4.2398 5.74378 4.05849 5.78036 3.87533 5.78036C3.69217 5.78036 3.51085 5.74378 3.34202 5.67275C3.17319 5.60173 3.02025 5.4977 2.89217 5.36677C2.76409 5.23584 2.66345 5.08064 2.59617 4.91029C2.52888 4.73994 2.49629 4.55786 2.50033 4.37475C2.50824 4.01532 2.65658 3.67328 2.91358 3.42187C3.17058 3.17047 3.51581 3.02969 3.87533 3.02969C4.23484 3.02969 4.58007 3.17047 4.83707 3.42187C5.09407 3.67328 5.24241 4.01532 5.25033 4.37475Z" fill="currentColor"/>
+                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                        d="M0.666992 2.39208C0.666992 2.0671 0.79609 1.75544 1.02588 1.52564C1.25568 1.29585 1.56735 1.16675 1.89233 1.16675H14.107C14.268 1.16649 14.4276 1.19799 14.5764 1.25946C14.7253 1.32093 14.8606 1.41116 14.9745 1.52497C15.0884 1.63879 15.1788 1.77397 15.2404 1.92276C15.3021 2.07155 15.3337 2.23103 15.3337 2.39208V14.6067C15.3338 14.7678 15.3022 14.9274 15.2407 15.0762C15.1792 15.2251 15.0889 15.3604 14.975 15.4743C14.8611 15.5882 14.7259 15.6786 14.5771 15.7402C14.4283 15.8018 14.2687 15.8335 14.1077 15.8334H1.89233C1.73136 15.8334 1.57196 15.8017 1.42326 15.7401C1.27455 15.6785 1.13944 15.5881 1.02565 15.4743C0.911857 15.3604 0.821613 15.2253 0.760074 15.0765C0.698534 14.9278 0.666905 14.7684 0.666992 14.6074V2.39208ZM6.47233 6.75875H8.45833V7.75608C8.74499 7.18275 9.47833 6.66675 10.5803 6.66675C12.693 6.66675 13.1937 7.80875 13.1937 9.90408V13.7854H11.0557V10.3814C11.0557 9.18808 10.769 8.51475 10.041 8.51475C9.03099 8.51475 8.61099 9.24075 8.61099 10.3814V13.7854H6.47233V6.75875ZM2.80566 13.6941H4.94433V6.66675H2.80566V13.6941ZM5.25033 4.37475C5.25436 4.55786 5.22177 4.73994 5.15449 4.91029C5.0872 5.08064 4.98656 5.23584 4.85848 5.36677C4.7304 5.4977 4.57746 5.60173 4.40863 5.67275C4.2398 5.74378 4.05849 5.78036 3.87533 5.78036C3.69217 5.78036 3.51085 5.74378 3.34202 5.67275C3.17319 5.60173 3.02025 5.4977 2.89217 5.36677C2.76409 5.23584 2.66345 5.08064 2.59617 4.91029C2.52888 4.73994 2.49629 4.55786 2.50033 4.37475C2.50824 4.01532 2.65658 3.67328 2.91358 3.42187C3.17058 3.17047 3.51581 3.02969 3.87533 3.02969C4.23484 3.02969 4.58007 3.17047 4.83707 3.42187C5.09407 3.67328 5.24241 4.01532 5.25033 4.37475Z"
+                                        fill="currentColor" />
                                 </svg>
                             </div>
                             <div class="txt txt-16 txt-med">Linkedin</div>
@@ -505,14 +553,17 @@
                     </div>
                 </div>
                 <div class="ft-bottom">
-                    <div class="txt txt-16 ft-copy-txt">© <span data-year="">2024</span>, SPACE-SHIP. All Rights Reserved.</div>
+                    <div class="txt txt-16 ft-copy-txt">© <span data-year="">2024</span>, SPACE-SHIP. All Rights
+                        Reserved.</div>
                     <div class="ft-term">
                         <div class="ft-term-item">
-                            <a href="/imprint.html" class="txt txt-16 ft-term-item-link" data-link="imprint">Imprints</a>
+                            <a href="/imprint.html" class="txt txt-16 ft-term-item-link"
+                                data-link="imprint">Imprints</a>
                             <div class="txt txt-16 ft-term-item-div">/</div>
                         </div>
                         <div class="ft-term-item">
-                            <a href="/term.html" class="txt txt-16 ft-term-item-link" data-link="term">Privacy policy</a>
+                            <a href="/term.html" class="txt txt-16 ft-term-item-link" data-link="term">Privacy
+                                policy</a>
                             <div class="txt txt-16 ft-term-item-div">/</div>
                         </div>
                     </div>
@@ -520,7 +571,8 @@
             </div>
             <div class="ft-bg">
                 <video muted preload loop autoplay playsinline class="vid-bg">
-                    <source src="https://s3.ap-southeast-1.amazonaws.com/assets.bearplus.io/videos/ft-bg.mp4" type="video/mp4">
+                    <source src="https://s3.ap-southeast-1.amazonaws.com/assets.bearplus.io/videos/ft-bg.mp4"
+                        type="video/mp4">
                 </video>
             </div>
         </footer>
@@ -528,4 +580,5 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-4DB80S5P4S"></script>
     <script src="./js/index.js" type="module"></script>
 </body>
+
 </html>
