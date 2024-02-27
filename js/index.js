@@ -1,5 +1,5 @@
 import 'swiper/swiper-bundle.min.css'
-import $ from "jquery";
+import $, { get } from "jquery";
 import lenis from './vendors/lenis';
 import barba from '@barba/core';
 import barbaPrefetch from '@barba/prefetch';
@@ -14,8 +14,13 @@ import solutionScript from './solution';
 import insightScript from './insight';
 import notfoundScript from './notfound';
 import { getAllDataByType, getDetail } from './common/prismic_fn';
+import { setLang, getlang, setDefaultlang, updateSearch } from "./common/lang";
+
 
 const scripts = () => {
+
+    setDefaultlang()
+
     if (history.scrollRestoration) {
         history.scrollRestoration = "manual";
     }
@@ -23,9 +28,9 @@ const scripts = () => {
     barba.use(barbaPrefetch);
     gsap.registerPlugin(ScrollTrigger);
 
-    function debounce(func, delay = 100){
+    function debounce(func, delay = 100) {
         let timer;
-        return function(event) {
+        return function (event) {
             if (timer) clearTimeout(timer);
             timer = setTimeout(func, delay, event);
         };
@@ -35,7 +40,7 @@ const scripts = () => {
         let newViewportWidth;
         // portrait mobile viewport initial, any change refresh
         if (initialViewportWidth < 480) {
-            $(window).on('resize', debounce(function() {
+            $(window).on('resize', debounce(function () {
                 newViewportWidth = window.innerWidth || document.documentElement.clientWidth;
                 if (newViewportWidth > 479) {
                     location.reload();
@@ -44,7 +49,7 @@ const scripts = () => {
         }
         // landscape mobile viewport initial, any change refresh
         else if (initialViewportWidth < 768) {
-            $(window).on('resize', debounce(function() {
+            $(window).on('resize', debounce(function () {
                 newViewportWidth = window.innerWidth || document.documentElement.clientWidth;
                 if (newViewportWidth > 767) {
                     location.reload();
@@ -52,8 +57,8 @@ const scripts = () => {
             }))
         }
         // tablet viewport initial, any change refresh
-        else if (initialViewportWidth > 767 && initialViewportWidth < 992)  {
-            $(window).on('resize', debounce(function() {
+        else if (initialViewportWidth > 767 && initialViewportWidth < 992) {
+            $(window).on('resize', debounce(function () {
                 newViewportWidth = window.innerWidth || document.documentElement.clientWidth;
                 if (newViewportWidth < 768 || newViewportWidth > 991) {
                     location.reload();
@@ -62,7 +67,7 @@ const scripts = () => {
         }
         // web viewport initial, any change refresh
         else if (initialViewportWidth > 991) {
-            $(window).on('resize', debounce(function() {
+            $(window).on('resize', debounce(function () {
                 newViewportWidth = window.innerWidth || document.documentElement.clientWidth;
                 if (newViewportWidth < 992) {
                     location.reload();
@@ -92,11 +97,11 @@ const scripts = () => {
                 });
                 if ($(window).width() < 767) {
                     setTimeout(() => {
-                        document.querySelector('.wrapper').scrollTo(0,document.getElementById(locationHash.replace('#','')).offsetTop)
+                        document.querySelector('.wrapper').scrollTo(0, document.getElementById(locationHash.replace('#', '')).offsetTop)
                     }, 300);
                 }
             }, 300);
-            
+
         } else {
             lenis.scrollTo(0, {
                 force: true,
@@ -133,7 +138,7 @@ const scripts = () => {
     handleCursor.init()
     const handlePopup = {
         init: () => {
-            $('[data-popup]').on('click', function(e) {
+            $('[data-popup]').on('click', function (e) {
                 e.preventDefault();
                 if ($(this).attr('data-popup') == 'open') {
                     $('.popup').addClass('active')
@@ -146,7 +151,7 @@ const scripts = () => {
             })
         },
         open: () => {
-            
+
         }
     }
     handlePopup.init()
@@ -360,7 +365,7 @@ const scripts = () => {
     handleForm()
     //Gtag
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     const updateGtag = {
         once: () => {
             gtag('js', new Date());
@@ -374,16 +379,16 @@ const scripts = () => {
             window.dataLayer.push({
                 'event': 'page_view',
                 'page_title': (document.title) ? document.title : '',
-                'page_URL': (window.location.href) ?  window.location.href : '',
+                'page_URL': (window.location.href) ? window.location.href : '',
                 'page_path': (window.location.pathname) ? window.location.pathname : '',
                 'page_hash': (window.location.hash) ? window.location.hash : ''
             });
             console.log(window.dataLayer);
         }
     }
-    
+
     const header = $('.header')
-    lenis.on('scroll', function(inst) {
+    lenis.on('scroll', function (inst) {
         if (inst.scroll < header.outerHeight()) {
             header.removeClass('on-hide')
             header.removeClass('on-scroll')
@@ -400,11 +405,11 @@ const scripts = () => {
             }
         }
     })
-    $('.header-toggle-link').on('click', function(e) {
+    $('.header-toggle-link').on('click', function (e) {
         e.preventDefault();
         $('.header-nav').addClass('active')
     })
-    $('.header-nav-close-ic').on('click', function(e) {
+    $('.header-nav-close-ic').on('click', function (e) {
         e.preventDefault();
         $('.header-nav').removeClass('active')
     })
@@ -432,7 +437,7 @@ const scripts = () => {
                         } else {
                             $(el).text(src.data.link.url)
                         }
-                        break;  
+                        break;
                     case 'email':
                         src = infos.filter((i) => i.uid == 'email')[0]
                         $(el).attr('href', `email:${src.data.link.url}`)
@@ -451,7 +456,7 @@ const scripts = () => {
                         $(el).attr('href', src.data.link.url).attr('target', '_blank')
                         $(el).find('.ft-ctc-link-txt').text(src.data.name)
                         break;
-                    default: 
+                    default:
                         break;
                 }
 
@@ -464,16 +469,18 @@ const scripts = () => {
         })
     }
     function transitionLeave(data) {
-        gsap.set(data.next.container, {opacity: 0})
+        gsap.set(data.next.container, { opacity: 0 })
         let tl = gsap.timeline({})
         tl
-        .to(data.current.container, {opacity: 0, duration: .4, onComplete: () => {
-            $(data.current.container).remove()
-            resetScroll()
-        }})
-        .to('.footer', {opacity: 0, duration: .4}, '<=0')
-        .to(data.next.container, {opacity: 1, duration: .4})
-        .to('.footer', {opacity: 1, duration: .4}, '<=0')
+            .to(data.current.container, {
+                opacity: 0, duration: .4, onComplete: () => {
+                    $(data.current.container).remove()
+                    resetScroll()
+                }
+            })
+            .to('.footer', { opacity: 0, duration: .4 }, '<=0')
+            .to(data.next.container, { opacity: 1, duration: .4 })
+            .to('.footer', { opacity: 1, duration: .4 }, '<=0')
         return tl;
     }
     function transitionEnter(data) {
@@ -481,7 +488,7 @@ const scripts = () => {
         tl
         return tl;
     }
-    
+
     const VIEWS = [
         homeScript,
         aboutScript,
@@ -498,6 +505,7 @@ const scripts = () => {
             name: 'opacity-transition',
             sync: true,
             once(data) {
+                console.log(getLang());
                 updateGtag.once();
                 resetScroll()
                 updateContactInfo()
@@ -505,7 +513,7 @@ const scripts = () => {
                 transitionOnce(data)
             },
             async enter(data) {
-                
+
             },
             async afterLeave(data) {
 

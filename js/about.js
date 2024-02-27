@@ -5,7 +5,9 @@ import lenis from './vendors/lenis';
 import { Navigation } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { parseRem, sortAsc } from "./untils";
-import { getAllDataByType } from "./common/prismic_fn"
+import { getAllDataByType } from "./common/prismic_fn";
+import { getlang, updateSearch } from "./common/lang";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,6 +16,9 @@ gsap.registerPlugin(ScrollTrigger);
 const aboutScript = {
     namespace: 'about',
     afterEnter(data) {
+        console.log(getlang());
+        updateSearch()
+
         function scrollTo(data) {
             if (window.location.hash) {
                 let locationHash = window.location.hash;
@@ -24,7 +29,7 @@ const aboutScript = {
                     });
                     if ($(window).width() < 767) {
                         setTimeout(() => {
-                            document.querySelector('.wrapper').scrollTo(0,document.getElementById(locationHash.replace('#','')).offsetTop)
+                            document.querySelector('.wrapper').scrollTo(0, document.getElementById(locationHash.replace('#', '')).offsetTop)
                         }, 300);
                     }
                 }, 300);
@@ -57,7 +62,7 @@ const aboutScript = {
                 $(parent).find('.home-part-marquee-item').remove()
                 allPart.forEach((i) => {
                     let html = templatePartItem.clone();
-                    html.find('img').attr('src',i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
+                    html.find('img').attr('src', i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
                     html.attr('href', i.data.link.url).attr('target', '_blank');
                     html.appendTo(parent);
                 })
@@ -87,8 +92,8 @@ const aboutScript = {
                         }
                     })
                     tlScrub
-                    .fromTo('.abt-mile-main-inner', {x: $(window).width() > 991 ? 0 : 0}, {x: $(window).width() > 991 ? -distance : -distance})
-                    .fromTo('.abt-mile-prog-inner', {width: '0%'}, {width: '100%'}, 0)
+                        .fromTo('.abt-mile-main-inner', { x: $(window).width() > 991 ? 0 : 0 }, { x: $(window).width() > 991 ? -distance : -distance })
+                        .fromTo('.abt-mile-prog-inner', { width: '0%' }, { width: '100%' }, 0)
                 })
             } else {
                 const abtMileSwiper = new Swiper('.swiper.abt-mile-main', {
@@ -96,13 +101,13 @@ const aboutScript = {
                     spaceBetween: parseRem(24),
                     on: {
                         slideChange: (swiper) => {
-                            gsap.to('.abt-mile-prog-inner', {width: `${swiper.progress * 100}%`})
+                            gsap.to('.abt-mile-prog-inner', { width: `${swiper.progress * 100}%` })
                         }
                     }
                 })
                 abtMileSwiper.slideTo(0)
             }
-            
+
         }
         function getApiAbtTeam() {
             getAllDataByType('team').then((res) => {
@@ -118,7 +123,7 @@ const aboutScript = {
                     if (i.data.linkedin.url) {
                         html.find('.abt-team-item-name-wrap').attr('href', i.data.linkedin.url).attr('target', '_blank')
                     } else {
-                        html.find('.abt-team-item-name-wrap').css('pointer-events','none')
+                        html.find('.abt-team-item-name-wrap').css('pointer-events', 'none')
                         html.find('.abt-team-item-name-wrap').find('.abt-team-item-ic').remove()
                     }
                     html.appendTo(parent);
@@ -137,7 +142,7 @@ const aboutScript = {
                     if (i.data.link_pdf.url) {
                         html.attr('href', i.data.link_pdf.url).attr('target', '_blank')
                     } else {
-                        html.css('pointer-events','none')
+                        html.css('pointer-events', 'none')
                     }
                     html.find('.abt-job-item-title').text(i.data.job_title)
                     html.find('.abt-job-item-type').text(i.data.job_type)
@@ -147,7 +152,7 @@ const aboutScript = {
             })
         }
         getApiAbtJob()
-        
+
     },
     beforeLeave() {
     }

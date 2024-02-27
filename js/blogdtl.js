@@ -5,17 +5,17 @@ import { Navigation } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { getAllDataByType, getDetail } from "./common/prismic_fn";
 import { parseRem, sortAsc } from "./untils";
+import { getlang, updateSearch } from "./common/lang";
+
 
 gsap.registerPlugin(ScrollTrigger);
-
-//Home
 
 const blogdtlScript = {
     namespace: 'blogdtl',
     afterEnter(data) {
         let param;
         function updateBlogContent(data) {
-            param = window.location.search.replace('?id=','')
+            param = window.location.search.replace('?id=', '')
             getDetail('article', param).then((res) => {
                 let item = res;
                 $(document).find('title').text(`${item.data.title} | SpaceShip`)
@@ -30,68 +30,68 @@ const blogdtlScript = {
         }
         updateBlogContent(data)
         function updateUrl(item) {
-            history.replaceState({},'',`/${item.uid}`)
+            history.replaceState({}, '', `/${item.uid}`)
         }
         function toHTML(richTextArray) {
             let html = '';
             let isLabeled;
             for (const block of richTextArray) {
                 switch (block.type) {
-                case 'paragraph':
+                    case 'paragraph':
                         let string = block.text;
                         for (const span of block.spans) {
                             switch (span.type) {
                                 case 'strong':
-                                string = string.replace(block.text.substring(span.start, span.end),`<strong>${block.text.substring(span.start, span.end)}</strong>`);
-                                break;
+                                    string = string.replace(block.text.substring(span.start, span.end), `<strong>${block.text.substring(span.start, span.end)}</strong>`);
+                                    break;
                                 case 'em':
-                                string = string.replace(block.text.substring(span.start, span.end),`<em>${block.text.substring(span.start, span.end)}</em>`);
-                                break;
+                                    string = string.replace(block.text.substring(span.start, span.end), `<em>${block.text.substring(span.start, span.end)}</em>`);
+                                    break;
                                 case 'hyperlink':
-                                string = string.replace(block.text.substring(span.start, span.end),`<a href="${span.data.url}" class="txt-link" ${span.data.url.target ? 'target="_blank"' : ''}>${block.text.substring(span.start, span.end)}</a>`);
-                                break;
+                                    string = string.replace(block.text.substring(span.start, span.end), `<a href="${span.data.url}" class="txt-link" ${span.data.url.target ? 'target="_blank"' : ''}>${block.text.substring(span.start, span.end)}</a>`);
+                                    break;
                                 default:
-                                break;
+                                    break;
                             }
                         }
                         html += `<p class="txt txt-18"">${string}</p>`;
-                    break;
-                case 'heading2':
-                    html += `<h2 class="heading h6">${block.text}</h2>`;
-                    break;
-                case 'heading3':
-                    isLabeled = block.spans.filter(span => span.type == 'label');
-                    html += `<h3 class="txt txt-20 txt-med" data-label="${isLabeled.length ? isLabeled[0].data.label : ''}">${block.text}</h3>`;
-                    break;
-                case 'image':
-                    html += `<figure>
+                        break;
+                    case 'heading2':
+                        html += `<h2 class="heading h6">${block.text}</h2>`;
+                        break;
+                    case 'heading3':
+                        isLabeled = block.spans.filter(span => span.type == 'label');
+                        html += `<h3 class="txt txt-20 txt-med" data-label="${isLabeled.length ? isLabeled[0].data.label : ''}">${block.text}</h3>`;
+                        break;
+                    case 'image':
+                        html += `<figure>
                         <div class="rictxt-img">
                             <img src="${block.url}" alt="${block.alt}" width="${block.dimensions.width}" height="${block.dimensions.height}">
                         </div>
                         ${block.alt ? '<figcaption>' + block.alt + '</figcaption>' : ''}
                     </figure>`;
-                    break;
-                case 'list-item':
-                    let listString = block.text;
-                    for (const span of block.spans) {
-                        switch (span.type) {
-                            case 'strong':
-                            listString = listString.replace(block.text.substring(span.start, span.end),`<strong>${block.text.substring(span.start, span.end)}</strong>`);
-                            break;
-                            case 'em':
-                            listString = listString.replace(block.text.substring(span.start, span.end),`<em>${block.text.substring(span.start, span.end)}</em>`);
-                            break;
-                            case 'hyperlink':
-                            listString = listString.replace(block.text.substring(span.start, span.end),`<a href="${span.data.url}" class="txt-link">${block.text.substring(span.start, span.end)}</a>`);
-                            break;
-                            default:
-                            break;
+                        break;
+                    case 'list-item':
+                        let listString = block.text;
+                        for (const span of block.spans) {
+                            switch (span.type) {
+                                case 'strong':
+                                    listString = listString.replace(block.text.substring(span.start, span.end), `<strong>${block.text.substring(span.start, span.end)}</strong>`);
+                                    break;
+                                case 'em':
+                                    listString = listString.replace(block.text.substring(span.start, span.end), `<em>${block.text.substring(span.start, span.end)}</em>`);
+                                    break;
+                                case 'hyperlink':
+                                    listString = listString.replace(block.text.substring(span.start, span.end), `<a href="${span.data.url}" class="txt-link">${block.text.substring(span.start, span.end)}</a>`);
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
-                    }
-                    html += `<li class="txt txt-18">${listString}</li>`;
-                    break;
-                default:
-                    console.error(`Unsupported block type: ${block.type}`);
+                        html += `<li class="txt txt-18">${listString}</li>`;
+                        break;
+                    default:
+                        console.error(`Unsupported block type: ${block.type}`);
                 }
             }
             return html;
@@ -134,7 +134,7 @@ const blogdtlScript = {
         getApiBlogdtlRel(data)
         function blogdtlRel(data) {
             if ($(window).width() < 767) {
-                const blogdtlRelSwiper = new Swiper($(data.next.container).find('.blogdtl-rel-main').get(0),{
+                const blogdtlRelSwiper = new Swiper($(data.next.container).find('.blogdtl-rel-main').get(0), {
                     modules: [Navigation],
                     slidesPerView: 'auto',
                     spaceBetween: parseRem(20),
@@ -144,7 +144,7 @@ const blogdtlScript = {
                     },
                 })
             }
-        }   
+        }
     },
     beforeLeave() {
     }

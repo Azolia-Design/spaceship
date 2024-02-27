@@ -197,3 +197,30 @@ button {
         display: none;
     }
 }
+
+.lang {    
+    &-wrap {
+        position: fixed;
+        top: 50%;
+        left: 30rem;
+        // display: flex;
+        z-index: 9999999;
+        font-size: 2rem;
+    }
+
+    &-curr {
+
+    }
+    &-drop {
+        position: relative;
+
+        &-item {
+            color: black;
+
+            &.active {
+                color: red;
+                pointer-events: none;
+            }
+        }
+    }
+}

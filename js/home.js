@@ -7,6 +7,8 @@ import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper";
 import { getAllDataByType } from "./common/prismic_fn"
 import { parseRem, xSetter, ySetter, xGetter, yGetter, pointerCurr, lerp, sortAsc } from "./untils";
+import { getlang, updateSearch } from "./common/lang";
+
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
@@ -15,6 +17,9 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 const homeScript = {
     namespace: 'home',
     afterEnter() {
+        console.log(getlang());
+        updateSearch()
+
         function homeHeroMouse() {
             function mousMove() {
                 let iconX = xGetter('.home-hero-img-sat')
@@ -38,20 +43,20 @@ const homeScript = {
                         delay: delay ? (- duration / 3 * idx) - duration / 6 : - duration / 3 * idx
                     })
                     tl
-                    .from(el, {autoAlpha: 0, duration: 1, ease: 'none'})
-                    .to(el, {
-                        duration: duration, 
-                        ease: "none",
-                        motionPath:{
-                            path: pathID,
-                            align: pathID,
-                            start: rev ? 1 : 0,
-                            end: rev ? 0 : 1,
-                            autoRotate: rotate,
-                            alignOrigin: [0.5, 0.5]
-                        }
-                    }, 0)
-                    .to(el, {autoAlpha: 0, duration: 1, ease: 'none'}, '>=-1')
+                        .from(el, { autoAlpha: 0, duration: 1, ease: 'none' })
+                        .to(el, {
+                            duration: duration,
+                            ease: "none",
+                            motionPath: {
+                                path: pathID,
+                                align: pathID,
+                                start: rev ? 1 : 0,
+                                end: rev ? 0 : 1,
+                                autoRotate: rotate,
+                                alignOrigin: [0.5, 0.5]
+                            }
+                        }, 0)
+                        .to(el, { autoAlpha: 0, duration: 1, ease: 'none' }, '>=-1')
                 })
             }
             arrowAnim('#outPathR', '.outArrR', true, false, false)
@@ -81,7 +86,7 @@ const homeScript = {
                 $(parent).find('.home-part-marquee-item').remove()
                 allPart.forEach((i) => {
                     let html = templatePartItem.clone();
-                    html.find('img').attr('src',i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
+                    html.find('img').attr('src', i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
                     html.attr('href', i.data.link.url).attr('target', '_blank');
                     html.appendTo(parent);
                 })
@@ -109,40 +114,40 @@ const homeScript = {
             let isLabeled;
             for (const block of richTextArray) {
                 switch (block.type) {
-                case 'paragraph':
+                    case 'paragraph':
                         let string = block.text;
                         for (const span of block.spans) {
                             switch (span.type) {
                                 case 'strong':
-                                string = string.replace(block.text.substring(span.start, span.end),`<strong>${block.text.substring(span.start, span.end)}</strong>`);
-                                break;
+                                    string = string.replace(block.text.substring(span.start, span.end), `<strong>${block.text.substring(span.start, span.end)}</strong>`);
+                                    break;
                                 case 'em':
-                                string = string.replace(block.text.substring(span.start, span.end),`<em>${block.text.substring(span.start, span.end)}</em>`);
-                                break;
+                                    string = string.replace(block.text.substring(span.start, span.end), `<em>${block.text.substring(span.start, span.end)}</em>`);
+                                    break;
                                 default:
-                                break;
+                                    break;
                             }
                         }
                         html += `<p>${string}</p>`;
-                    break;
-                case 'list-item':
-                    let listString = block.text;
-                    for (const span of block.spans) {
-                        switch (span.type) {
-                            case 'strong':
-                            listString = listString.replace(block.text.substring(span.start, span.end),`<strong>${block.text.substring(span.start, span.end)}</strong>`);
-                            break;
-                            case 'em':
-                            listString = listString.replace(block.text.substring(span.start, span.end),`<em>${block.text.substring(span.start, span.end)}</em>`);
-                            break;
-                            default:
-                            break;
+                        break;
+                    case 'list-item':
+                        let listString = block.text;
+                        for (const span of block.spans) {
+                            switch (span.type) {
+                                case 'strong':
+                                    listString = listString.replace(block.text.substring(span.start, span.end), `<strong>${block.text.substring(span.start, span.end)}</strong>`);
+                                    break;
+                                case 'em':
+                                    listString = listString.replace(block.text.substring(span.start, span.end), `<em>${block.text.substring(span.start, span.end)}</em>`);
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
-                    }
-                    html += `<li>${listString}</li>`;
-                    break;
-                default:
-                    console.error(`Unsupported block type: ${block.type}`);
+                        html += `<li>${listString}</li>`;
+                        break;
+                    default:
+                        console.error(`Unsupported block type: ${block.type}`);
                 }
             }
             return html;
@@ -204,7 +209,7 @@ const homeScript = {
         function homeFaq() {
             $('.home-faq-item').eq(0).addClass('active');
             $('.home-faq-item').eq(0).find('.home-faq-item-body').slideDown();
-            $('.home-faq-item-head').on('click', function(e) {
+            $('.home-faq-item-head').on('click', function (e) {
                 e.preventDefault();
                 if ($(this).closest('.home-faq-item').hasClass('active')) {
                     $(this).closest('.home-faq-item').removeClass('active')

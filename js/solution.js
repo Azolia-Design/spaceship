@@ -5,6 +5,9 @@ import { Navigation } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { parseRem, sortAsc } from "./untils";
 import { getAllDataByType } from "./common/prismic_fn";
+import { getlang, updateSearch } from "./common/lang";
+
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,35 +16,38 @@ gsap.registerPlugin(ScrollTrigger);
 const solutionScript = {
     namespace: 'solution',
     afterEnter(data) {
+        console.log(getlang());
+        updateSearch()
+
         function solProd() {
             if ($(window).width() > 991) {
                 let tl = gsap.timeline({
                     scrollTrigger: {
-                        trigger:'.sol-prod-img-wrap',
+                        trigger: '.sol-prod-img-wrap',
                         start: 'top bottom',
                         end: 'bottom top+=50%',
                         scrub: .4,
                     }
                 })
                 tl
-                .to('.sol-prod-img-wrap img', {scale: 1.2, yPercent: -10, ease: 'none'})
-            } 
+                    .to('.sol-prod-img-wrap img', { scale: 1.2, yPercent: -10, ease: 'none' })
+            }
         }
         solProd()
         function toHTML(richTextArray) {
             let html = '';
             for (const block of richTextArray) {
                 switch (block.type) {
-                case 'paragraph':
+                    case 'paragraph':
                         let string = block.text;
                         html += `<p>${string}</p>`;
-                    break;
-                case 'list-item':
-                    let listString = block.text;
-                    html += `<li>${listString}</li>`;
-                    break;
-                default:
-                    console.error(`Unsupported block type: ${block.type}`);
+                        break;
+                    case 'list-item':
+                        let listString = block.text;
+                        html += `<li>${listString}</li>`;
+                        break;
+                    default:
+                        console.error(`Unsupported block type: ${block.type}`);
                 }
             }
             return html;

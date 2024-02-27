@@ -5,6 +5,8 @@ import { Navigation, Grid } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { parseRem } from "./untils";
 import { getAllDataByType } from "./common/prismic_fn";
+import { getlang, updateSearch } from "./common/lang";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,6 +15,9 @@ gsap.registerPlugin(ScrollTrigger);
 const insightScript = {
     namespace: 'insight',
     afterEnter(data) {
+        console.log(getlang());
+        updateSearch()
+
         function getApiInsNews() {
             getAllDataByType('news').then((res) => {
                 let allNews = res;
@@ -70,12 +75,12 @@ const insightScript = {
         }
         function insNewsLogo() {
             $('.ins-news-logo-item.item-default').addClass('active');
-            $('.ins-news-main-item').on('pointermove', function(e) {
+            $('.ins-news-main-item').on('pointermove', function (e) {
                 let idx = $(this).index()
                 $('.ins-news-logo-item').removeClass('active')
                 $('.ins-news-logo-item').eq(idx + 1).addClass('active')
             })
-            $('.ins-news-main-item').on('pointerleave', function(e) {
+            $('.ins-news-main-item').on('pointerleave', function (e) {
                 $('.ins-news-logo-item').removeClass('active')
                 $('.ins-news-logo-item.item-default').addClass('active');
             })
@@ -106,7 +111,7 @@ const insightScript = {
         }
         getApiInsArt()
         function insArtPagi() {
-            $('.ins-art-main-btn-wrap .btn').on('click', function(e) {
+            $('.ins-art-main-btn-wrap .btn').on('click', function (e) {
                 e.preventDefault();
                 let allHiddenItem = $('.ins-art-main-item.hidden');
                 allHiddenItem.each((idx, el) => {
