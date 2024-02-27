@@ -18,6 +18,50 @@ const homeScript = {
     namespace: 'home',
     afterEnter() {
 
+        function getApiHome() {
+            getDetail('home', 'home').then((res) => {
+                console.log(res);
+                return res.data
+            })
+            // .then((data) => {
+            //     console.log(data);
+            //     getApiHomeHero(data)
+            //     getApiHomeAbt(data)
+            //     getApiHomeProblem(data)
+            //     getApiHomeSol(data)
+            //     getApiHomeTech(data)
+            //     getApiHomeBenefits(data)
+            // })
+        }
+        // getApiHome()
+        function getApiHomeHero(data) {
+            $('.home-hero-title').text(data.hero_title[0].text)
+            $('.home-hero-sub').text(data.hero_subtitle)
+            $('.home-hero-btn-wrap a .txt').text(data.hero_button)
+            $('.home-hero-body').text(data.hero_body[0].text)
+            $('.home-hero-tail-title').text(data.hero_tail_title[0].text)
+        }
+        function getApiHomeAbt(data) {
+            $('.home-abt-title').text(data.about_title[0].text)
+        }
+        function getApiHomeProblem(data) {
+            $('.home-prob-title').text(data.problem_title[0].text)
+            $('.home-prob-label .txt').text(data.problem_label)
+        }
+        function getApiHomeSol(data) {
+            $('.home-sol-title .replace').html(data.solution_title[0].text.replaceAll('\n', '<br/>'))
+            $('.home-sol-label .txt').text(data.solution_label)
+
+        }
+        function getApiHomeTech(data) {
+            $('.home-tech-title').text(data.technology_title[0].text)
+            $('.home-tech-btn-wrap a .txt').text(data.technology_title[0].text)
+        }
+        function getApiHomeBenefits(data) {
+            $('.home-faq-title').text(data.benefit_title[0].text)
+            $('.home-faq-label .txt').text(data.benefit_label)
+        }
+
         function homeHeroMouse() {
             function mousMove() {
                 let iconX = xGetter('.home-hero-img-sat')
