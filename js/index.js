@@ -95,9 +95,8 @@ const scripts = () => {
                 $('[for="fname"].message').html(company.replace('Company' , data.message).replace('Optional' , data.optional))
                 $('.popup-form-submit-txt').text(data.send)
                 let succTitle = $('.popup-form-succ-title').html()
-                $('.popup-form-succ-title').html(succTitle.replace('Company' , data.message))asdad
-            }
-
+                $('.popup-form-succ-title').html(succTitle.replace('Company' , data.message))
+            },
         }
     }
 
