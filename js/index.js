@@ -18,7 +18,7 @@ import { setLang, getLang, setDefaultlang } from "./common/lang";
 
 
 const scripts = () => {
-
+    let plsWait = 'Please wait ...'
     setDefaultlang()
     handleLangToggle()
     UpdateLangApi()
@@ -52,13 +52,16 @@ const scripts = () => {
         getDetail('global', 'global', getLang()).then((res) => {
             return res.data;
         }).then((data) => {
-            console.log(data);
+            updateContent.cursor(data)
             updateContent.header(data)
             updateContent.footer(data)
             updateContent.popup(data)
         })
 
         const updateContent = {
+            cursor: (data) => {
+                $('.cursor-txt').text(data.drag)
+            },
             header: (data) => {
                 $('.header-link-txt[data-link="home"]').text(data.home)
                 $('.header-link-txt[data-link="about"]').text(data.about)
@@ -68,6 +71,9 @@ const scripts = () => {
                 $('.header-act .btn .txt').text(data.getintouch)
             },
             footer: (data) => {
+                $('.ft-abt-info-job').text(data.ceo_role)
+                $('.ft-abt-info-quote').text(data.ceo_premble)
+                $('.ft-abt-form input').attr('placeholder', data.form_placeholder)
                 $('.ft-ctc-grp-label.contactus').text(data.contact)
                 $('.ft-ctc-grp-label.headoffice').text(data.headoffice)
                 $('.ft-menu-link-txt[data-link="home"]').text(data.home)
@@ -95,7 +101,10 @@ const scripts = () => {
                 $('[for="fname"].message').html(company.replace('Company' , data.message).replace('Optional' , data.optional))
                 $('.popup-form-submit-txt').text(data.send)
                 let succTitle = $('.popup-form-succ-title').html()
-                $('.popup-form-succ-title').html(succTitle.replace('Company' , data.message))
+                $('.popup-form-succ-title').html(succTitle.replace('Thank you' , data.message))
+                $('.popup-form-succ-sub').text(data.thankyou_body)
+                $('.popup-form-succ-btn-wrap .txt').text(data.closepanel)
+                plsWait = data.please_wait
             },
         }
     }
@@ -269,9 +278,9 @@ const scripts = () => {
             const setLoading = (isLoading) => {
                 if (isLoading) {
                     if (textEle) {
-                        submitBtn.find(textEle).text('Please wait ...');
+                        submitBtn.find(textEle).text(plsWait);
                     } else {
-                        submitBtn.val('Please wait ...');
+                        submitBtn.val(plsWait);
                     }
 
                     submitBtn.css({ 'pointer-events': 'none' })
