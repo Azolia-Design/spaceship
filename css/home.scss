@@ -136,6 +136,7 @@
 }
 .home-hero-mid {
     &-img {
+        position: relative;
         pointer-events: none;
         grid-column: 4/14;
         margin-top: -11.9rem;
@@ -144,6 +145,20 @@
         &.show-tb, &.show-mb {
             display: none;
         }
+    }
+    &-txt-wrap {
+        position: absolute;
+        top: 0;
+        left: 0;
+        @include size(100%);
+        font-size: 102.2rem;
+    }
+    &-txt {
+        position: absolute;
+        top: 56.4912280702%;
+        left: 29.3542074364%;
+        font-size: 0.027397260274em;
+        line-height: 1.2em;
     }
 }
 @include md {
@@ -161,6 +176,14 @@
             &.show-tb {
                 display: block;
             }
+        }
+        &-txt-wrap {
+            font-size: 46.4rem;
+        }
+        &-txt {
+            top: 49.7121217976%;
+            left: 29.3685344828%;
+            font-size: 0.03146551724em;
         }
     }
 }
@@ -181,6 +204,14 @@
                 display: block;
             }
         }
+        &-txt-wrap {
+            font-size: 31.4rem;
+        }
+        &-txt {
+            top: 41.7121217976%;
+            left: 12.1694267516%;
+            font-size: 0.0872611465em;
+        }
     }
 }
 @include xs {
@@ -188,6 +219,11 @@
         &-img {
             margin-top: -5rem;
             margin-left: 0;
+        }
+        &-txt {
+            top: 41.7121217976%;
+            left: 12.1694267516%;
+            font-size: 0.0572611465em;
         }
     }
 }

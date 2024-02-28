@@ -5,7 +5,9 @@ import lenis from './vendors/lenis';
 import { Navigation } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { parseRem, sortAsc } from "./untils";
-import { getAllDataByType } from "./common/prismic_fn"
+import { getAllDataByType, getDetail } from "./common/prismic_fn";
+import { getLang } from "./common/lang";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -14,9 +16,77 @@ gsap.registerPlugin(ScrollTrigger);
 const aboutScript = {
     namespace: 'about',
     afterEnter(data) {
+        getApiAbt()
+
+        function getApiAbt() {
+            getDetail('about_page', 'about', getLang()).then((res) => {
+                return res.data
+            }).then((data) => {
+                console.log(data);
+                getApiAbtHero(data)
+                getApiAbtVision(data)
+                getApiAbtPartner(data)
+                getApiAbtMilestone(data)
+                getApiAbtCEO(data)
+                getApiAbtTeam(data)
+                getApiAbtJob(data)
+            })
+        }
+        function getApiAbtHero(data) {
+            $('.abt-hero-title').text(data.hero_title)
+        }
+        function getApiAbtVision(data) {
+            $('.abt-hero-label .txt').text(data.vision_label)
+            let visionBody = data.vision_body
+            $(data.vision_hl).each((idx, el) => {
+                visionBody = visionBody.replace(el.item, `<span class="txt-hl">${el.item}</span>`)
+            })
+            $('.abt-hero-sub').html(visionBody)
+        }
+        function getApiAbtPartner(data) {
+            $('.home-part-label').text(data.partners_grants)
+        }
+        function getApiAbtCEO(data) {
+            let parent = $('.abt-ceo-quote')
+            let templateParaItem = parent.find('.abt-ceo-quote-txt').eq(0).clone();
+            parent.find('.abt-ceo-quote-txt').remove()
+            let CeoBody = $(data.ceo_body)
+            CeoBody.each((idx, el) => {
+                let html = templateParaItem.clone()
+                let bodyText = el.text
+                let subString = []
+                $(el.spans).each((idx, hl) => {
+                    subString[idx] = bodyText.substring(hl.start, hl.end);
+                })
+                $(subString).each((idx, el) => {
+                    bodyText = bodyText.replace(el, `<span class="txt-hl">${el}</span>`)
+                })
+                html.html(bodyText)
+                parent.append(html)
+            })
+        }
+        function getApiAbtMilestone(data) {
+            $('.abt-mile-label .txt').text(data.milestone_label)
+        }
+        function getApiAbtTeam(data) {
+            $('.abt-team-label .txt').text(data.team_label)
+            $('.abt-team-title').text(data.team_title)
+            $('.abt-team-sub').text(data.team_body)
+            $('.abt-team-btn-wrap .txt').text(data.team_button)
+        }
+
+        function getApiAbtJob(data) {
+            $('.abt-job-label .txt').text(data.position_label)
+            $('.abt-job-title').text(data.position_title)
+            $('.abt-job-sub').text(data.position_subtitle)
+        }
+
         function scrollTo(data) {
             if (window.location.hash) {
                 let locationHash = window.location.hash;
+                if (locationHash.includes('?')) {
+                    locationHash = locationHash.split('?')[0]
+                }
                 setTimeout(() => {
                     lenis.scrollTo(locationHash, {
                         force: true,
@@ -24,7 +94,7 @@ const aboutScript = {
                     });
                     if ($(window).width() < 767) {
                         setTimeout(() => {
-                            document.querySelector('.wrapper').scrollTo(0,document.getElementById(locationHash.replace('#','')).offsetTop)
+                            document.querySelector('.wrapper').scrollTo(0, document.getElementById(locationHash.replace('#', '')).offsetTop)
                         }, 300);
                     }
                 }, 300);
@@ -32,7 +102,7 @@ const aboutScript = {
         }
         scrollTo(data)
         function getApiAbtMile() {
-            getAllDataByType('milstone').then((res) => {
+            getAllDataByType('milstone', getLang()).then((res) => {
                 let allMils = sortAsc(res);
                 let templateMilItem = $('.abt-mile-item').eq(0).clone();
                 let parent = '.abt-mile-main-inner'
@@ -57,7 +127,7 @@ const aboutScript = {
                 $(parent).find('.home-part-marquee-item').remove()
                 allPart.forEach((i) => {
                     let html = templatePartItem.clone();
-                    html.find('img').attr('src',i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
+                    html.find('img').attr('src', i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
                     html.attr('href', i.data.link.url).attr('target', '_blank');
                     html.appendTo(parent);
                 })
@@ -87,8 +157,8 @@ const aboutScript = {
                         }
                     })
                     tlScrub
-                    .fromTo('.abt-mile-main-inner', {x: $(window).width() > 991 ? 0 : 0}, {x: $(window).width() > 991 ? -distance : -distance})
-                    .fromTo('.abt-mile-prog-inner', {width: '0%'}, {width: '100%'}, 0)
+                        .fromTo('.abt-mile-main-inner', { x: $(window).width() > 991 ? 0 : 0 }, { x: $(window).width() > 991 ? -distance : -distance })
+                        .fromTo('.abt-mile-prog-inner', { width: '0%' }, { width: '100%' }, 0)
                 })
             } else {
                 const abtMileSwiper = new Swiper('.swiper.abt-mile-main', {
@@ -96,16 +166,16 @@ const aboutScript = {
                     spaceBetween: parseRem(24),
                     on: {
                         slideChange: (swiper) => {
-                            gsap.to('.abt-mile-prog-inner', {width: `${swiper.progress * 100}%`})
+                            gsap.to('.abt-mile-prog-inner', { width: `${swiper.progress * 100}%` })
                         }
                     }
                 })
                 abtMileSwiper.slideTo(0)
             }
-            
+
         }
         function getApiAbtTeam() {
-            getAllDataByType('team').then((res) => {
+            getAllDataByType('team', getLang()).then((res) => {
                 let allTeam = sortAsc(res);
                 let templateTeamItem = $('.abt-team-item').eq(0).clone();
                 let parent = '.abt-team-main'
@@ -118,7 +188,7 @@ const aboutScript = {
                     if (i.data.linkedin.url) {
                         html.find('.abt-team-item-name-wrap').attr('href', i.data.linkedin.url).attr('target', '_blank')
                     } else {
-                        html.find('.abt-team-item-name-wrap').css('pointer-events','none')
+                        html.find('.abt-team-item-name-wrap').css('pointer-events', 'none')
                         html.find('.abt-team-item-name-wrap').find('.abt-team-item-ic').remove()
                     }
                     html.appendTo(parent);
@@ -127,7 +197,7 @@ const aboutScript = {
         }
         getApiAbtTeam()
         function getApiAbtJob() {
-            getAllDataByType('job').then((res) => {
+            getAllDataByType('job', getLang()).then((res) => {
                 let allJob = sortAsc(res).reverse();
                 let templateJobItem = $('.abt-job-item').eq(0).clone();
                 let parent = '.abt-job-main-inner'
@@ -137,7 +207,7 @@ const aboutScript = {
                     if (i.data.link_pdf.url) {
                         html.attr('href', i.data.link_pdf.url).attr('target', '_blank')
                     } else {
-                        html.css('pointer-events','none')
+                        html.css('pointer-events', 'none')
                     }
                     html.find('.abt-job-item-title').text(i.data.job_title)
                     html.find('.abt-job-item-type').text(i.data.job_type)
@@ -147,7 +217,7 @@ const aboutScript = {
             })
         }
         getApiAbtJob()
-        
+
     },
     beforeLeave() {
     }

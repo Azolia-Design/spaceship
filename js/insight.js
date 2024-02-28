@@ -1,10 +1,12 @@
-import $ from "jquery";
+import $, { get } from "jquery";
 import gsap from "gsap";
 import Swiper from "swiper";
 import { Navigation, Grid } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { parseRem } from "./untils";
-import { getAllDataByType } from "./common/prismic_fn";
+import { getAllDataByType, getDetail } from "./common/prismic_fn";
+import { getLang } from "./common/lang";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,8 +15,32 @@ gsap.registerPlugin(ScrollTrigger);
 const insightScript = {
     namespace: 'insight',
     afterEnter(data) {
+        getApiInsight()
+
+        function getApiInsight() {
+            getDetail('insight_page', 'insight', getLang()).then((res) => {
+                return res.data
+            }).then((data) => {
+                getApiInsightHero(data)
+                getApiInsightNews(data)
+                getApiInsightArt(data)
+            })
+        }
+        function getApiInsightHero(data) {
+            $('.ins-hero-title').html(data.hero_title)
+        }
+        function getApiInsightNews(data) {
+            $('.ins-news-main-title').text(data.news_title)
+        }
+        function getApiInsightArt(data) {
+            $('.ins-art-title').text(data.articles_title)
+            $('.ins-art-main-btn-wrap .txt').text(data.articles_button)
+
+        }
+
+
         function getApiInsNews() {
-            getAllDataByType('news').then((res) => {
+            getAllDataByType('news', getLang()).then((res) => {
                 let allNews = res;
                 let templateNewsItem = $('.ins-news-main-item').eq(0).clone();
                 let parent = '.ins-news-main-list';
@@ -70,19 +96,19 @@ const insightScript = {
         }
         function insNewsLogo() {
             $('.ins-news-logo-item.item-default').addClass('active');
-            $('.ins-news-main-item').on('pointermove', function(e) {
+            $('.ins-news-main-item').on('pointermove', function (e) {
                 let idx = $(this).index()
                 $('.ins-news-logo-item').removeClass('active')
                 $('.ins-news-logo-item').eq(idx + 1).addClass('active')
             })
-            $('.ins-news-main-item').on('pointerleave', function(e) {
+            $('.ins-news-main-item').on('pointerleave', function (e) {
                 $('.ins-news-logo-item').removeClass('active')
                 $('.ins-news-logo-item.item-default').addClass('active');
             })
         }
         let pageLimit = 2;
         function getApiInsArt() {
-            getAllDataByType('article').then((res) => {
+            getAllDataByType('article', getLang()).then((res) => {
                 let allArt = res;
                 if (allArt.length < pageLimit) {
                     $('.ins-art-main-btn-wrap').addClass('hidden')
@@ -92,8 +118,12 @@ const insightScript = {
                 $(parent).html('')
                 allArt.forEach((i, idx) => {
                     let html = templateArtItem.clone();
-                    let originalUrl = html.attr('href');
-                    html.attr('href', `${originalUrl}?id=${i.uid}`)
+                    let originalUrl = html.attr('href')
+                    if (originalUrl.includes('?lang')) {
+                        html.attr('href', `${originalUrl.replace('?lang=es', '')}?id=${i.uid}&lang=es`)
+                    } else {
+                        html.attr('href', `${originalUrl}?id=${i.uid}`)
+                    }
                     html.find('.ins-art-main-item-thumb img').attr('src', i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.title)
                     html.find('.ins-art-main-item-title').text(i.data.title)
                     html.find('.ins-art-main-item-label .txt-med').text(`${new Date(i.data.date).toLocaleString('default', { month: 'long' })}, ${new Date(i.data.date).getFullYear()}`)
@@ -106,7 +136,7 @@ const insightScript = {
         }
         getApiInsArt()
         function insArtPagi() {
-            $('.ins-art-main-btn-wrap .btn').on('click', function(e) {
+            $('.ins-art-main-btn-wrap .btn').on('click', function (e) {
                 e.preventDefault();
                 let allHiddenItem = $('.ins-art-main-item.hidden');
                 allHiddenItem.each((idx, el) => {

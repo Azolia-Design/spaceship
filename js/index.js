@@ -1,5 +1,5 @@
 import 'swiper/swiper-bundle.min.css'
-import $ from "jquery";
+import $, { get } from "jquery";
 import lenis from './vendors/lenis';
 import barba from '@barba/core';
 import barbaPrefetch from '@barba/prefetch';
@@ -14,8 +14,92 @@ import solutionScript from './solution';
 import insightScript from './insight';
 import notfoundScript from './notfound';
 import { getAllDataByType, getDetail } from './common/prismic_fn';
+import { setLang, getLang, setDefaultlang } from "./common/lang";
+
 
 const scripts = () => {
+
+    setDefaultlang()
+    handleLangToggle()
+    UpdateLangApi()
+    function handleLangToggle() {
+        gsap.set('.header-lang-popup-ic', {'--index-item': $('[data-lang].active').index()})
+    
+        $(`[data-lang-toggle]`).on('click', function(e) {
+            e.preventDefault()
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active')
+                $(`.header-lang-popup`).removeClass('active')
+            } else {
+                $(this).addClass('active')
+                $(`.header-lang-popup`).addClass('active')
+            }
+        })
+        $('[data-lang]').on('click', function (e) {
+            e.preventDefault()
+            setLang($(this).attr('data-lang'))
+            gsap.to('.header-lang-popup-ic', {'--index-item': $(this).index(), duration: .5})
+        })
+        $(window).on('click', function(e) {
+            if (!$(`.header-lang-popup:hover`).length && !$(`[data-lang-toggle]:hover`).length) {
+                $(`.header-lang-popup`).removeClass('active')
+                $(`[data-lang-toggle]`).removeClass('active')
+            }
+        })
+    }
+    
+    function UpdateLangApi() {
+        getDetail('global', 'global', getLang()).then((res) => {
+            return res.data;
+        }).then((data) => {
+            console.log(data);
+            updateContent.header(data)
+            updateContent.footer(data)
+            updateContent.popup(data)
+        })
+
+        const updateContent = {
+            header: (data) => {
+                $('.header-link-txt[data-link="home"]').text(data.home)
+                $('.header-link-txt[data-link="about"]').text(data.about)
+                $('.header-link-txt[data-link="solution"]').text(data.solution)
+                $('.header-link-txt[data-link="insight"]').text(data.insight)
+                $('.header-link-txt[data-link="careers"]').text(data.career)
+                $('.header-act .btn .txt').text(data.getintouch)
+            },
+            footer: (data) => {
+                $('.ft-ctc-grp-label.contactus').text(data.contact)
+                $('.ft-ctc-grp-label.headoffice').text(data.headoffice)
+                $('.ft-menu-link-txt[data-link="home"]').text(data.home)
+                $('.ft-menu-link-txt[data-link="about"]').text(data.about)
+                $('.ft-menu-link-txt[data-link="solution"]').text(data.solution)
+                $('.ft-menu-link-txt[data-link="insight"]').text(data.insight)
+                $('.ft-menu-link-txt[data-link="careers"]').text(data.career)
+                $('.ft-abt-info-btn-wrap .txt').text(data.getintouch)
+                $('.ft-abt-form-title').text(data.newletter)
+                $('.ft-abt-form-btn-wrap .ft-abt-form-submit-txt').text(data.subscribe)
+
+                $('.ft-copy-txt').html(data.copyright.replace(`2024`, `<span data-year>2024</span>`))
+                $('[data-link="imprint"]').text(data.imprint)
+                $('[data-link="term"]').text(data.privacy_policy)
+            },
+            popup: (data) => {
+                $('.popup-info-title').text(data.getintouch)
+                $('.popup-info-item-label.support').text(data.support)
+                $('.popup-info-item-label.callus').text(data.callus)
+                $('[for="firstname"]').text(data.firstname)
+                $('[for="lastname"]').text(data.lastname)
+                $('[for="email"]').text(data.email)
+                let company = $('[for="fname"]').html()
+                $('[for="fname"]:not(.message)').html(company.replace('Company' , data.company).replace('Optional' , data.optional))
+                $('[for="fname"].message').html(company.replace('Company' , data.message).replace('Optional' , data.optional))
+                $('.popup-form-submit-txt').text(data.send)
+                let succTitle = $('.popup-form-succ-title').html()
+                $('.popup-form-succ-title').html(succTitle.replace('Company' , data.message))
+            },
+        }
+    }
+
     if (history.scrollRestoration) {
         history.scrollRestoration = "manual";
     }
@@ -23,9 +107,9 @@ const scripts = () => {
     barba.use(barbaPrefetch);
     gsap.registerPlugin(ScrollTrigger);
 
-    function debounce(func, delay = 100){
+    function debounce(func, delay = 100) {
         let timer;
-        return function(event) {
+        return function (event) {
             if (timer) clearTimeout(timer);
             timer = setTimeout(func, delay, event);
         };
@@ -35,7 +119,7 @@ const scripts = () => {
         let newViewportWidth;
         // portrait mobile viewport initial, any change refresh
         if (initialViewportWidth < 480) {
-            $(window).on('resize', debounce(function() {
+            $(window).on('resize', debounce(function () {
                 newViewportWidth = window.innerWidth || document.documentElement.clientWidth;
                 if (newViewportWidth > 479) {
                     location.reload();
@@ -44,7 +128,7 @@ const scripts = () => {
         }
         // landscape mobile viewport initial, any change refresh
         else if (initialViewportWidth < 768) {
-            $(window).on('resize', debounce(function() {
+            $(window).on('resize', debounce(function () {
                 newViewportWidth = window.innerWidth || document.documentElement.clientWidth;
                 if (newViewportWidth > 767) {
                     location.reload();
@@ -52,8 +136,8 @@ const scripts = () => {
             }))
         }
         // tablet viewport initial, any change refresh
-        else if (initialViewportWidth > 767 && initialViewportWidth < 992)  {
-            $(window).on('resize', debounce(function() {
+        else if (initialViewportWidth > 767 && initialViewportWidth < 992) {
+            $(window).on('resize', debounce(function () {
                 newViewportWidth = window.innerWidth || document.documentElement.clientWidth;
                 if (newViewportWidth < 768 || newViewportWidth > 991) {
                     location.reload();
@@ -62,7 +146,7 @@ const scripts = () => {
         }
         // web viewport initial, any change refresh
         else if (initialViewportWidth > 991) {
-            $(window).on('resize', debounce(function() {
+            $(window).on('resize', debounce(function () {
                 newViewportWidth = window.innerWidth || document.documentElement.clientWidth;
                 if (newViewportWidth < 992) {
                     location.reload();
@@ -83,6 +167,9 @@ const scripts = () => {
     }
     function resetScroll() {
         let locationHash = window.location.hash;
+        if (locationHash.includes('?')) {
+            locationHash = locationHash.split('?')[0]   
+        }
         lenis.stop()
         if ($(locationHash).length) {
             setTimeout(() => {
@@ -92,11 +179,11 @@ const scripts = () => {
                 });
                 if ($(window).width() < 767) {
                     setTimeout(() => {
-                        document.querySelector('.wrapper').scrollTo(0,document.getElementById(locationHash.replace('#','')).offsetTop)
+                        document.querySelector('.wrapper').scrollTo(0, document.getElementById(locationHash.replace('#', '')).offsetTop)
                     }, 300);
                 }
             }, 300);
-            
+
         } else {
             lenis.scrollTo(0, {
                 force: true,
@@ -133,7 +220,7 @@ const scripts = () => {
     handleCursor.init()
     const handlePopup = {
         init: () => {
-            $('[data-popup]').on('click', function(e) {
+            $('[data-popup]').on('click', function (e) {
                 e.preventDefault();
                 if ($(this).attr('data-popup') == 'open') {
                     $('.popup').addClass('active')
@@ -146,7 +233,7 @@ const scripts = () => {
             })
         },
         open: () => {
-            
+
         }
     }
     handlePopup.init()
@@ -360,7 +447,7 @@ const scripts = () => {
     handleForm()
     //Gtag
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     const updateGtag = {
         once: () => {
             gtag('js', new Date());
@@ -374,16 +461,16 @@ const scripts = () => {
             window.dataLayer.push({
                 'event': 'page_view',
                 'page_title': (document.title) ? document.title : '',
-                'page_URL': (window.location.href) ?  window.location.href : '',
+                'page_URL': (window.location.href) ? window.location.href : '',
                 'page_path': (window.location.pathname) ? window.location.pathname : '',
                 'page_hash': (window.location.hash) ? window.location.hash : ''
             });
             console.log(window.dataLayer);
         }
     }
-    
+
     const header = $('.header')
-    lenis.on('scroll', function(inst) {
+    lenis.on('scroll', function (inst) {
         if (inst.scroll < header.outerHeight()) {
             header.removeClass('on-hide')
             header.removeClass('on-scroll')
@@ -400,23 +487,23 @@ const scripts = () => {
             }
         }
     })
-    $('.header-toggle-link').on('click', function(e) {
+    $('.header-toggle-link').on('click', function (e) {
         e.preventDefault();
         $('.header-nav').addClass('active')
     })
-    $('.header-nav-close-ic').on('click', function(e) {
+    $('.header-nav-close-ic').on('click', function (e) {
         e.preventDefault();
         $('.header-nav').removeClass('active')
     })
     function updateContactInfo(data) {
         let parent;
-        console.log(data)
+        // console.log(data)
         if (!data) {
             parent = $('body')
         } else {
             parent = $(data.next.container)
         }
-        console.log(parent)
+        // console.log(parent)
         getAllDataByType('global_info').then(res => {
             let infos = res;
             let allItem = parent.find('[data-replace]');
@@ -432,7 +519,7 @@ const scripts = () => {
                         } else {
                             $(el).text(src.data.link.url)
                         }
-                        break;  
+                        break;
                     case 'email':
                         src = infos.filter((i) => i.uid == 'email')[0]
                         $(el).attr('href', `email:${src.data.link.url}`)
@@ -451,7 +538,7 @@ const scripts = () => {
                         $(el).attr('href', src.data.link.url).attr('target', '_blank')
                         $(el).find('.ft-ctc-link-txt').text(src.data.name)
                         break;
-                    default: 
+                    default:
                         break;
                 }
 
@@ -464,16 +551,18 @@ const scripts = () => {
         })
     }
     function transitionLeave(data) {
-        gsap.set(data.next.container, {opacity: 0})
+        gsap.set(data.next.container, { opacity: 0 })
         let tl = gsap.timeline({})
         tl
-        .to(data.current.container, {opacity: 0, duration: .4, onComplete: () => {
-            $(data.current.container).remove()
-            resetScroll()
-        }})
-        .to('.footer', {opacity: 0, duration: .4}, '<=0')
-        .to(data.next.container, {opacity: 1, duration: .4})
-        .to('.footer', {opacity: 1, duration: .4}, '<=0')
+            .to(data.current.container, {
+                opacity: 0, duration: .4, onComplete: () => {
+                    $(data.current.container).remove()
+                    resetScroll()
+                }
+            })
+            .to('.footer', { opacity: 0, duration: .4 }, '<=0')
+            .to(data.next.container, { opacity: 1, duration: .4 })
+            .to('.footer', { opacity: 1, duration: .4 }, '<=0')
         return tl;
     }
     function transitionEnter(data) {
@@ -481,7 +570,7 @@ const scripts = () => {
         tl
         return tl;
     }
-    
+
     const VIEWS = [
         homeScript,
         aboutScript,
@@ -505,7 +594,7 @@ const scripts = () => {
                 transitionOnce(data)
             },
             async enter(data) {
-                
+
             },
             async afterLeave(data) {
 

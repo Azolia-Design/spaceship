@@ -5,8 +5,10 @@ import MotionPathPlugin from "gsap/MotionPathPlugin";
 import lenis from './vendors/lenis';
 import Swiper from "swiper";
 import { Navigation, Pagination } from "swiper";
-import { getAllDataByType } from "./common/prismic_fn"
+import { getAllDataByType, getDetail } from "./common/prismic_fn"
 import { parseRem, xSetter, ySetter, xGetter, yGetter, pointerCurr, lerp, sortAsc } from "./untils";
+import { getLang } from "./common/lang";
+
 
 gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
@@ -15,6 +17,56 @@ gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 const homeScript = {
     namespace: 'home',
     afterEnter() {
+        getApiHome()
+
+        function getApiHome() {
+            getDetail('home_page', 'home', getLang()).then((res) => {
+                return res.data
+            }).then((data) => {
+                // console.log(data);
+                getApiHomeHero(data)
+                getApiHomeAbt(data)
+                getApiHomeProblem(data)
+                getApiHomeSol(data)
+                getApiHomeTech(data)
+                getApiHomeBenefits(data)
+                getApiPartnerlabel(data)
+            })
+        }
+        function getApiHomeHero(data) {
+            let heroTitle = data.hero_title.replace(`${data.hero_title_hl}`, `<span class="txt-hl">${data.hero_title_hl}</span>`)
+            $('.home-hero-title').html(heroTitle)
+            $('.home-hero-sub').text(data.hero_subtitle)
+            $('.home-hero-btn-wrap a .txt').text(data.hero_button)
+            $('.home-hero-body').text(data.hero_body)
+            $('.home-hero-tail-title').text(data.hero_tail_title)
+            $('.home-hero-mid-txt .replace').text(data.hero_premble)
+        }
+        function getApiHomeAbt(data) {
+            $('.home-abt-title').text(data.about_title)
+            $('.home-abt-btn-wrap .txt').text(data.about_button)
+        }
+        function getApiPartnerlabel(data) {
+            $('.home-part-label').text(data.partners_grants)
+        }
+        function getApiHomeProblem(data) {
+            $('.home-prob-title').text(data.problem_title)
+            $('.home-prob-label .txt').text(data.problem_label)
+        }
+        function getApiHomeSol(data) {
+            $('.home-sol-title .replace').html(data.solution_title.replaceAll('\n', '<br/>'))
+            $('.home-sol-label .txt').text(data.solution_label)
+            $('.home-sol-btn-wrap .txt').text(data.solution_button)
+        }
+        function getApiHomeTech(data) {
+            $('.home-tech-title').text(data.technology_title)
+            $('.home-tech-btn-wrap a .txt').text(data.technology_button)
+        }
+        function getApiHomeBenefits(data) {
+            $('.home-faq-title').text(data.benefit_title)
+            $('.home-faq-label .txt').text(data.benefit_label)
+        }
+
         function homeHeroMouse() {
             function mousMove() {
                 let iconX = xGetter('.home-hero-img-sat')
@@ -38,20 +90,20 @@ const homeScript = {
                         delay: delay ? (- duration / 3 * idx) - duration / 6 : - duration / 3 * idx
                     })
                     tl
-                    .from(el, {autoAlpha: 0, duration: 1, ease: 'none'})
-                    .to(el, {
-                        duration: duration, 
-                        ease: "none",
-                        motionPath:{
-                            path: pathID,
-                            align: pathID,
-                            start: rev ? 1 : 0,
-                            end: rev ? 0 : 1,
-                            autoRotate: rotate,
-                            alignOrigin: [0.5, 0.5]
-                        }
-                    }, 0)
-                    .to(el, {autoAlpha: 0, duration: 1, ease: 'none'}, '>=-1')
+                        .from(el, { autoAlpha: 0, duration: 1, ease: 'none' })
+                        .to(el, {
+                            duration: duration,
+                            ease: "none",
+                            motionPath: {
+                                path: pathID,
+                                align: pathID,
+                                start: rev ? 1 : 0,
+                                end: rev ? 0 : 1,
+                                autoRotate: rotate,
+                                alignOrigin: [0.5, 0.5]
+                            }
+                        }, 0)
+                        .to(el, { autoAlpha: 0, duration: 1, ease: 'none' }, '>=-1')
                 })
             }
             arrowAnim('#outPathR', '.outArrR', true, false, false)
@@ -81,7 +133,7 @@ const homeScript = {
                 $(parent).find('.home-part-marquee-item').remove()
                 allPart.forEach((i) => {
                     let html = templatePartItem.clone();
-                    html.find('img').attr('src',i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
+                    html.find('img').attr('src', i.data.image.url).attr('alt', i.data.image.alt ? i.data.image.alt : i.data.name)
                     html.attr('href', i.data.link.url).attr('target', '_blank');
                     html.appendTo(parent);
                 })
@@ -89,7 +141,7 @@ const homeScript = {
         }
         getAPiHomePart()
         function getApiHomeProb() {
-            getAllDataByType('problem').then((res) => {
+            getAllDataByType('problem', getLang()).then((res) => {
                 let allProb = sortAsc(res);
                 let templateProbItem = $('.home-prob-item').eq(0).clone();
                 let parent = '.home-prob-inner'
@@ -109,46 +161,46 @@ const homeScript = {
             let isLabeled;
             for (const block of richTextArray) {
                 switch (block.type) {
-                case 'paragraph':
+                    case 'paragraph':
                         let string = block.text;
                         for (const span of block.spans) {
                             switch (span.type) {
                                 case 'strong':
-                                string = string.replace(block.text.substring(span.start, span.end),`<strong>${block.text.substring(span.start, span.end)}</strong>`);
-                                break;
+                                    string = string.replace(block.text.substring(span.start, span.end), `<strong>${block.text.substring(span.start, span.end)}</strong>`);
+                                    break;
                                 case 'em':
-                                string = string.replace(block.text.substring(span.start, span.end),`<em>${block.text.substring(span.start, span.end)}</em>`);
-                                break;
+                                    string = string.replace(block.text.substring(span.start, span.end), `<em>${block.text.substring(span.start, span.end)}</em>`);
+                                    break;
                                 default:
-                                break;
+                                    break;
                             }
                         }
                         html += `<p>${string}</p>`;
-                    break;
-                case 'list-item':
-                    let listString = block.text;
-                    for (const span of block.spans) {
-                        switch (span.type) {
-                            case 'strong':
-                            listString = listString.replace(block.text.substring(span.start, span.end),`<strong>${block.text.substring(span.start, span.end)}</strong>`);
-                            break;
-                            case 'em':
-                            listString = listString.replace(block.text.substring(span.start, span.end),`<em>${block.text.substring(span.start, span.end)}</em>`);
-                            break;
-                            default:
-                            break;
+                        break;
+                    case 'list-item':
+                        let listString = block.text;
+                        for (const span of block.spans) {
+                            switch (span.type) {
+                                case 'strong':
+                                    listString = listString.replace(block.text.substring(span.start, span.end), `<strong>${block.text.substring(span.start, span.end)}</strong>`);
+                                    break;
+                                case 'em':
+                                    listString = listString.replace(block.text.substring(span.start, span.end), `<em>${block.text.substring(span.start, span.end)}</em>`);
+                                    break;
+                                default:
+                                    break;
+                            }
                         }
-                    }
-                    html += `<li>${listString}</li>`;
-                    break;
-                default:
-                    console.error(`Unsupported block type: ${block.type}`);
+                        html += `<li>${listString}</li>`;
+                        break;
+                    default:
+                        console.error(`Unsupported block type: ${block.type}`);
                 }
             }
             return html;
         }
         function getAPiHomeSol() {
-            getAllDataByType('home_sol').then((res) => {
+            getAllDataByType('home_sol', getLang()).then((res) => {
                 let allSol = sortAsc(res);
                 let templateSolItem = $('.home-sol-item').eq(0).clone();
                 let parent = '.home-sol-inner'
@@ -186,8 +238,23 @@ const homeScript = {
                 }
             })
         }
+        function getApiHomeTechnology() {
+            getAllDataByType('home_tech', getLang()).then((res) => {
+                let allTech = sortAsc(res);
+                let templateTechItem = $('.home-tech-item').eq(0).clone();
+                let parent = '.home-tech-inner'
+                $(parent).find('.home-tech-item').remove()
+                allTech.forEach((i) => {
+                    let html = templateTechItem.clone();
+                    html.find('.home-tech-item-title').text(i.data.title)
+                    html.find('.home-tech-item-body').html(i.data.content)
+                    html.appendTo(parent);
+                })
+            })
+        }
+        getApiHomeTechnology()
         function getApiHomeFaq() {
-            getAllDataByType('home_benefit').then((res) => {
+            getAllDataByType('home_benefit', getLang()).then((res) => {
                 let allFaq = sortAsc(res);
                 let templateFaqItem = $('.home-faq-item').eq(0).clone();
                 let parent = '.home-faq-inner'
@@ -204,7 +271,7 @@ const homeScript = {
         function homeFaq() {
             $('.home-faq-item').eq(0).addClass('active');
             $('.home-faq-item').eq(0).find('.home-faq-item-body').slideDown();
-            $('.home-faq-item-head').on('click', function(e) {
+            $('.home-faq-item-head').on('click', function (e) {
                 e.preventDefault();
                 if ($(this).closest('.home-faq-item').hasClass('active')) {
                     $(this).closest('.home-faq-item').removeClass('active')

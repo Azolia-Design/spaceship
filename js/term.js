@@ -1,6 +1,8 @@
 import $ from "jquery";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
+import { getLang } from "./common/lang";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -9,6 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 const termScript = {
     namespace: 'term',
     afterEnter() {
+
     },
     beforeLeave() {
     }

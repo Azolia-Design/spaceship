@@ -46,7 +46,7 @@ function createToc(lenis, richtextEl, tocEl, htmlTemplate) {
     for (let i = 0; i < headings.length; i++) {
         headings.eq(i).attr('id', `toc-${i}`);
         let tocItem = htmlTemplate.clone();
-        
+
         let tocOrdinal = i + 1 < 10 ? `0${i + 1}` : i + 1;
         tocItem.find('[data-toc="number"]').text(tocOrdinal);
 
@@ -56,7 +56,7 @@ function createToc(lenis, richtextEl, tocEl, htmlTemplate) {
         } else {
             tocItem.find('[data-toc="title"]').text(headings.eq(i).text());
         }
-        tocItem.attr('href',`#toc-${i}`)
+        tocItem.attr('href', `#toc-${i}`)
         tocWrap.append(tocItem);
     }
     //mobile
@@ -100,16 +100,16 @@ function createToc(lenis, richtextEl, tocEl, htmlTemplate) {
     //updateToc();
 }
 
-const lerp = (a,b,t = 0.08) => {
+const lerp = (a, b, t = 0.08) => {
     return a + (b - a) * t;
 }
 const isTouchDevice = () => {
     return (('ontouchstart' in window) ||
-    (navigator.maxTouchPoints > 0) ||
-    (navigator.msMaxTouchPoints > 0));
+        (navigator.maxTouchPoints > 0) ||
+        (navigator.msMaxTouchPoints > 0));
 }
-let pointer = {x: 0, y: 0};
-$(window).on('pointermove', function(e) {
+let pointer = { x: 0, y: 0 };
+$(window).on('pointermove', function (e) {
     pointer.x = e.clientX;
     pointer.y = e.clientY;
 })
@@ -126,58 +126,58 @@ function toHTML(richTextArray, pClass, linkClass) {
     let html = '';
     for (const block of richTextArray) {
         switch (block.type) {
-        case 'paragraph':
-            let string = block.text;
-            for (const span of block.spans) {
-                switch (span.type) {
-                    case 'label':
-                        let tag;
-                        switch (span.data.label) {
-                            case 'contact':
-                            tag = "contact"
-                        }
-                        string = string.replace(block.text.substring(span.start, span.end),`<a href="#" class="${linkClass}" data-popup="${tag}" >${block.text.substring(span.start, span.end)}</a>`);
-                    break;
-                    case 'hyperlink':
-                        let link = new URL(span.data.url)
-                        string = string.replace(block.text.substring(span.start, span.end),`<a href="${window.location.origin}${link.pathname}${link.hash}" class="${linkClass}">${block.text.substring(span.start, span.end)}</a>`);
-                    break;
-                    default:
-                    break;
+            case 'paragraph':
+                let string = block.text;
+                for (const span of block.spans) {
+                    switch (span.type) {
+                        case 'label':
+                            let tag;
+                            switch (span.data.label) {
+                                case 'contact':
+                                    tag = "contact"
+                            }
+                            string = string.replace(block.text.substring(span.start, span.end), `<a href="#" class="${linkClass}" data-popup="${tag}" >${block.text.substring(span.start, span.end)}</a>`);
+                            break;
+                        case 'hyperlink':
+                            let link = new URL(span.data.url)
+                            string = string.replace(block.text.substring(span.start, span.end), `<a href="${window.location.origin}${link.pathname}${link.hash}" class="${linkClass}">${block.text.substring(span.start, span.end)}</a>`);
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
-            html += `<p class="${pClass}">${string}</p>`;
-        break;
-        case 'list-item':
-            let listString = block.text;
-            for (const span of block.spans) {
-                switch (span.type) {
-                    case 'label':
-                        let tag;
-                        switch (span.data.label) {
-                            case 'contact':
-                            tag = "contact"
-                        }
-                        listString = listString.replace(block.text.substring(span.start, span.end),`<a href="#" class="${linkClass}" data-popup="${tag}" >${block.text.substring(span.start, span.end)}</a>`);
-                    break;
-                    case 'hyperlink':
-                        let link = new URL(span.data.url)
-                        listString = listString.replace(block.text.substring(span.start, span.end),`<a href="${window.location.origin}${link.pathname}${link.hash}" class="${linkClass}">${block.text.substring(span.start, span.end)}</a>`);
-                    break;
-                    default:
-                    break;
+                html += `<p class="${pClass}">${string}</p>`;
+                break;
+            case 'list-item':
+                let listString = block.text;
+                for (const span of block.spans) {
+                    switch (span.type) {
+                        case 'label':
+                            let tag;
+                            switch (span.data.label) {
+                                case 'contact':
+                                    tag = "contact"
+                            }
+                            listString = listString.replace(block.text.substring(span.start, span.end), `<a href="#" class="${linkClass}" data-popup="${tag}" >${block.text.substring(span.start, span.end)}</a>`);
+                            break;
+                        case 'hyperlink':
+                            let link = new URL(span.data.url)
+                            listString = listString.replace(block.text.substring(span.start, span.end), `<a href="${window.location.origin}${link.pathname}${link.hash}" class="${linkClass}">${block.text.substring(span.start, span.end)}</a>`);
+                            break;
+                        default:
+                            break;
+                    }
                 }
-            }
-            html += `<li class="txt txt-16 txt-li">${listString}</li>`;
-        break;
-        default:
-            console.error(`Unsupported block type: ${block.type}`);
+                html += `<li class="txt txt-16 txt-li">${listString}</li>`;
+                break;
+            default:
+                console.error(`Unsupported block type: ${block.type}`);
         }
     }
     return html;
 }
 function sortAsc(arr) {
-    return arr.sort((a,b) => {
+    return arr.sort((a, b) => {
         if (a.data.order === null) {
             return 1;
         }
