@@ -52,9 +52,10 @@ const scripts = () => {
         getDetail('global', 'global', getLang()).then((res) => {
             return res.data;
         }).then((data) => {
-            // console.log(data);
+            console.log(data);
             updateContent.header(data)
             updateContent.footer(data)
+            updateContent.popup(data)
         })
 
         const updateContent = {
@@ -81,7 +82,22 @@ const scripts = () => {
                 $('.ft-copy-txt').html(data.copyright.replace(`2024`, `<span data-year>2024</span>`))
                 $('[data-link="imprint"]').text(data.imprint)
                 $('[data-link="term"]').text(data.privacy_policy)
+            },
+            popup: (data) => {
+                $('.popup-info-title').text(data.getintouch)
+                $('.popup-info-item-label.support').text(data.support)
+                $('.popup-info-item-label.callus').text(data.callus)
+                $('[for="firstname"]').text(data.firstname)
+                $('[for="lastname"]').text(data.lastname)
+                $('[for="email"]').text(data.email)
+                let company = $('[for="fname"]').html()
+                $('[for="fname"]:not(.message)').html(company.replace('Company' , data.company).replace('Optional' , data.optional))
+                $('[for="fname"].message').html(company.replace('Company' , data.message).replace('Optional' , data.optional))
+                $('.popup-form-submit-txt').text(data.send)
+                let succTitle = $('.popup-form-succ-title').html()
+                $('.popup-form-succ-title').html(succTitle.replace('Company' , data.message))asdad
             }
+
         }
     }
 

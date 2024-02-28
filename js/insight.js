@@ -15,31 +15,32 @@ gsap.registerPlugin(ScrollTrigger);
 const insightScript = {
     namespace: 'insight',
     afterEnter(data) {
+        getApiInsight()
+
         function getApiInsight() {
-            getDetail('insight', 'insight', getLang()).then((res) => {
+            getDetail('insight_page', 'insight', getLang()).then((res) => {
                 return res.data
             }).then((data) => {
-                console.log(data);
                 getApiInsightHero(data)
                 getApiInsightNews(data)
                 getApiInsightArt(data)
             })
         }
-        getApiInsight()
-
         function getApiInsightHero(data) {
-            $('.ins-hero-title').html(data.hero_title[0].text)
+            $('.ins-hero-title').html(data.hero_title)
         }
         function getApiInsightNews(data) {
             $('.ins-news-main-title').text(data.news_title)
         }
         function getApiInsightArt(data) {
             $('.ins-art-title').text(data.articles_title)
+            $('.ins-art-main-btn-wrap .txt').text(data.articles_button)
+
         }
 
 
         function getApiInsNews() {
-            getAllDataByType('news').then((res) => {
+            getAllDataByType('news', getLang()).then((res) => {
                 let allNews = res;
                 let templateNewsItem = $('.ins-news-main-item').eq(0).clone();
                 let parent = '.ins-news-main-list';
