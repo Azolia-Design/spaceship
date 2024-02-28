@@ -19,7 +19,9 @@ function setActiveLangBtn(data) {
     document.querySelectorAll("[data-lang]").forEach((el) => {
         el.classList.remove("active")
     })
-    document.querySelector(`[data-lang=${data}]`).classList.add("active")
+    document.querySelectorAll(`[data-lang=${data}]`).forEach((el) => {
+        el.classList.add("active")
+    })
 }
 function setAnchor(data) {
     if (data == 'es') {

@@ -26,11 +26,14 @@ const aboutScript = {
                 getApiAbtHero(data)
                 getApiAbtVision(data)
                 getApiAbtPartner(data)
+                getApiAbtMilestone(data)
                 getApiAbtCEO(data)
+                getApiAbtTeam(data)
+                getApiAbtJob(data)
             })
         }
         function getApiAbtHero(data) {
-            $('.abt-hero-title').text(data.heri_title)
+            $('.abt-hero-title').text(data.hero_title)
         }
         function getApiAbtVision(data) {
             $('.abt-hero-label .txt').text(data.vision_label)
@@ -47,21 +50,36 @@ const aboutScript = {
             let parent = $('.abt-ceo-quote')
             let templateParaItem = parent.find('.abt-ceo-quote-txt').eq(0).clone();
             parent.find('.abt-ceo-quote-txt').remove()
-            let CeoBody = $(data.ceo_body_new)
+            let CeoBody = $(data.ceo_body)
             CeoBody.each((idx, el) => {
                 let html = templateParaItem.clone()
                 let bodyText = el.text
-                console.log(bodyText);
+                let subString = []
                 $(el.spans).each((idx, hl) => {
-                    // let subString = $(bodyText).subString(hl.start, hl.end)
-                    // bodyText = bodyText.replace(subString, `<span class="txt-hl">${subString}</span>`)
+                    subString[idx] = bodyText.substring(hl.start, hl.end);
                 })
-
+                $(subString).each((idx, el) => {
+                    bodyText = bodyText.replace(el, `<span class="txt-hl">${el}</span>`)
+                })
+                html.html(bodyText)
                 parent.append(html)
             })
-
+        }
+        function getApiAbtMilestone(data) {
+            $('.abt-mile-label .txt').text(data.milestone_label)
+        }
+        function getApiAbtTeam(data) {
+            $('.abt-team-label .txt').text(data.team_label)
+            $('.abt-team-title').text(data.team_title)
+            $('.abt-team-sub').text(data.team_body)
+            $('.abt-team-btn-wrap .txt').text(data.team_button)
         }
 
+        function getApiAbtJob(data) {
+            $('.abt-job-label .txt').text(data.position_label)
+            $('.abt-job-title').text(data.position_title)
+            $('.abt-job-sub').text(data.position_subtitle)
+        }
 
         function scrollTo(data) {
             if (window.location.hash) {

@@ -23,8 +23,6 @@ const scripts = () => {
     handleLangToggle()
     UpdateLangApi()
     function handleLangToggle() {
-        $(`[data-lang-nav]`).removeClass('active')
-        $(`[data-lang-nav=${$('html').attr('lang')}]`).addClass('active')
         gsap.set('.header-lang-popup-ic', {'--index-item': $('[data-lang].active').index()})
     
         $(`[data-lang-toggle]`).on('click', function(e) {
@@ -40,13 +38,10 @@ const scripts = () => {
         $('[data-lang]').on('click', function (e) {
             e.preventDefault()
             setLang($(this).attr('data-lang'))
-            $(`[data-lang-nav]`).removeClass('active')
-            $(`[data-lang-nav]`).eq($(this).index()).addClass('active')
             gsap.to('.header-lang-popup-ic', {'--index-item': $(this).index(), duration: .5})
         })
         $(window).on('click', function(e) {
             if (!$(`.header-lang-popup:hover`).length && !$(`[data-lang-toggle]:hover`).length) {
-                console.log('close nef');
                 $(`.header-lang-popup`).removeClass('active')
                 $(`[data-lang-toggle]`).removeClass('active')
             }
