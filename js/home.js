@@ -126,7 +126,7 @@ const homeScript = {
         }
         homeHeroPath()
         function getAPiHomePart() {
-            getAllDataByType('part_logo', getLang()).then((res) => {
+            getAllDataByType('part_logo').then((res) => {
                 let allPart = sortAsc(res);
                 let templatePartItem = $('.home-part-marquee-item').eq(0).clone();
                 let parent = '.home-part-marquee-inner';
@@ -201,7 +201,6 @@ const homeScript = {
         }
         function getAPiHomeSol() {
             getAllDataByType('home_sol', getLang()).then((res) => {
-                // console.log(res);
                 let allSol = sortAsc(res);
                 let templateSolItem = $('.home-sol-item').eq(0).clone();
                 let parent = '.home-sol-inner'
@@ -241,8 +240,16 @@ const homeScript = {
         }
         function getApiHomeTechnology() {
             getAllDataByType('home_tech', getLang()).then((res) => {
-                let allProb = sortAsc(res);
-
+                let allTech = sortAsc(res);
+                let templateTechItem = $('.home-tech-item').eq(0).clone();
+                let parent = '.home-tech-inner'
+                $(parent).find('.home-tech-item').remove()
+                allTech.forEach((i) => {
+                    let html = templateTechItem.clone();
+                    html.find('.home-tech-item-title').text(i.data.title)
+                    html.find('.home-tech-item-body').html(i.data.content)
+                    html.appendTo(parent);
+                })
             })
         }
         getApiHomeTechnology()

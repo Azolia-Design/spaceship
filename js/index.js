@@ -57,7 +57,7 @@ const scripts = () => {
         getDetail('global', 'global', getLang()).then((res) => {
             return res.data;
         }).then((data) => {
-            console.log(data);
+            // console.log(data);
             updateContent.header(data)
             updateContent.footer(data)
         })
@@ -484,13 +484,13 @@ const scripts = () => {
     })
     function updateContactInfo(data) {
         let parent;
-        console.log(data)
+        // console.log(data)
         if (!data) {
             parent = $('body')
         } else {
             parent = $(data.next.container)
         }
-        console.log(parent)
+        // console.log(parent)
         getAllDataByType('global_info').then(res => {
             let infos = res;
             let allItem = parent.find('[data-replace]');

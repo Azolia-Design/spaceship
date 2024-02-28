@@ -135,16 +135,6 @@
             gap: .8rem;
             padding: 1rem;
             margin-left: -1rem;
-            &-txt {
-                opacity: 0;
-                @include transition(opacity .5s ease-out);
-                &:nth-child(n+2) {
-                    position: absolute;
-                }
-                &.active {
-                    opacity: 1;
-                }
-            }
             &-ic-wrap {
                 position: relative;
                 display: flex;

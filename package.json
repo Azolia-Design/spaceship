@@ -11,9 +11,9 @@
     "main": false
   },
   "scripts": {
-    "clear": "rm -rf dist .parcel-cache",
-    "dev": "npm run clear && PARCEL_WORKERS=1 parcel",
-    "build": "npm run clear && NODE_OPTIONS=--max-old-space-size=8192 PARCEL_WORKERS=1 parcel build --no-cache --no-content-hash --public-url ./ --no-scope-hoist",
+    "clear": "rimraf dist .parcel-cache",
+    "dev": "npm run clear && set PARCEL_WORKERS=1 && parcel",
+    "build": "npm run clear && set NODE_OPTIONS=--max-old-space-size=8192 && set PARCEL_WORKERS=1 && parcel build --no-cache --no-content-hash --public-url ./ --no-scope-hoist",
     "rename": "node rename.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
@@ -24,8 +24,10 @@
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.9.3",
+    "cross-env": "^7.0.3",
     "parcel": "^2.9.3",
     "parcel-reporter-static-files-copy": "^1.3.4",
+    "rimraf": "^3.0.2",
     "sharp": "^0.31.3"
   },
   "dependencies": {

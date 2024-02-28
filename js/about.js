@@ -5,7 +5,7 @@ import lenis from './vendors/lenis';
 import { Navigation } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { parseRem, sortAsc } from "./untils";
-import { getAllDataByType } from "./common/prismic_fn";
+import { getAllDataByType, getDetail } from "./common/prismic_fn";
 import { getLang } from "./common/lang";
 
 
@@ -16,6 +16,51 @@ gsap.registerPlugin(ScrollTrigger);
 const aboutScript = {
     namespace: 'about',
     afterEnter(data) {
+        getApiAbt()
+
+        function getApiAbt() {
+            getDetail('about_page', 'about', getLang()).then((res) => {
+                return res.data
+            }).then((data) => {
+                console.log(data);
+                getApiAbtHero(data)
+                getApiAbtVision(data)
+                getApiAbtPartner(data)
+                getApiAbtCEO(data)
+            })
+        }
+        function getApiAbtHero(data) {
+            $('.abt-hero-title').text(data.heri_title)
+        }
+        function getApiAbtVision(data) {
+            $('.abt-hero-label .txt').text(data.vision_label)
+            let visionBody = data.vision_body
+            $(data.vision_hl).each((idx, el) => {
+                visionBody = visionBody.replace(el.item, `<span class="txt-hl">${el.item}</span>`)
+            })
+            $('.abt-hero-sub').html(visionBody)
+        }
+        function getApiAbtPartner(data) {
+            $('.home-part-label').text(data.partners_grants)
+        }
+        function getApiAbtCEO(data) {
+            let parent = $('.abt-ceo-quote')
+            let templateParaItem = parent.find('.abt-ceo-quote-txt').eq(0).clone();
+            parent.find('.abt-ceo-quote-txt').remove()
+            let CeoBody = $(data.ceo_body_new)
+            CeoBody.each((idx, el) => {
+                let html = templateParaItem.clone()
+                let bodyText = el.text
+                console.log(bodyText);
+                $(el.spans).each((idx, hl) => {
+                    // let subString = $(bodyText).subString(hl.start, hl.end)
+                    // bodyText = bodyText.replace(subString, `<span class="txt-hl">${subString}</span>`)
+                })
+
+                parent.append(html)
+            })
+
+        }
 
 
         function scrollTo(data) {
@@ -36,7 +81,7 @@ const aboutScript = {
         }
         scrollTo(data)
         function getApiAbtMile() {
-            getAllDataByType('milstone').then((res) => {
+            getAllDataByType('milstone', getLang()).then((res) => {
                 let allMils = sortAsc(res);
                 let templateMilItem = $('.abt-mile-item').eq(0).clone();
                 let parent = '.abt-mile-main-inner'
@@ -109,7 +154,7 @@ const aboutScript = {
 
         }
         function getApiAbtTeam() {
-            getAllDataByType('team').then((res) => {
+            getAllDataByType('team', getLang()).then((res) => {
                 let allTeam = sortAsc(res);
                 let templateTeamItem = $('.abt-team-item').eq(0).clone();
                 let parent = '.abt-team-main'
@@ -131,7 +176,7 @@ const aboutScript = {
         }
         getApiAbtTeam()
         function getApiAbtJob() {
-            getAllDataByType('job').then((res) => {
+            getAllDataByType('job', getLang()).then((res) => {
                 let allJob = sortAsc(res).reverse();
                 let templateJobItem = $('.abt-job-item').eq(0).clone();
                 let parent = '.abt-job-main-inner'

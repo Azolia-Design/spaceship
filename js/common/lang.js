@@ -10,6 +10,7 @@ function setLang(data, setURL = true) {
     document.querySelector('html').setAttribute('lang', data)
     setActiveLangBtn(data)
     setAnchor(data)
+    document.querySelector('.header-lang-open-txt').textContent = data.toUpperCase()
     if (setURL) {
         setActiveLangURL(data)
     }
