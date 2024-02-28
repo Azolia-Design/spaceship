@@ -54,7 +54,7 @@ const solutionScript = {
             $('.sol-coming-sub').text(data.upcoming_body)
         }
         function getApiSolSer(data) {
-            $('.sol-ser-label').text(data.service_label)
+            $('.sol-ser-label .txt').text(data.service_label)
             $('.sol-ser-title').text(data.service_title)
         }
 
