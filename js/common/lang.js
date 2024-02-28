@@ -49,7 +49,7 @@ function setActiveLangURL(data) {
     switch (data) {
         case 'es':
             if (!window.location.href.includes('?')) {
-                newUrl = `${window.location.origin + window.location.pathname}?lang=` + data
+                newUrl = `${window.location.origin + window.location.pathname}${window.location.href.includes('#') ? window.location.hash: ''}?lang=` + data
             } else {
                 newUrl = `${window.location.origin + window.location.pathname + window.location.search}&lang=` + data
             }
@@ -63,24 +63,35 @@ function setActiveLangURL(data) {
             break;
     }
     history.replaceState({}, '', newUrl)
-    window.location = newUrl
+    if (newUrl.includes('#')) {
+        location.reload();
+    } else {
+        window.location = newUrl
+    }
 }
 function setDefaultlang() {
+    let initLang;
     if (!window.location.search.includes('lang')) {
-        setLang('en', false)
+        if (window.location.hash.includes('?lang')) {
+            initLang = window.location.hash.split('=')[1]
+        } else {
+            initLang = 'en'
+        }
     } else {
         let search = JSON.parse('{"' + decodeURI(window.location.search.substring(1)).replace(/"/g, '\\"').replace(/&/g, '","').replace(/=/g, '":"') + '"}')
-        switch (search.lang) {
-            case 'es':
-                setLang('es', false)
-                break;
-            case 'en':
-                setLang('en', false)
-                break;
-            default:
-                setLang('en', false)
-                break;
-        }
+        initLang = search.lang   
+    }
+    console.log(initLang)
+    switch (initLang) {
+        case 'es':
+            setLang('es', false)
+            break;
+        case 'en':
+            setLang('en', false)
+            break;
+        default:
+            setLang('en', false)
+            break;
     }
 }
 

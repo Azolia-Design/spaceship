@@ -84,6 +84,9 @@ const aboutScript = {
         function scrollTo(data) {
             if (window.location.hash) {
                 let locationHash = window.location.hash;
+                if (locationHash.includes('?')) {
+                    locationHash = locationHash.split('?')[0]
+                }
                 setTimeout(() => {
                     lenis.scrollTo(locationHash, {
                         force: true,

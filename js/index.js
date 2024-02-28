@@ -167,6 +167,9 @@ const scripts = () => {
     }
     function resetScroll() {
         let locationHash = window.location.hash;
+        if (locationHash.includes('?')) {
+            locationHash = locationHash.split('?')[0]   
+        }
         lenis.stop()
         if ($(locationHash).length) {
             setTimeout(() => {
