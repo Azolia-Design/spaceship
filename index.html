@@ -24,13 +24,6 @@
 
 <body>
     <div class="wrapper" data-barba="wrapper">
-        <div class="lang-wrap">
-            <p class="lang-curr">Language</p>
-            <div class="lang-drop">
-                <a href="#" class="lang-drop-item" data-lang="en">English</a>
-                <a href="#" class="lang-drop-item" data-lang="es">Spanish</a>
-            </div>
-        </div>
         <header class="header">
             <div class="container grid">
                 <div class="header-logo">
@@ -89,6 +82,29 @@
                         </ul>
                     </div>
                     <div class="header-act">
+                        <div class="header-lang-wrap">
+                            <a href="#" class="txt txt-16 header-lang-open" data-lang-toggle="open">
+                                <p data-lang-nav="en" class="header-lang-open-txt">EN</p>
+                                <p data-lang-nav="es" class="header-lang-open-txt">ES</p>
+                                <p data-lang-nav="ab" class="header-lang-open-txt">AB</p>
+                                <div class="header-lang-open-ic-wrap">
+                                    <svg class="header-lang-open-ic down" xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 7" fill="none">
+                                        <path d="M9.14844 1.5L5.14844 5.5L1.14844 1.5" stroke="#454545" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <svg class="header-lang-open-ic up" xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 7" fill="none">
+                                        <path d="M9.14844 1.5L5.14844 5.5L1.14844 1.5" stroke="#454545" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </div>
+                            </a>
+                            <div class="txt txt-16 header-lang-popup">
+                                <a href="#" data-lang="en" class="header-lang-popup-txt txt-med">English</a>
+                                <a href="#" data-lang="es" class="header-lang-popup-txt txt-med">Spanish</a>
+                                <a href="#" data-lang="ab" class="header-lang-popup-txt txt-med">Arabic</a>
+                                <svg class="header-lang-popup-ic" xmlns="http://www.w3.org/2000/svg" width="100%" viewBox="0 0 10 10" fill="none">
+                                    <path d="M0.199805 0.600097L9.7998 5.05956L0.199805 9.4001L2.11981 5.05956L0.199805 0.600097Z" fill="#292929"/>
+                                </svg>
+                            </div>
+                        </div>
                         <div class="header-btn-wrap">
                             <a href="#" class="btn" data-popup="open">
                                 <div class="txt txt-16 txt-btn txt-med">Get in touch</div>
@@ -575,7 +591,6 @@
                         <div class="home-sol-title">
                             <span class="heading h2">ARRIVAL-X</span>
                             <h2 class="heading h3 txt-reg replace">
-                                <br>
                                 Industry-first ETA <br>Prediction tailored to ports
                             </h2>
                         </div>
@@ -779,7 +794,7 @@
                 </div>
                 <div class="ft-ctc">
                     <div class="ft-ctc-grp">
-                        <div class="txt txt-20 txt-med ft-ctc-grp-label">
+                        <div class="txt txt-20 txt-med ft-ctc-grp-label contactus">
                             Contact us
                         </div>
                         <div class="ft-ctc-grp-li">
@@ -808,7 +823,7 @@
                         </div>
                     </div>
                     <div class="ft-ctc-grp">
-                        <div class="txt txt-20 txt-med ft-ctc-grp-label">
+                        <div class="txt txt-20 txt-med ft-ctc-grp-label headoffice">
                             Head Office
                         </div>
                         <div class="ft-ctc-grp-li">

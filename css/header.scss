@@ -115,6 +115,89 @@
     &-toggle {
         display: none;
     }
+    &-btn-wrap {
+        flex-shrink: 0;
+    }
+    &-act {
+        display: flex;
+        align-items: center;
+        gap: 1.6rem;
+    }
+    &-lang {
+
+        &-wrap {
+            position: relative;
+        }
+        &-open {
+            position: relative;
+            display: flex;
+            align-items: center;
+            gap: .8rem;
+            padding: 1rem;
+            margin-left: -1rem;
+            &-txt {
+                opacity: 0;
+                @include transition(opacity .5s ease-out);
+                &:nth-child(n+2) {
+                    position: absolute;
+                }
+                &.active {
+                    opacity: 1;
+                }
+            }
+            &-ic-wrap {
+                position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            &-ic {
+                width: 1.6rem;
+
+                &:nth-child(n+2){
+                    position: absolute;
+                    right: 0;
+                    @include transform(translateY(100%) rotate(180deg));
+                    opacity: 0;
+                }
+            }
+        }
+        &-popup {
+            position: absolute;
+            right: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+            background-color: rgba($cl-white, 1);
+            border-radius: 1.2rem;
+            padding: 1.6rem 2rem 1.6rem 2.8rem;
+            @include transform(translateY(2rem));
+            opacity: 0;
+            pointer-events: none;
+            @include transition(all .5s ease-out);
+
+            &.active {
+                @include transform(translateY(1rem));
+                opacity: 1;
+                pointer-events: auto;
+            }
+            &-txt {
+                width: 6.5rem;
+                color: rgba($cl-txt, .5);
+                &.active {
+                    color: rgba($cl-txt, 1);
+                }
+            }
+            &-ic {
+                --index-item: 0;
+                position: absolute;
+                left: 1rem;
+                top: calc(1.6rem + (1.6rem * 1.4)/2 + var(--index-item)*(1.6rem + 1.6rem * 1.4));
+                @include transform(translateY(-50%));
+                width: 1rem;
+            }
+        }
+    }
 }
 @include md {
     .header {

@@ -20,7 +20,7 @@ const homeScript = {
         getApiHome()
 
         function getApiHome() {
-            getDetail('home', 'home', getLang()).then((res) => {
+            getDetail('home_page', 'home', getLang()).then((res) => {
                 return res.data
             }).then((data) => {
                 console.log(data);
@@ -34,46 +34,38 @@ const homeScript = {
             })
         }
         function getApiHomeHero(data) {
-
-            let heroTitle = data.hero_title[0].text.replace(`${data.hero_title_highlight}`, `<span class="txt-hl">${data.hero_title_highlight}</span>`)
+            let heroTitle = data.hero_title.replace(`${data.hero_title_hl}`, `<span class="txt-hl">${data.hero_title_hl}</span>`)
             $('.home-hero-title').html(heroTitle)
             $('.home-hero-sub').text(data.hero_subtitle)
             $('.home-hero-btn-wrap a .txt').text(data.hero_button)
-            $('.home-hero-body').text(data.hero_body[0].text)
-            $('.home-hero-tail-title').text(data.hero_tail_title[0].text)
+            $('.home-hero-body').text(data.hero_body)
+            $('.home-hero-tail-title').text(data.hero_tail_title)
+            $('.home-hero-mid-txt .replace').text(data.hero_premble)
         }
         function getApiHomeAbt(data) {
-            $('.home-abt-title').text(data.about_title[0].text)
+            $('.home-abt-title').text(data.about_title)
             $('.home-abt-btn-wrap .txt').text(data.about_button)
         }
         function getApiPartnerlabel(data) {
-            $('.home-part-label').text(data.partner_label)
+            $('.home-part-label').text(data.partners_grants)
         }
         function getApiHomeProblem(data) {
-            $('.home-prob-title').text(data.problem_title[0].text)
+            $('.home-prob-title').text(data.problem_title)
             $('.home-prob-label .txt').text(data.problem_label)
         }
         function getApiHomeSol(data) {
-            $('.home-sol-title .replace').html(data.solution_title[0].text.replaceAll('\n', '<br/>'))
+            $('.home-sol-title .replace').html(data.solution_title.replaceAll('\n', '<br/>'))
             $('.home-sol-label .txt').text(data.solution_label)
-
+            $('.home-sol-btn-wrap .txt').text(data.solution_button)
         }
         function getApiHomeTech(data) {
-            $('.home-tech-title').text(data.technology_title[0].text)
+            $('.home-tech-title').text(data.technology_title)
             $('.home-tech-btn-wrap a .txt').text(data.technology_button)
         }
         function getApiHomeBenefits(data) {
-            $('.home-faq-title').text(data.benefit_title[0].text)
+            $('.home-faq-title').text(data.benefit_title)
             $('.home-faq-label .txt').text(data.benefit_label)
         }
-
-
-
-
-
-
-
-
 
         function homeHeroMouse() {
             function mousMove() {

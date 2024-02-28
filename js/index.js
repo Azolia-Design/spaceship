@@ -14,16 +14,81 @@ import solutionScript from './solution';
 import insightScript from './insight';
 import notfoundScript from './notfound';
 import { getAllDataByType, getDetail } from './common/prismic_fn';
-import { setLang, getLang, setDefaultlang, updateSearch } from "./common/lang";
+import { setLang, getLang, setDefaultlang } from "./common/lang";
 
 
 const scripts = () => {
 
     setDefaultlang()
-    $('[data-lang]').on('click', function (e) {
-        e.preventDefault()
-        setLang($(this).attr('data-lang'))
-    })
+    handleLangToggle()
+    UpdateLangApi()
+    function handleLangToggle() {
+        $(`[data-lang-nav]`).removeClass('active')
+        $(`[data-lang-nav=${$('html').attr('lang')}]`).addClass('active')
+        gsap.set('.header-lang-popup-ic', {'--index-item': $('[data-lang].active').index()})
+    
+        $(`[data-lang-toggle]`).on('click', function(e) {
+            e.preventDefault()
+            if ($(this).hasClass('active')) {
+                $(this).removeClass('active')
+                $(`.header-lang-popup`).removeClass('active')
+            } else {
+                $(this).addClass('active')
+                $(`.header-lang-popup`).addClass('active')
+            }
+        })
+        $('[data-lang]').on('click', function (e) {
+            e.preventDefault()
+            setLang($(this).attr('data-lang'))
+            $(`[data-lang-nav]`).removeClass('active')
+            $(`[data-lang-nav]`).eq($(this).index()).addClass('active')
+            gsap.to('.header-lang-popup-ic', {'--index-item': $(this).index(), duration: .5})
+        })
+        $(window).on('click', function(e) {
+            if (!$(`.header-lang-popup:hover`).length && !$(`[data-lang-toggle]:hover`).length) {
+                console.log('close nef');
+                $(`.header-lang-popup`).removeClass('active')
+                $(`[data-lang-toggle]`).removeClass('active')
+            }
+        })
+    }
+    
+    function UpdateLangApi() {
+        getDetail('global', 'global', getLang()).then((res) => {
+            return res.data;
+        }).then((data) => {
+            console.log(data);
+            updateContent.header(data)
+            updateContent.footer(data)
+        })
+
+        const updateContent = {
+            header: (data) => {
+                $('.header-link-txt[data-link="home"]').text(data.home)
+                $('.header-link-txt[data-link="about"]').text(data.about)
+                $('.header-link-txt[data-link="solution"]').text(data.solution)
+                $('.header-link-txt[data-link="insight"]').text(data.insight)
+                $('.header-link-txt[data-link="careers"]').text(data.career)
+                $('.header-act .btn .txt').text(data.getintouch)
+            },
+            footer: (data) => {
+                $('.ft-ctc-grp-label.contactus').text(data.contact)
+                $('.ft-ctc-grp-label.headoffice').text(data.headoffice)
+                $('.ft-menu-link-txt[data-link="home"]').text(data.home)
+                $('.ft-menu-link-txt[data-link="about"]').text(data.about)
+                $('.ft-menu-link-txt[data-link="solution"]').text(data.solution)
+                $('.ft-menu-link-txt[data-link="insight"]').text(data.insight)
+                $('.ft-menu-link-txt[data-link="careers"]').text(data.career)
+                $('.ft-abt-info-btn-wrap .txt').text(data.getintouch)
+                $('.ft-abt-form-title').text(data.newletter)
+                $('.ft-abt-form-btn-wrap .ft-abt-form-submit-txt').text(data.subscribe)
+
+                $('.ft-copy-txt').html(data.copyright.replace(`2024`, `<span data-year>2024</span>`))
+                $('[data-link="imprint"]').text(data.imprint)
+                $('[data-link="term"]').text(data.privacy_policy)
+            }
+        }
+    }
 
     if (history.scrollRestoration) {
         history.scrollRestoration = "manual";
