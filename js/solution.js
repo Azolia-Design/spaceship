@@ -4,7 +4,7 @@ import Swiper from "swiper";
 import { Navigation } from "swiper";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { parseRem, sortAsc } from "./untils";
-import { getAllDataByType } from "./common/prismic_fn";
+import { getAllDataByType, getDetail} from "./common/prismic_fn";
 import { getLang } from "./common/lang";
 
 
@@ -16,7 +16,22 @@ gsap.registerPlugin(ScrollTrigger);
 const solutionScript = {
     namespace: 'solution',
     afterEnter(data) {
+        getApiSol()
 
+        function getApiSol() {
+            getDetail('solution_page', 'solution', getLang()).then((res) => {
+                return res.data
+            }).then((data) => {
+                console.log(data)
+                getApiSolHero(data)
+            })
+        }
+        function getApiSolHero(data) {
+            $('.sol-hero-label').text(data.hero_premble)
+            let heroTitle = $('.sol-hero-title').html()
+            console.log(heroTitle);
+            // $('.sol-hero-title').html
+        }
 
         function solProd() {
             if ($(window).width() > 991) {

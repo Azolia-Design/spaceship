@@ -298,6 +298,11 @@
             justify-content: end;
             gap: 0 1.6rem
         }
+        &-act {
+            .header-lang-wrap {
+                display: none;
+            }
+        }
         &.on-scroll {
             background-color: rgba($cl-white, 1);
             padding-top: 1.6rem;

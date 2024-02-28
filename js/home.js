@@ -23,7 +23,7 @@ const homeScript = {
             getDetail('home_page', 'home', getLang()).then((res) => {
                 return res.data
             }).then((data) => {
-                console.log(data);
+                // console.log(data);
                 getApiHomeHero(data)
                 getApiHomeAbt(data)
                 getApiHomeProblem(data)
