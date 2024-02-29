@@ -18,7 +18,6 @@ const termScript = {
             getDetail('policy_page', 'policy', getLang()).then((res) => {
                 return res.data
             }).then((data) => {
-                // console.log(data);
                 getApiPolicyContent(data)
                 getApiPolicyRichText(data)
             });
