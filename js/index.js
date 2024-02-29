@@ -28,11 +28,9 @@ const scripts = () => {
         $(`[data-lang-toggle]`).on('click', function(e) {
             e.preventDefault()
             if ($(this).hasClass('active')) {
-                $(this).removeClass('active')
-                $(`.header-lang-popup`).removeClass('active')
+                lang.close()
             } else {
-                $(this).addClass('active')
-                $(`.header-lang-popup`).addClass('active')
+                lang.open()
             }
         })
         $('[data-lang]').on('click', function (e) {
@@ -42,12 +40,21 @@ const scripts = () => {
         })
         $(window).on('click', function(e) {
             if (!$(`.header-lang-popup:hover`).length && !$(`[data-lang-toggle]:hover`).length) {
-                $(`.header-lang-popup`).removeClass('active')
-                $(`[data-lang-toggle]`).removeClass('active')
+                lang.close()
             }
         })
     }
-    
+     
+    const lang= {
+        open: () => {
+            $(`[data-lang-toggle]`).addClass('active')
+            $(`.header-lang-popup`).addClass('active')
+        },
+        close: () => {
+            $(`.header-lang-popup`).removeClass('active')
+            $(`[data-lang-toggle]`).removeClass('active')
+        }
+    }
     function UpdateLangApi() {
         getDetail('global', 'global', getLang()).then((res) => {
             return res.data;
@@ -496,7 +503,7 @@ const scripts = () => {
                 if (inst.direction >= 1) {
                     header.addClass('on-hide')
                     if ($('.header-lang-popup').hasClass('active')) {
-                        $('.header-lang-popup').removeClass('active')
+                        lang.close()
                     }
                 } else {
                     header.removeClass('on-hide')
