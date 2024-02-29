@@ -74,13 +74,22 @@ const aboutScript = {
             $('.abt-team-sub').text(data.team_body)
             $('.abt-team-btn-wrap .txt').text(data.team_button)
         }
-
         function getApiAbtJobContent(data) {
             $('.abt-job-label .txt').text(data.position_label)
             $('.abt-job-title').text(data.position_title)
             $('.abt-job-sub').text(data.position_subtitle)
         }
-
+        function changeHref() {
+            if (getLang() == "es-es") {
+                $('a').each((idx, el) => {
+                    if (el.getAttribute('href').includes('#Career')) {
+                        let newHref = '/about.html#Careers?lang=es'
+                        el.setAttribute('href', newHref)
+                    }
+                })  
+            }
+        }
+        changeHref()
         function scrollTo(data) {
             if (window.location.hash) {
                 let locationHash = window.location.hash;

@@ -62,7 +62,6 @@ const scripts = () => {
             cursor: (data) => {
                 $('.cursor-txt').text(data.drag)
                 if  (getLang() == 'es-es') {
-                    console.log('asadsdasdasdasd');
                     $('.cursor-txt').addClass('small')
                 }
             },
