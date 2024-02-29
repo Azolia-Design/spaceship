@@ -191,6 +191,9 @@ button {
             @include transform(rotate(180deg));
         }
     }
+    &-txt.small {
+        @include transform(scale(.75));
+    }
 }
 @include md {
     .cursor {

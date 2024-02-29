@@ -23,12 +23,11 @@ const homeScript = {
             getDetail('home_page', 'home', getLang()).then((res) => {
                 return res.data
             }).then((data) => {
-                // console.log(data);
                 getApiHomeHero(data)
                 getApiHomeAbt(data)
                 getApiHomeProblem(data)
-                getApiHomeSol(data)
-                getApiHomeTech(data)
+                getApiHomeSolContent(data)
+                getApiHomeTechContent(data)
                 getApiHomeBenefits(data)
                 getApiPartnerlabel(data)
             })
@@ -53,12 +52,12 @@ const homeScript = {
             $('.home-prob-title').text(data.problem_title)
             $('.home-prob-label .txt').text(data.problem_label)
         }
-        function getApiHomeSol(data) {
+        function getApiHomeSolContent(data) {
             $('.home-sol-title .replace').html(data.solution_title.replaceAll('\n', '<br/>'))
             $('.home-sol-label .txt').text(data.solution_label)
             $('.home-sol-btn-wrap .txt').text(data.solution_button)
         }
-        function getApiHomeTech(data) {
+        function getApiHomeTechContent(data) {
             $('.home-tech-title').text(data.technology_title)
             $('.home-tech-btn-wrap a .txt').text(data.technology_button)
         }

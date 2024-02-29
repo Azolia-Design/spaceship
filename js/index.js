@@ -61,6 +61,10 @@ const scripts = () => {
         const updateContent = {
             cursor: (data) => {
                 $('.cursor-txt').text(data.drag)
+                if  (getLang() == 'es-es') {
+                    console.log('asadsdasdasdasd');
+                    $('.cursor-txt').addClass('small')
+                }
             },
             header: (data) => {
                 $('.header-link-txt[data-link="home"]').text(data.home)
@@ -76,15 +80,19 @@ const scripts = () => {
                 $('.ft-abt-form input').attr('placeholder', data.form_placeholder)
                 $('.ft-ctc-grp-label.contactus').text(data.contact)
                 $('.ft-ctc-grp-label.headoffice').text(data.headoffice)
-                $('.ft-menu-link-txt[data-link="home"]').text(data.home)
-                $('.ft-menu-link-txt[data-link="about"]').text(data.about)
-                $('.ft-menu-link-txt[data-link="solution"]').text(data.solution)
-                $('.ft-menu-link-txt[data-link="insight"]').text(data.insight)
-                $('.ft-menu-link-txt[data-link="careers"]').text(data.career)
+                let homeHtml = $('.ft-menu-link-txt[data-link="home"]').html()
+                $('.ft-menu-link-txt[data-link="home"]').html(homeHtml.replace('Home', data.home))
+                let aboutHtml = $('.ft-menu-link-txt[data-link="about"]').html()
+                $('.ft-menu-link-txt[data-link="about"]').html(aboutHtml.replace('About', data.about))
+                let solutionHtml = $('.ft-menu-link-txt[data-link="solution"]').html()
+                $('.ft-menu-link-txt[data-link="solution"]').html(solutionHtml.replace('Solution', data.solution))
+                let insightHtml = $('.ft-menu-link-txt[data-link="insight"]').html()
+                $('.ft-menu-link-txt[data-link="insight"]').html(insightHtml.replace('Insights', data.insight))
+                let careerHtml = $('.ft-menu-link-txt[data-link="career"]').html()
+                $('.ft-menu-link-txt[data-link="career"]').html(careerHtml.replace('Careers', data.career))
                 $('.ft-abt-info-btn-wrap .txt').text(data.getintouch)
                 $('.ft-abt-form-title').text(data.newletter)
                 $('.ft-abt-form-btn-wrap .ft-abt-form-submit-txt').text(data.subscribe)
-
                 $('.ft-copy-txt').html(data.copyright.replace(`2024`, `<span data-year>2024</span>`))
                 $('[data-link="imprint"]').text(data.imprint)
                 $('[data-link="term"]').text(data.privacy_policy)

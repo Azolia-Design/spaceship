@@ -22,14 +22,13 @@ const aboutScript = {
             getDetail('about_page', 'about', getLang()).then((res) => {
                 return res.data
             }).then((data) => {
-                // console.log(data);
                 getApiAbtHero(data)
                 getApiAbtVision(data)
                 getApiAbtPartner(data)
                 getApiAbtMilestone(data)
                 getApiAbtCEO(data)
-                getApiAbtTeam(data)
-                getApiAbtJob(data)
+                getApiAbtTeamContent(data)
+                getApiAbtJobContent(data)
             })
         }
         function getApiAbtHero(data) {
@@ -47,6 +46,7 @@ const aboutScript = {
             $('.home-part-label').text(data.partners_grants)
         }
         function getApiAbtCEO(data) {
+            $('.abt-ceo-job').text(data.ceo_role)
             let parent = $('.abt-ceo-quote')
             let templateParaItem = parent.find('.abt-ceo-quote-txt').eq(0).clone();
             parent.find('.abt-ceo-quote-txt').remove()
@@ -68,14 +68,14 @@ const aboutScript = {
         function getApiAbtMilestone(data) {
             $('.abt-mile-label .txt').text(data.milestone_label)
         }
-        function getApiAbtTeam(data) {
+        function getApiAbtTeamContent(data) {
             $('.abt-team-label .txt').text(data.team_label)
             $('.abt-team-title').text(data.team_title)
             $('.abt-team-sub').text(data.team_body)
             $('.abt-team-btn-wrap .txt').text(data.team_button)
         }
 
-        function getApiAbtJob(data) {
+        function getApiAbtJobContent(data) {
             $('.abt-job-label .txt').text(data.position_label)
             $('.abt-job-title').text(data.position_title)
             $('.abt-job-sub').text(data.position_subtitle)
