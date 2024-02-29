@@ -31,8 +31,10 @@ const solutionScript = {
         }
         function getApiSolHero(data) {
             $('.sol-hero-label').text(data.hero_premble)
+
             let heroTitle = $('.sol-hero-title').html()
             $('.sol-hero-title').html(heroTitle.replace('Innovation', `${data.hero_title}`))
+            $('.sol-hero-title .txt-hl').text(data.hero_technology)
             $('.sol-hero-sub').text(data.hero_subtitle)
         }
         function getApiSolProd(data) {
