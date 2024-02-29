@@ -10,6 +10,22 @@ gsap.registerPlugin(ScrollTrigger);
 const notfoundScript = {
     namespace: 'notfound',
     afterEnter() {
+        getApiNotFound()
+
+        function getApiNotFound() {
+            getDetail('notfound', 'page404', getLang()).then((res) => {
+                return res.data
+            }).then((data) => {
+                console.log(data);
+                getApiContent(data)
+            })
+        }
+        function getApiContent(data) {
+            $('.notfound-main-label').text(data.title)
+            $('.notfound-main-sub').text(data.subtitle)
+            $('.notfound-main-btn-wrap .txt').text(data.button)
+        }
+
         function checkRedirect() {
             let path = window.location.pathname;
             let uid = path.replace('/', '').replace('?lang', '')

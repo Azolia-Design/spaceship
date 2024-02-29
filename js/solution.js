@@ -26,7 +26,7 @@ const solutionScript = {
                 getApiSolProd(data)
                 getApiSolFeat(data)
                 getApiSolComing(data)
-                getApiSolSer(data)
+                getApiSolSerContent(data)
             })
         }
         function getApiSolHero(data) {
@@ -53,8 +53,8 @@ const solutionScript = {
             $('.sol-coming-title').text(data.upcoming_title)
             $('.sol-coming-sub').text(data.upcoming_body)
         }
-        function getApiSolSer(data) {
-            $('.sol-ser-label').text(data.service_label)
+        function getApiSolSerContent(data) {
+            $('.sol-ser-label .txt').text(data.service_label)
             $('.sol-ser-title').text(data.service_title)
         }
 

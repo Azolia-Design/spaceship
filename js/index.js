@@ -18,7 +18,7 @@ import { setLang, getLang, setDefaultlang } from "./common/lang";
 
 
 const scripts = () => {
-
+    let plsWait = 'Please wait ...'
     setDefaultlang()
     handleLangToggle()
     UpdateLangApi()
@@ -52,13 +52,19 @@ const scripts = () => {
         getDetail('global', 'global', getLang()).then((res) => {
             return res.data;
         }).then((data) => {
-            console.log(data);
+            updateContent.cursor(data)
             updateContent.header(data)
             updateContent.footer(data)
             updateContent.popup(data)
         })
 
         const updateContent = {
+            cursor: (data) => {
+                $('.cursor-txt').text(data.drag)
+                if  (getLang() == 'es-es') {
+                    $('.cursor-txt').addClass('small')
+                }
+            },
             header: (data) => {
                 $('.header-link-txt[data-link="home"]').text(data.home)
                 $('.header-link-txt[data-link="about"]').text(data.about)
@@ -68,17 +74,24 @@ const scripts = () => {
                 $('.header-act .btn .txt').text(data.getintouch)
             },
             footer: (data) => {
+                $('.ft-abt-info-job').text(data.ceo_role)
+                $('.ft-abt-info-quote').text(data.ceo_premble)
+                $('.ft-abt-form input').attr('placeholder', data.form_placeholder)
                 $('.ft-ctc-grp-label.contactus').text(data.contact)
                 $('.ft-ctc-grp-label.headoffice').text(data.headoffice)
-                $('.ft-menu-link-txt[data-link="home"]').text(data.home)
-                $('.ft-menu-link-txt[data-link="about"]').text(data.about)
-                $('.ft-menu-link-txt[data-link="solution"]').text(data.solution)
-                $('.ft-menu-link-txt[data-link="insight"]').text(data.insight)
-                $('.ft-menu-link-txt[data-link="careers"]').text(data.career)
+                let homeHtml = $('.ft-menu-link-txt[data-link="home"]').html()
+                $('.ft-menu-link-txt[data-link="home"]').html(homeHtml.replace('Home', data.home))
+                let aboutHtml = $('.ft-menu-link-txt[data-link="about"]').html()
+                $('.ft-menu-link-txt[data-link="about"]').html(aboutHtml.replace('About', data.about))
+                let solutionHtml = $('.ft-menu-link-txt[data-link="solution"]').html()
+                $('.ft-menu-link-txt[data-link="solution"]').html(solutionHtml.replace('Solution', data.solution))
+                let insightHtml = $('.ft-menu-link-txt[data-link="insight"]').html()
+                $('.ft-menu-link-txt[data-link="insight"]').html(insightHtml.replace('Insights', data.insight))
+                let careerHtml = $('.ft-menu-link-txt[data-link="career"]').html()
+                $('.ft-menu-link-txt[data-link="career"]').html(careerHtml.replace('Careers', data.career))
                 $('.ft-abt-info-btn-wrap .txt').text(data.getintouch)
                 $('.ft-abt-form-title').text(data.newletter)
                 $('.ft-abt-form-btn-wrap .ft-abt-form-submit-txt').text(data.subscribe)
-
                 $('.ft-copy-txt').html(data.copyright.replace(`2024`, `<span data-year>2024</span>`))
                 $('[data-link="imprint"]').text(data.imprint)
                 $('[data-link="term"]').text(data.privacy_policy)
@@ -95,7 +108,10 @@ const scripts = () => {
                 $('[for="fname"].message').html(company.replace('Company' , data.message).replace('Optional' , data.optional))
                 $('.popup-form-submit-txt').text(data.send)
                 let succTitle = $('.popup-form-succ-title').html()
-                $('.popup-form-succ-title').html(succTitle.replace('Company' , data.message))
+                $('.popup-form-succ-title').html(succTitle.replace('Thank you' , data.message))
+                $('.popup-form-succ-sub').text(data.thankyou_body)
+                $('.popup-form-succ-btn-wrap .txt').text(data.closepanel)
+                plsWait = data.please_wait
             },
         }
     }
@@ -272,9 +288,9 @@ const scripts = () => {
             const setLoading = (isLoading) => {
                 if (isLoading) {
                     if (textEle) {
-                        submitBtn.find(textEle).text('Please wait ...');
+                        submitBtn.find(textEle).text(plsWait);
                     } else {
-                        submitBtn.val('Please wait ...');
+                        submitBtn.val(plsWait);
                     }
 
                     submitBtn.css({ 'pointer-events': 'none' })
