@@ -495,6 +495,9 @@ const scripts = () => {
             if (!$('.header-nav').hasClass('active')) {
                 if (inst.direction >= 1) {
                     header.addClass('on-hide')
+                    if ($('.header-lang-popup').hasClass('active')) {
+                        $('.header-lang-popup').removeClass('active')
+                    }
                 } else {
                     header.removeClass('on-hide')
                 }

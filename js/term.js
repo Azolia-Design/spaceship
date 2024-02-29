@@ -1,4 +1,4 @@
-import $ from "jquery";
+import $, { contains } from "jquery";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { getDetail } from "./common/prismic_fn";
@@ -11,15 +11,17 @@ gsap.registerPlugin(ScrollTrigger);
 
 const termScript = {
     namespace: 'term',
-    afterEnter() {
+    afterEnter(data) {
         getApiPolicy()
-
+        console.log(data.next.container);
         function getApiPolicy() {
             getDetail('policy_page', 'policy', getLang()).then((res) => {
                 return res.data
             }).then((data) => {
-                getApiPolicyContent(data)
-                getApiPolicyRichText(data)
+                if (!$(data.next.container).attr('data-namespace') == 'imprint') {
+                    getApiPolicyContent(data)
+                    getApiPolicyRichText(data)
+                }
             });
             function getApiPolicyContent(data) {
                 $('.term-hero-title').text(data.hero_title)
